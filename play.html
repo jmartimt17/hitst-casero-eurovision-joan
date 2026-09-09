@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Hitster Eurovisión</title>
 
   <!-- PWA -->
@@ -17,6 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
 
     :root {
       --bg: #0a0a14;
@@ -27,215 +28,207 @@
       --muted: #8880aa;
       --green: #00e676;
       --pulse: #5040ff;
+      --pink: #ff1e9c;
     }
 
+    html, body { height: 100%; }
     body {
       background: var(--bg);
       color: var(--text);
       font-family: 'Inter', sans-serif;
       min-height: 100dvh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
+      overflow-x: hidden;
     }
 
-    .stars {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
+    .stars { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
     .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.4;
+      position: absolute; width: 2px; height: 2px;
+      background: white; border-radius: 50%; opacity: 0.4;
       animation: twinkle 3s infinite alternate;
     }
-    @keyframes twinkle {
-      from { opacity: 0.1; }
-      to   { opacity: 0.7; }
-    }
+    @keyframes twinkle { from { opacity: 0.1; } to { opacity: 0.7; } }
 
-    .card {
+    /* --- Screen system --- */
+    .screen {
       position: relative;
       z-index: 1;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2.5rem 2rem;
-      width: 100%;
-      max-width: 360px;
-      text-align: center;
-      box-shadow: 0 0 60px rgba(80, 64, 255, 0.15);
-    }
-
-    .label {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-    }
-
-    .country { font-size: 2rem; margin-bottom: 0.15rem; }
-
-    .country-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.6rem;
-      letter-spacing: 0.05em;
-      color: var(--star);
-      margin-bottom: 1.5rem;
-    }
-
-    .divider {
-      width: 40px;
-      height: 2px;
-      background: var(--border);
-      margin: 0 auto 1.5rem;
-    }
-
-    .timer-wrap {
-      position: relative;
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 1.8rem;
-    }
-
-    .timer-svg { transform: rotate(-90deg); width: 140px; height: 140px; }
-    .timer-track    { fill: none; stroke: var(--border); stroke-width: 6; }
-    .timer-progress {
-      fill: none;
-      stroke: var(--pulse);
-      stroke-width: 6;
-      stroke-linecap: round;
-      stroke-dasharray: 345.4;
-      stroke-dashoffset: 0;
-      transition: stroke-dashoffset 1s linear, stroke 0.5s;
-    }
-
-    .timer-center {
-      position: absolute;
-      inset: 0;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2px;
+      padding: calc(1.5rem + env(safe-area-inset-top)) 1.5rem calc(1.5rem + env(safe-area-inset-bottom));
+      text-align: center;
     }
 
-    .timer-seconds {
+    /* --- Home --- */
+    .brand {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 3rem;
+      font-size: 3.6rem;
       line-height: 1;
-      color: var(--text);
+      letter-spacing: 0.06em;
+      color: #fff;
+      text-shadow: 0 0 6px var(--pink), 0 0 22px var(--pink), 0 0 42px rgba(255,30,156,0.6);
     }
-
-    .timer-unit {
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      color: var(--muted);
+    .tagline {
+      margin-top: 0.9rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-    }
-
-    .btn-spotify {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      width: 100%;
-      padding: 0.9rem 1.2rem;
-      background: #1DB954;
-      color: #000;
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 0.95rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      text-decoration: none;
-      margin-bottom: 0.75rem;
-      transition: transform 0.1s, opacity 0.1s;
-    }
-    .btn-spotify:hover  { opacity: 0.9; transform: scale(1.02); }
-    .btn-spotify:active { transform: scale(0.98); }
-
-    .btn-timer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      width: 100%;
-      padding: 0.85rem 1.2rem;
-      background: transparent;
       color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 10px;
+      padding: 0.5rem 0.9rem;
+      box-shadow: 0 0 14px rgba(80,64,255,0.35);
     }
-    .btn-timer:hover    { border-color: var(--pulse); background: rgba(80,64,255,0.08); }
+    .speaker {
+      font-size: 8rem;
+      margin: 2.2rem 0;
+      filter: drop-shadow(0 12px 30px rgba(0,0,0,0.6));
+    }
+    .home-actions { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 0.8rem; }
+
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+      width: 100%; padding: 1rem 1.2rem;
+      font-family: 'Inter', sans-serif; font-weight: 700; font-size: 1rem;
+      border: none; border-radius: 50px; cursor: pointer;
+      text-decoration: none; color: inherit;
+      transition: transform 0.1s, opacity 0.1s, background 0.2s, border-color 0.2s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--pink); color: #fff; box-shadow: 0 6px 26px rgba(255,30,156,0.45); }
+    .btn-primary:hover { opacity: 0.92; }
+    .btn-ghost { background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid var(--border); font-weight: 600; }
+    .btn-ghost:hover { border-color: var(--pulse); }
+    .btn-spotify { background: #1DB954; color: #000; }
+    .btn-spotify:hover { opacity: 0.9; }
+
+    .link-btn {
+      background: none; border: none; color: var(--muted);
+      font-size: 0.8rem; cursor: pointer;
+      text-decoration: underline; text-underline-offset: 3px;
+      font-family: 'Inter', sans-serif;
+    }
+    .link-btn:hover { color: var(--text); }
+
+    /* --- Scanner --- */
+    #screenScan { padding: 0; justify-content: flex-start; }
+    #scanVideo {
+      position: fixed; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; background: #000; z-index: 1;
+    }
+    .scan-overlay { position: fixed; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .scan-frame {
+      width: min(68vw, 280px); aspect-ratio: 1; position: relative;
+      box-shadow: 0 0 0 100vmax rgba(0,0,0,0.55);
+      border-radius: 16px;
+    }
+    .scan-frame::before, .scan-frame::after,
+    .scan-frame > i::before, .scan-frame > i::after {
+      content: ''; position: absolute; width: 34px; height: 34px;
+      border: 4px solid var(--pink); border-radius: 4px;
+      filter: drop-shadow(0 0 6px var(--pink));
+    }
+    .scan-frame::before { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+    .scan-frame::after  { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+    .scan-frame > i::before { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+    .scan-frame > i::after  { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+    .scan-hint {
+      position: fixed; left: 0; right: 0; bottom: calc(2rem + env(safe-area-inset-bottom));
+      z-index: 3; color: #fff; font-size: 0.9rem; padding: 0 1.5rem;
+      text-shadow: 0 1px 6px #000;
+    }
+    .scan-close {
+      position: fixed; top: calc(1rem + env(safe-area-inset-top)); right: 1rem;
+      z-index: 3; width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(0,0,0,0.45); color: #fff; border: none;
+      font-size: 1.4rem; line-height: 1; cursor: pointer;
+    }
+
+    /* --- Rotate --- */
+    .rotate-phone {
+      width: 120px; height: 210px; border-radius: 22px;
+      border: 3px solid #35d0e0;
+      box-shadow: 0 0 10px #35d0e0, inset 0 0 10px rgba(53,208,224,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; margin: 1.5rem 0 2rem;
+      animation: tilt 2.2s ease-in-out infinite;
+    }
+    @keyframes tilt {
+      0%, 100% { transform: rotate(0deg); }
+      55%, 75% { transform: rotate(-90deg); }
+    }
+    .rotate-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem; letter-spacing: 0.05em;
+    }
+    .rotate-sub { color: var(--muted); font-size: 0.9rem; margin: 0.4rem 0 1.8rem; }
+
+    /* --- Play card --- */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      width: 100%; max-width: 360px;
+      box-shadow: 0 0 60px rgba(80, 64, 255, 0.15);
+    }
+    .label { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--muted); text-transform: uppercase; margin-bottom: 0.4rem; }
+    .country { font-size: 2rem; margin-bottom: 0.15rem; }
+    .country-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
+      letter-spacing: 0.05em; color: var(--star); margin-bottom: 1.5rem;
+    }
+    .divider { width: 40px; height: 2px; background: var(--border); margin: 0 auto 1.5rem; }
+
+    .timer-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 1.8rem; }
+    .timer-svg { transform: rotate(-90deg); width: 140px; height: 140px; }
+    .timer-track { fill: none; stroke: var(--border); stroke-width: 6; }
+    .timer-progress {
+      fill: none; stroke: var(--pulse); stroke-width: 6; stroke-linecap: round;
+      stroke-dasharray: 345.4; stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear, stroke 0.5s;
+    }
+    .timer-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+    .timer-seconds { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; line-height: 1; color: var(--text); }
+    .timer-unit { font-size: 0.6rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+
+    .card .btn { margin-bottom: 0.75rem; }
+    .btn-timer {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border); font-weight: 600; font-size: 0.9rem; padding: 0.85rem 1.2rem;
+    }
+    .btn-timer:hover { border-color: var(--pulse); background: rgba(80,64,255,0.08); }
     .btn-timer:disabled { opacity: 0.4; cursor: not-allowed; }
 
     .btn-reset {
-      background: none;
-      border: none;
-      color: var(--muted);
-      font-size: 0.75rem;
-      cursor: pointer;
-      margin-top: 0.8rem;
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      background: none; border: none; color: var(--muted); font-size: 0.75rem;
+      cursor: pointer; margin-top: 0.4rem; text-decoration: underline; text-underline-offset: 3px;
       display: none;
     }
     .btn-reset:hover { color: var(--text); }
 
-    .status-msg {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 1rem;
-      min-height: 1.2em;
-      transition: color 0.3s;
-    }
+    .status-msg { font-size: 0.78rem; color: var(--muted); margin-top: 1rem; min-height: 1.2em; transition: color 0.3s; }
     .status-msg.done { color: var(--green); font-weight: 600; }
 
-    .logo {
-      margin-top: 2rem;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.9rem;
-      letter-spacing: 0.2em;
-      color: var(--border);
-    }
+    .logo { margin-top: 2rem; font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; letter-spacing: 0.2em; color: var(--border); }
 
-    .error-card { text-align: center; }
-    .error-card h2 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-    .error-card p  { color: var(--muted); font-size: 0.85rem; }
+    /* --- Rules --- */
+    .rules { max-width: 420px; text-align: left; line-height: 1.65; font-size: 0.9rem; color: #d5cff0; }
+    .rules h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em; color: #fff; text-align: center; margin-bottom: 1rem; }
+    .rules ol { padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .rules strong { color: var(--star); }
 
-    /* Install banner (solo se muestra si hay prompt disponible) */
+    .err h2 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .err p { color: var(--muted); font-size: 0.9rem; }
+
     #installBanner {
-      display: none;
-      position: fixed;
-      bottom: 1rem;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--pulse);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      padding: 0.75rem 1.5rem;
-      font-family: 'Inter', sans-serif;
-      font-weight: 700;
-      font-size: 0.85rem;
-      cursor: pointer;
-      z-index: 100;
-      box-shadow: 0 4px 20px rgba(80,64,255,0.4);
+      display: none; position: fixed;
+      bottom: calc(1rem + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%);
+      background: var(--pulse); color: white; border: none; border-radius: 50px;
+      padding: 0.75rem 1.5rem; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.85rem;
+      cursor: pointer; z-index: 100; box-shadow: 0 4px 20px rgba(80,64,255,0.4);
     }
   </style>
 </head>
@@ -243,45 +236,94 @@
 
 <div class="stars" id="stars"></div>
 
-<div class="card" id="card">
-  <div class="label">Eurovisión 2024</div>
-  <div class="country" id="countryFlag">🎵</div>
-  <div class="country-name" id="countryName">Cargando...</div>
-  <div class="divider"></div>
-
-  <div class="timer-wrap">
-    <svg class="timer-svg" viewBox="0 0 120 120">
-      <circle class="timer-track"    cx="60" cy="60" r="55"/>
-      <circle class="timer-progress" cx="60" cy="60" r="55" id="timerRing"/>
-    </svg>
-    <div class="timer-center">
-      <span class="timer-seconds" id="timerNum">20</span>
-      <span class="timer-unit">seg</span>
-    </div>
+<!-- ===== HOME ===== -->
+<div class="screen" id="screenHome" hidden>
+  <div class="brand">HITSTER</div>
+  <div class="tagline">Edición Eurovisión 2024</div>
+  <div class="speaker">🔊</div>
+  <div class="home-actions">
+    <button class="btn btn-primary" id="playBtn">JUGAR AHORA</button>
+    <button class="btn btn-ghost" id="rulesBtn">Cómo se juega</button>
+    <a class="btn btn-ghost" href="cards.html">🖨️ Imprimir las cartas</a>
   </div>
+  <div class="logo" style="margin-top:2rem">26 CANCIONES · MALMÖ 2024</div>
+</div>
 
-  <a class="btn-spotify" id="spotifyBtn" href="#" target="_blank">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 11-.277-1.215c3.809-.87 7.076-.496 9.712 1.115.293.18.387.563.207.857zm1.223-2.722a.779.779 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.778.778 0 01-.973-.516.779.779 0 01.516-.973c3.632-1.102 8.147-.568 11.237 1.328a.779.779 0 01.257 1.07zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.935.935 0 11-.543-1.79c3.532-1.072 9.404-.865 13.115 1.338a.935.935 0 01-.955 1.609z"/>
-    </svg>
-    Abrir en Spotify
-  </a>
+<!-- ===== SCANNER ===== -->
+<div class="screen" id="screenScan" hidden>
+  <video id="scanVideo" playsinline muted></video>
+  <div class="scan-overlay"><div class="scan-frame"><i></i></div></div>
+  <button class="scan-close" id="scanClose" aria-label="Cerrar">✕</button>
+  <p class="scan-hint" id="scanHint">Apunta al código QR de una carta</p>
+</div>
 
-  <button class="btn-timer" id="timerBtn" disabled>
-    ▶ Iniciar temporizador (20 s)
-  </button>
-  <button class="btn-reset" id="resetBtn">Reiniciar</button>
+<!-- ===== ROTATE ===== -->
+<div class="screen" id="screenRotate" hidden>
+  <div class="rotate-phone">🎶</div>
+  <div class="rotate-title">GIRA EL TELÉFONO</div>
+  <div class="rotate-sub">Ponlo en horizontal y empezará la cuenta atrás</div>
+  <div class="home-actions">
+    <a class="btn btn-spotify" id="rotateSpotify" target="_blank" rel="noopener">▶ Abrir en Spotify</a>
+    <button class="link-btn" id="skipRotate">o empezar sin girar</button>
+  </div>
+</div>
 
-  <p class="status-msg" id="statusMsg">Abre la canción en Spotify y pulsa Iniciar</p>
+<!-- ===== PLAY ===== -->
+<div class="screen" id="screenPlay" hidden>
+  <div class="card">
+    <div class="label">Eurovisión 2024</div>
+    <div class="country" id="countryFlag">🎵</div>
+    <div class="country-name" id="countryName">—</div>
+    <div class="divider"></div>
 
-  <div class="logo">HITSTER · EUROVISIÓN</div>
+    <div class="timer-wrap">
+      <svg class="timer-svg" viewBox="0 0 120 120">
+        <circle class="timer-track" cx="60" cy="60" r="55"/>
+        <circle class="timer-progress" cx="60" cy="60" r="55" id="timerRing"/>
+      </svg>
+      <div class="timer-center">
+        <span class="timer-seconds" id="timerNum">20</span>
+        <span class="timer-unit">seg</span>
+      </div>
+    </div>
+
+    <a class="btn btn-spotify" id="spotifyBtn" href="#" target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 11-.277-1.215c3.809-.87 7.076-.496 9.712 1.115.293.18.387.563.207.857zm1.223-2.722a.779.779 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.778.778 0 01-.973-.516.779.779 0 01.516-.973c3.632-1.102 8.147-.568 11.237 1.328a.779.779 0 01.257 1.07zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.935.935 0 11-.543-1.79c3.532-1.072 9.404-.865 13.115 1.338a.935.935 0 01-.955 1.609z"/>
+      </svg>
+      Abrir en Spotify
+    </a>
+
+    <button class="btn btn-timer" id="timerBtn">▶ Reiniciar cuenta atrás (20 s)</button>
+    <button class="btn-reset" id="resetBtn">Reiniciar</button>
+
+    <p class="status-msg" id="statusMsg">Escucha ~20 s y adivina el año del Festival</p>
+    <div class="logo">HITSTER · EUROVISIÓN</div>
+  </div>
+  <button class="link-btn" id="nextCard" style="margin-top:1.4rem">Escanear siguiente carta →</button>
+</div>
+
+<!-- ===== RULES ===== -->
+<div class="screen" id="screenRules" hidden>
+  <div class="rules">
+    <h2>Cómo se juega</h2>
+    <ol>
+      <li>Pulsa <strong>Jugar</strong> y escanea el QR de una carta.</li>
+      <li>Gira el móvil a horizontal: empieza la cuenta atrás de <strong>20 segundos</strong> y se abre la canción en Spotify. Dale al play.</li>
+      <li>Sin mirar la carta, los jugadores adivinan <strong>el año del Festival</strong> en el que participó esa canción.</li>
+      <li>Coloca la carta en tu línea del tiempo (antes/después de las que ya tienes). Dale la vuelta para comprobar el año.</li>
+      <li>El primero en colocar <strong>10 cartas</strong> correctas gana.</li>
+    </ol>
+  </div>
+  <button class="btn btn-ghost" id="rulesBack" style="max-width:340px;margin-top:1.6rem">Volver</button>
 </div>
 
 <button id="installBanner">📲 Instalar app</button>
 
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
 <script>
 // --- Stars ---
-(function() {
+(function () {
   const c = document.getElementById('stars');
   for (let i = 0; i < 80; i++) {
     const s = document.createElement('div');
@@ -321,80 +363,177 @@ const SONGS = [
   { id: "0uHrMbMv3c78398pIANDqR", country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",                title: "Europapa" },
 ];
 
-// --- Load song ---
+const $ = id => document.getElementById(id);
+const SCREENS = ['screenHome', 'screenScan', 'screenRotate', 'screenPlay', 'screenRules'];
+let stream = null, scanRAF = null, scanCanvas = null, scanCtx = null, scanning = false;
+function show(id) {
+  SCREENS.forEach(s => { $(s).hidden = (s !== id); });
+  if (id !== 'screenScan') stopScanner();
+}
+
+// --- Routing ---
 const params  = new URL(location.href).searchParams;
 const trackId = params.get('id');
 const song    = trackId ? SONGS.find(s => s.id === trackId) : null;
 
 if (!trackId) {
-  document.getElementById('card').innerHTML = `
-    <div class="error-card">
-      <div class="country">🎶</div>
-      <h2>Hitster · Eurovisión</h2>
-      <p style="margin:0.8rem 0 1.2rem">
-        Edición Eurovisión 2024 · Gran Final de Malmö.<br><br>
-        Escanea el QR de una carta con la cámara del móvil para empezar a jugar:
-        escucha ~20&nbsp;segundos de la canción y adivina el año del Festival.
-      </p>
-      <a class="btn-spotify" href="cards.html">🖨️ Imprimir las cartas</a>
-      <div class="logo" style="margin-top:1.5rem">${SONGS.length} CANCIONES · MALMÖ 2024</div>
-    </div>`;
+  show('screenHome');
 } else if (!song) {
-  document.getElementById('card').innerHTML = `
-    <div class="error-card">
-      <h2>Canción no encontrada</h2>
-      <p>El código QR no corresponde a ninguna canción de la lista.</p>
-    </div>`;
+  $('screenPlay').hidden = false;
+  $('screenPlay').innerHTML =
+    '<div class="err"><h2>Canción no encontrada</h2>' +
+    '<p>Este QR no corresponde a ninguna carta de la lista.</p>' +
+    '<button class="btn btn-ghost" style="margin-top:1.4rem;max-width:320px" onclick="location.search=\'\'">Ir al inicio</button></div>';
 } else {
-  document.getElementById('countryFlag').textContent = song.flag;
-  document.getElementById('countryName').textContent = song.country.toUpperCase();
-  document.title = `${song.title} — Hitster Eurovisión`;
-  document.getElementById('spotifyBtn').href = `https://open.spotify.com/track/${song.id}`;
-
-  document.getElementById('spotifyBtn').addEventListener('click', () => {
-    setTimeout(() => {
-      document.getElementById('timerBtn').disabled = false;
-      document.getElementById('statusMsg').textContent = 'Pulsa Iniciar cuando empiece a sonar';
-    }, 800);
-  });
+  setupRound(song);
 }
 
-// --- Timer (solo cuando hay una canción cargada) ---
+// --- Home buttons ---
+$('playBtn').addEventListener('click', startScanner);
+$('rulesBtn').addEventListener('click', () => show('screenRules'));
+$('rulesBack').addEventListener('click', () => show('screenHome'));
+
+// =================================================================
+//  SCANNER
+// =================================================================
+async function startScanner() {
+  show('screenScan');
+  $('scanHint').textContent = 'Apunta al código QR de una carta';
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: 'environment' } }, audio: false
+    });
+  } catch (err) {
+    $('scanHint').textContent = 'No se pudo abrir la cámara. Usa la cámara del móvil para escanear el QR.';
+    return;
+  }
+  const video = $('scanVideo');
+  video.srcObject = stream;
+  await video.play().catch(() => {});
+  scanCanvas = scanCanvas || document.createElement('canvas');
+  scanCtx = scanCanvas.getContext('2d', { willReadFrequently: true });
+  scanning = true;
+  scanRAF = requestAnimationFrame(scanTick);
+}
+
+function stopScanner() {
+  scanning = false;
+  if (scanRAF) cancelAnimationFrame(scanRAF), scanRAF = null;
+  if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+  const v = $('scanVideo');
+  if (v) v.srcObject = null;
+}
+
+function scanTick() {
+  if (!scanning) return;
+  const video = $('scanVideo');
+  if (video.readyState === video.HAVE_ENOUGH_DATA && typeof jsQR === 'function') {
+    const w = video.videoWidth, h = video.videoHeight;
+    scanCanvas.width = w; scanCanvas.height = h;
+    scanCtx.drawImage(video, 0, 0, w, h);
+    let img;
+    try { img = scanCtx.getImageData(0, 0, w, h); } catch (e) { img = null; }
+    if (img) {
+      const code = jsQR(img.data, w, h, { inversionAttempts: 'dontInvert' });
+      if (code && code.data) {
+        const id = extractId(code.data);
+        if (id && SONGS.some(s => s.id === id)) {
+          stopScanner();
+          if (navigator.vibrate) navigator.vibrate(60);
+          location.href = location.pathname + '?id=' + encodeURIComponent(id);
+          return;
+        }
+        $('scanHint').textContent = 'Ese QR no es de una carta de este juego';
+      }
+    }
+  }
+  scanRAF = requestAnimationFrame(scanTick);
+}
+
+function extractId(text) {
+  text = (text || '').trim();
+  try {
+    const u = new URL(text);
+    const q = u.searchParams.get('id');
+    if (q) return q.trim();
+  } catch (e) { /* not a URL */ }
+  if (/^[A-Za-z0-9]{22}$/.test(text)) return text;
+  const m = text.match(/[?&]id=([A-Za-z0-9]{22})/);
+  return m ? m[1] : null;
+}
+
+$('scanClose').addEventListener('click', () => {
+  stopScanner();
+  show(trackId ? 'screenRotate' : 'screenHome');
+});
+
+// =================================================================
+//  ROUND: rotate gate -> play card + timer
+// =================================================================
+function setupRound(song) {
+  document.title = `${song.country} — Hitster Eurovisión`;
+  $('countryFlag').textContent = song.flag;
+  $('countryName').textContent = song.country.toUpperCase();
+
+  const spotifyUrl = `https://open.spotify.com/track/${song.id}`;
+  $('spotifyBtn').href = spotifyUrl;
+  $('rotateSpotify').href = spotifyUrl;
+
+  show('screenRotate');
+
+  // Rotate-to-start: plain orientation media query (no permission needed)
+  const mq = window.matchMedia('(orientation: landscape)');
+  let armed = !mq.matches;           // only trigger on a real portrait -> landscape turn
+  const onOrient = () => {
+    if (!$('screenRotate').hidden) {
+      if (mq.matches && armed) startRound();
+      else if (!mq.matches) armed = true;
+    }
+  };
+  if (mq.addEventListener) mq.addEventListener('change', onOrient);
+  else window.addEventListener('orientationchange', onOrient);
+  window.addEventListener('resize', onOrient);
+
+  if (!armed) $('skipRotate').textContent = 'ya está en horizontal — pulsa para empezar';
+  $('skipRotate').addEventListener('click', startRound);
+  $('rotateSpotify').addEventListener('click', () => {
+    $('skipRotate').textContent = 'ahora gira el móvil a horizontal para empezar';
+  });
+
+  $('nextCard').addEventListener('click', startScanner);
+}
+
+let roundStarted = false;
+function startRound() {
+  if (roundStarted) return;
+  roundStarted = true;
+  show('screenPlay');
+  startTimer();
+}
+
+// =================================================================
+//  TIMER
+// =================================================================
 const DURATION = 20;
 let remaining = DURATION, interval = null;
-const ring     = document.getElementById('timerRing');
-const numEl    = document.getElementById('timerNum');
-const btnTimer = document.getElementById('timerBtn');
-const btnReset = document.getElementById('resetBtn');
-const statusEl = document.getElementById('statusMsg');
-const circ     = 2 * Math.PI * 55;
-
-if (song) {
+const ring = $('timerRing'), numEl = $('timerNum');
+const btnTimer = $('timerBtn'), btnReset = $('resetBtn'), statusEl = $('statusMsg');
+const circ = 2 * Math.PI * 55;
 
 function setRing(secs) {
   ring.style.strokeDashoffset = circ * (1 - secs / DURATION);
   ring.style.stroke = secs / DURATION > 0.4 ? 'var(--pulse)' : secs / DURATION > 0.15 ? '#f0a030' : '#e03030';
 }
 
-function resetTimer() {
-  clearInterval(interval); interval = null;
+function startTimer() {
+  clearInterval(interval);
   remaining = DURATION;
   numEl.textContent = DURATION;
   setRing(DURATION);
-  btnTimer.textContent = '▶ Iniciar temporizador (20 s)';
-  btnTimer.disabled = false;
   btnReset.style.display = 'none';
-  statusEl.textContent = 'Pulsa Iniciar cuando empiece a sonar';
+  statusEl.textContent = '¡Adivina el año del Festival!';
   statusEl.classList.remove('done');
-}
-
-btnTimer.addEventListener('click', () => {
-  if (interval) return;
-  btnTimer.disabled = true;
-  btnTimer.textContent = '⏱ Contando...';
-  btnReset.style.display = 'block';
-  statusEl.textContent = '¡Adivina el año!';
-  statusEl.classList.remove('done');
+  btnTimer.textContent = '▶ Reiniciar cuenta atrás (20 s)';
 
   interval = setInterval(() => {
     remaining--;
@@ -407,30 +546,31 @@ btnTimer.addEventListener('click', () => {
       ring.style.strokeDashoffset = 0;
       statusEl.textContent = '¡Tiempo! ¿Acertaste el año?';
       statusEl.classList.add('done');
-      btnTimer.textContent = '✓ Tiempo agotado';
+      btnReset.style.display = 'block';
     }
   }, 1000);
-});
+}
 
-btnReset.addEventListener('click', resetTimer);
-setRing(DURATION);
-} // fin if (song)
+if (btnTimer) {
+  btnTimer.addEventListener('click', startTimer);
+  btnReset.addEventListener('click', startTimer);
+  setRing(DURATION);
+}
 
-// --- PWA: Service Worker ---
+// =================================================================
+//  PWA
+// =================================================================
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').catch(console.error);
 }
 
-// --- PWA: Install banner ---
 let deferredPrompt;
-const installBtn = document.getElementById('installBanner');
-
+const installBtn = $('installBanner');
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   deferredPrompt = e;
-  installBtn.style.display = 'block';
+  if ($('screenHome') && !$('screenHome').hidden) installBtn.style.display = 'block';
 });
-
 installBtn.addEventListener('click', async () => {
   if (!deferredPrompt) return;
   deferredPrompt.prompt();
