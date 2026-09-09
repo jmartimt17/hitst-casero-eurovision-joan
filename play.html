@@ -378,6 +378,37 @@ const SONGS = [
   { id: "0uHrMbMv3c78398pIANDqR", year: 2024, country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",                title: "Europapa", pv: "adf1afd42554acfb8f165649b5a5c7c4d95cc5bd" },
 ];
 
+// Cartas impresas ANTES de corregir los Track IDs: traduce el ID viejo del QR al nuevo.
+const LEGACY = {
+  "7oYMGSXtuRBJbdqT1cHJRf": "1ssBrm3EZb20Kb19roQIcy",
+  "2zuEKEHfEFsJDsWyAhEGsH": "3q58lQ4ByWV5MR0VSeNer3",
+  "2BHgGbXOaHaXrVHBQW3ZBt": "2Ozw7k5CLtM5W9SomrOyjw",
+  "1kHFKnFqBYIfx7fDnbTiRX": "4QWrK6lpr8rZ6sa8ymqMrq",
+  "4qoUTOMLqJWiSnOQfEkAVM": "5ViF3hsL0iwD7jhh5JB2Ip",
+  "3MsHBhHKxXnfbq4Wf2Zhp8": "6EwXG9cPjesjehN0kw30xs",
+  "2tpYCBuqFVhCiXZR3QmFPK": "74mWVYv6xPilcalOxrQa5Y",
+  "7h1R0iMRgBKPepRDY7fE96": "582OHNxg4RRvlzTn7fuLY9",
+  "0smabpMkLHuDHpgJY3tTpW": "6syLoIbMRXvCEr94FMVBHh",
+  "5Hk1iykXXCACKnOUEBRrPd": "5L8C1PZGCpZf8STcN79H5j",
+  "5kFpJ0LBKPK6mzxiGrRPt0": "4GEmQTg7yfnfZoNhgpCg61",
+  "1rAnT1j9EKXWBT0FQGqaXO": "4sDLQ5atDUHhbikD1UQ2mW",
+  "4YaFTU7NJXFV8WUHR6Pf0u": "6awPQdcqY8IYdHzqhEYm3s",
+  "66gIYUJm8vNO0TQBGP3WFr": "49R1F3rIdSzuPk7AcHi6d1",
+  "4QdeCjHZA7HN4n3MVfvWkv": "4ypCNolz6aRYZPO3UOGp8Z",
+  "1vrd6UOGamcKNGnSHJQlSt": "4ZBe9Plh2adT70U4PDxve1",
+  "1y3fJHMYPVMqhwvVInIZoN": "7n3Czk07KugPQOWuqCHDmF",
+  "3V4CdWZmFOiRLSe7TYCPEE": "5N7IYups0hGrlVcvj0bmHG",
+  "5xbMPNpXBx5JnGrFnWoCXj": "1QpWQMKfQ44QUN1dEg65T8",
+  "1oVBFfFDNPqFsZFQvLfBRK": "3BJ0uXKEz9fUxCbZle1rCE",
+  "2vKHlJ5JYMFL1eTcNwDvHn": "1EjIXKhNHI00ZLMRpS8iz8",
+  "5eEDMkRGkABvAFOScjrNlj": "4IUMSDTVvUellFQ7RxI3kZ",
+  "6KuHXWMnVNqKMqDYY3e8J8": "6XIerJ9V7H9byQFRZiqyCv",
+  "3jMZexLLDuN2gGFdFhiOLT": "2MiEtw8UquKvxOwu47oTMu",
+  "4XiWDmgQvh9gXYHDRJisCf": "7qiEoVlFjb3KaytT2zgK1g",
+  "0iJBRBjFJtZkwb5Gu3ETXN": "0uHrMbMv3c78398pIANDqR",
+};
+const resolveId = raw => (raw && LEGACY[raw]) || raw;
+
 const $ = id => document.getElementById(id);
 const SCREENS = ['screenHome', 'screenScan', 'screenRotate', 'screenPlay', 'screenRules'];
 let stream = null, scanRAF = null, scanCanvas = null, scanCtx = null, scanning = false;
@@ -388,7 +419,7 @@ function show(id) {
 
 // --- Routing ---
 const params  = new URL(location.href).searchParams;
-const trackId = params.get('id');
+const trackId = resolveId(params.get('id'));
 const song    = trackId ? SONGS.find(s => s.id === trackId) : null;
 
 // --- Home buttons ---
@@ -439,7 +470,7 @@ function scanTick() {
     if (img) {
       const code = jsQR(img.data, w, h, { inversionAttempts: 'dontInvert' });
       if (code && code.data) {
-        const id = extractId(code.data);
+        const id = resolveId(extractId(code.data));
         if (id && SONGS.some(s => s.id === id)) {
           stopScanner();
           if (navigator.vibrate) navigator.vibrate(60);
