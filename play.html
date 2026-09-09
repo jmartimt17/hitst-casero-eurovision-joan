@@ -274,10 +274,10 @@
 <div class="screen" id="screenRotate" hidden>
   <div class="rotate-phone">🎶</div>
   <div class="rotate-title">GIRA EL TELÉFONO</div>
-  <div class="rotate-sub">Ponlo en horizontal y empezará la cuenta atrás</div>
+  <div class="rotate-sub">Ponlo en horizontal y empezará a sonar</div>
   <div class="home-actions">
-    <a class="btn btn-spotify" id="rotateSpotify" target="_blank" rel="noopener">▶ Abrir en Spotify</a>
-    <button class="link-btn" id="skipRotate">o empezar sin girar</button>
+    <button class="btn btn-spotify" id="startBtn">▶ Empezar</button>
+    <button class="link-btn" id="skipRotate">empezar sin girar</button>
   </div>
 </div>
 
@@ -297,15 +297,10 @@
       </div>
     </div>
 
-    <a class="btn btn-spotify" id="spotifyBtn" href="#" target="_blank" rel="noopener">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 11-.277-1.215c3.809-.87 7.076-.496 9.712 1.115.293.18.387.563.207.857zm1.223-2.722a.779.779 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.778.778 0 01-.973-.516.779.779 0 01.516-.973c3.632-1.102 8.147-.568 11.237 1.328a.779.779 0 01.257 1.07zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.935.935 0 11-.543-1.79c3.532-1.072 9.404-.865 13.115 1.338a.935.935 0 01-.955 1.609z"/>
-      </svg>
-      Abrir en Spotify
-    </a>
+    <audio id="audio" preload="auto" playsinline></audio>
 
-    <button class="btn btn-timer" id="timerBtn">▶ Reiniciar cuenta atrás (20 s)</button>
-    <button class="btn-reset" id="resetBtn">Reiniciar</button>
+    <button class="btn btn-spotify" id="soundBtn">▶ Reproducir 20 s</button>
+    <a class="btn btn-timer" id="spotifyBtn" href="#" target="_blank" rel="noopener">Abrir canción completa en Spotify</a>
 
     <p class="status-msg" id="statusMsg">Escucha ~20 s y adivina el año del Festival</p>
 
@@ -329,9 +324,9 @@
     <h2>Cómo se juega</h2>
     <ol>
       <li>Pulsa <strong>Jugar</strong> y escanea el QR de una carta.</li>
-      <li>Gira el móvil a horizontal: empieza la cuenta atrás de <strong>20 segundos</strong> y se abre la canción en Spotify. Dale al play.</li>
+      <li>Gira el móvil a horizontal: suena un fragmento de <strong>20 segundos</strong> de la canción y se para solo.</li>
       <li>Sin mirar la carta, los jugadores adivinan <strong>el año del Festival</strong> en el que participó esa canción.</li>
-      <li>Coloca la carta en tu línea del tiempo (antes/después de las que ya tienes). Dale la vuelta para comprobar el año.</li>
+      <li>Comprueba con <strong>Revelar solución</strong> (país, año, título y artista) y coloca la carta en tu línea del tiempo.</li>
       <li>El primero en colocar <strong>10 cartas</strong> correctas gana.</li>
     </ol>
   </div>
@@ -355,32 +350,32 @@
 
 // --- Song data ---
 const SONGS = [
-  { id: "1ssBrm3EZb20Kb19roQIcy", year: 2024, country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",               title: "Liar" },
-  { id: "3q58lQ4ByWV5MR0VSeNer3", year: 2024, country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                  title: "Ramonda" },
-  { id: "2Ozw7k5CLtM5W9SomrOyjw", year: 2024, country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                 title: "Hurricane" },
-  { id: "4QWrK6lpr8rZ6sa8ymqMrq", year: 2024, country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",               title: "No Rules!" },
-  { id: "5ViF3hsL0iwD7jhh5JB2Ip", year: 2024, country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",              title: "In The Middle" },
-  { id: "6EwXG9cPjesjehN0kw30xs", year: 2024, country: "Azerbaiyán",   flag: "🇦🇿", artist: "Fahree feat. Ilkin Dovlatov", title: "Özünlə Apar" },
-  { id: "74mWVYv6xPilcalOxrQa5Y", year: 2024, country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",             title: "One Milkali (One Blood)" },
-  { id: "582OHNxg4RRvlzTn7fuLY9", year: 2024, country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                    title: "Grito" },
-  { id: "6syLoIbMRXvCEr94FMVBHh", year: 2024, country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                       title: "Fighter" },
-  { id: "5L8C1PZGCpZf8STcN79H5j", year: 2024, country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",          title: "Unforgettable" },
-  { id: "4GEmQTg7yfnfZoNhgpCg61", year: 2024, country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",             title: "Dizzy" },
-  { id: "4sDLQ5atDUHhbikD1UQ2mW", year: 2024, country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",               title: "ZARI" },
-  { id: "6awPQdcqY8IYdHzqhEYm3s", year: 2024, country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                       title: "Ulveham" },
-  { id: "49R1F3rIdSzuPk7AcHi6d1", year: 2024, country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",             title: "La Noia" },
-  { id: "4ypCNolz6aRYZPO3UOGp8Z", year: 2024, country: "España",        flag: "🇪🇸", artist: "Nebulossa",                  title: "ZORRA" },
-  { id: "4ZBe9Plh2adT70U4PDxve1", year: 2024, country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",             title: "Luktelk" },
-  { id: "7n3Czk07KugPQOWuqCHDmF", year: 2024, country: "Ucrania",       flag: "🇺🇦", artist: "alyona alyona & Jerry Heil", title: "Teresa & Maria" },
-  { id: "5N7IYups0hGrlVcvj0bmHG", year: 2024, country: "Francia",       flag: "🇫🇷", artist: "Slimane",                    title: "Mon Amour" },
-  { id: "1QpWQMKfQ44QUN1dEg65T8", year: 2024, country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                     title: "We Will Rave" },
-  { id: "3BJ0uXKEz9fUxCbZle1rCE", year: 2024, country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                      title: "Always On The Run" },
-  { id: "1EjIXKhNHI00ZLMRpS8iz8", year: 2024, country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                       title: "The Code" },
-  { id: "4IUMSDTVvUellFQ7RxI3kZ", year: 2024, country: "Polonia",       flag: "🇵🇱", artist: "Luna",                       title: "The Tower" },
-  { id: "6XIerJ9V7H9byQFRZiqyCv", year: 2024, country: "San Marino",   flag: "🇸🇲", artist: "Megara",                     title: "11:11" },
-  { id: "2MiEtw8UquKvxOwu47oTMu", year: 2024, country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                   title: "Jako" },
-  { id: "7qiEoVlFjb3KaytT2zgK1g", year: 2024, country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",                title: "Doomsday Blue" },
-  { id: "0uHrMbMv3c78398pIANDqR", year: 2024, country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",                title: "Europapa" },
+  { id: "1ssBrm3EZb20Kb19roQIcy", year: 2024, country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",               title: "Liar", pv: "c4a1df4eb2d922d0925071b60bb181438a700585" },
+  { id: "3q58lQ4ByWV5MR0VSeNer3", year: 2024, country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                  title: "Ramonda", pv: "408c6daab3514bc536ee2d669aafd00baa0b651d" },
+  { id: "2Ozw7k5CLtM5W9SomrOyjw", year: 2024, country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                 title: "Hurricane", pv: "cde96fd2bc64c850016ce160505f1eab451fc7c0" },
+  { id: "4QWrK6lpr8rZ6sa8ymqMrq", year: 2024, country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",               title: "No Rules!", pv: "005801d73892012d798b1020f04f2709a48f0739" },
+  { id: "5ViF3hsL0iwD7jhh5JB2Ip", year: 2024, country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",              title: "In The Middle", pv: "639e961474e1eb8f24ab11cea8c7cb9300a95f50" },
+  { id: "6EwXG9cPjesjehN0kw30xs", year: 2024, country: "Azerbaiyán",   flag: "🇦🇿", artist: "Fahree feat. Ilkin Dovlatov", title: "Özünlə Apar", pv: "93a879b4e1d02b1e392084ffd016ab0719da8953" },
+  { id: "74mWVYv6xPilcalOxrQa5Y", year: 2024, country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",             title: "One Milkali (One Blood)", pv: "79f084c65b4244c8f16380989da3836665727fc5" },
+  { id: "582OHNxg4RRvlzTn7fuLY9", year: 2024, country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                    title: "Grito", pv: "a72766eb02a733146bea026a8a7cf2683e9e586f" },
+  { id: "6syLoIbMRXvCEr94FMVBHh", year: 2024, country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                       title: "Fighter", pv: "e2ff57ccf836613dba0e2194339e78d25e484daa" },
+  { id: "5L8C1PZGCpZf8STcN79H5j", year: 2024, country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",          title: "Unforgettable", pv: "b0f8146b036f3b5ef6d5abf877dea327bfe6c606" },
+  { id: "4GEmQTg7yfnfZoNhgpCg61", year: 2024, country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",             title: "Dizzy", pv: "15fc1ae37805e2e63eba2a931fcdf2759c533c95" },
+  { id: "4sDLQ5atDUHhbikD1UQ2mW", year: 2024, country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",               title: "ZARI", pv: "8045da7e62384a51b05f5ee1b7881c2048757fd6" },
+  { id: "6awPQdcqY8IYdHzqhEYm3s", year: 2024, country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                       title: "Ulveham", pv: "979ca2232bac552c846d49e968d7ed677e2103e4" },
+  { id: "49R1F3rIdSzuPk7AcHi6d1", year: 2024, country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",             title: "La Noia", pv: "6ceb7797040378d3a984c0bee2e4107bcce46c46" },
+  { id: "4ypCNolz6aRYZPO3UOGp8Z", year: 2024, country: "España",        flag: "🇪🇸", artist: "Nebulossa",                  title: "ZORRA", pv: "9282f511673c6ef9466ac9ae3226c5567cc10e0f" },
+  { id: "4ZBe9Plh2adT70U4PDxve1", year: 2024, country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",             title: "Luktelk", pv: "3355e62b74afab7efe26939f48d8d990c44e07e2" },
+  { id: "7n3Czk07KugPQOWuqCHDmF", year: 2024, country: "Ucrania",       flag: "🇺🇦", artist: "alyona alyona & Jerry Heil", title: "Teresa & Maria", pv: "8465d47338a7aa21397aa565eebfe24c2f561fb4" },
+  { id: "5N7IYups0hGrlVcvj0bmHG", year: 2024, country: "Francia",       flag: "🇫🇷", artist: "Slimane",                    title: "Mon Amour", pv: "ad89fa428c447ac3926785c0c56fd9e6af4641e5" },
+  { id: "1QpWQMKfQ44QUN1dEg65T8", year: 2024, country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                     title: "We Will Rave", pv: "cacd8ade4c93b5eccf74846870fd6a0037d531c6" },
+  { id: "3BJ0uXKEz9fUxCbZle1rCE", year: 2024, country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                      title: "Always On The Run", pv: "a8471549e28c5388b2b2760725e25ec55cff8395" },
+  { id: "1EjIXKhNHI00ZLMRpS8iz8", year: 2024, country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                       title: "The Code", pv: "e2cef9b3f240bcef7771b1e8b0edc2d6e17e8635" },
+  { id: "4IUMSDTVvUellFQ7RxI3kZ", year: 2024, country: "Polonia",       flag: "🇵🇱", artist: "Luna",                       title: "The Tower", pv: "141694f25b972ad32930e8f5b3e9a3aad2ed83e4" },
+  { id: "6XIerJ9V7H9byQFRZiqyCv", year: 2024, country: "San Marino",   flag: "🇸🇲", artist: "Megara",                     title: "11:11", pv: "0dd06ce62f44a10ed35a9c14114d78d9ed1de28f" },
+  { id: "2MiEtw8UquKvxOwu47oTMu", year: 2024, country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                   title: "Jako", pv: "2d43fe264f0f57b62996f3bccbde74c1f7731cc5" },
+  { id: "7qiEoVlFjb3KaytT2zgK1g", year: 2024, country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",                title: "Doomsday Blue", pv: "49fde0058f2cf8ca85f6dcabf529e56643e9d8f5" },
+  { id: "0uHrMbMv3c78398pIANDqR", year: 2024, country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",                title: "Europapa", pv: "adf1afd42554acfb8f165649b5a5c7c4d95cc5bd" },
 ];
 
 const $ = id => document.getElementById(id);
@@ -395,18 +390,6 @@ function show(id) {
 const params  = new URL(location.href).searchParams;
 const trackId = params.get('id');
 const song    = trackId ? SONGS.find(s => s.id === trackId) : null;
-
-if (!trackId) {
-  show('screenHome');
-} else if (!song) {
-  $('screenPlay').hidden = false;
-  $('screenPlay').innerHTML =
-    '<div class="err"><h2>Canción no encontrada</h2>' +
-    '<p>Este QR no corresponde a ninguna carta de la lista.</p>' +
-    '<button class="btn btn-ghost" style="margin-top:1.4rem;max-width:320px" onclick="location.search=\'\'">Ir al inicio</button></div>';
-} else {
-  setupRound(song);
-}
 
 // --- Home buttons ---
 $('playBtn').addEventListener('click', startScanner);
@@ -488,33 +471,45 @@ $('scanClose').addEventListener('click', () => {
 });
 
 // =================================================================
-//  ROUND: rotate gate -> play card + timer
+//  ROUND: pantalla "gira el teléfono" -> reproducir 20 s de la canción
 // =================================================================
+const DURATION = 20;
+const ring = $('timerRing'), numEl = $('timerNum'), statusEl = $('statusMsg');
+const soundBtn = $('soundBtn'), audio = $('audio');
+const circ = 2 * Math.PI * 55;
+let finished = false, spotifyUrl = '#', roundStarted = false;
+
+function setRing(secs) {
+  const f = Math.max(0, Math.min(1, secs / DURATION));
+  ring.style.strokeDashoffset = circ * (1 - f);
+  ring.style.stroke = f > 0.4 ? 'var(--pulse)' : f > 0.15 ? '#f0a030' : '#e03030';
+}
+
 function setupRound(song) {
   document.title = 'Hitster Eurovisión';
+  setRing(DURATION);
 
-  // Solución (oculta hasta pulsar "Revelar solución")
   $('solFlag').textContent = song.flag;
   $('solCountry').textContent = song.country.toUpperCase();
   $('solEdition').textContent = 'Eurovisión ' + song.year;
   $('solSong').textContent = song.title;
   $('solArtist').textContent = song.artist;
-
   $('revealBtn').addEventListener('click', () => {
     const sol = $('solution');
     sol.hidden = !sol.hidden;
     $('revealBtn').textContent = sol.hidden ? '🔓 Revelar solución' : '🙈 Ocultar solución';
   });
 
-  const spotifyUrl = `https://open.spotify.com/track/${song.id}`;
+  spotifyUrl = `https://open.spotify.com/track/${song.id}`;
   $('spotifyBtn').href = spotifyUrl;
-  $('rotateSpotify').href = spotifyUrl;
+
+  audio.src = song.pv ? ('https://p.scdn.co/mp3-preview/' + song.pv) : '';
+  if (audio.src) audio.load();
 
   show('screenRotate');
 
-  // Rotate-to-start: plain orientation media query (no permission needed)
   const mq = window.matchMedia('(orientation: landscape)');
-  let armed = !mq.matches;           // only trigger on a real portrait -> landscape turn
+  let armed = !mq.matches;                 // solo dispara con un giro real vertical -> horizontal
   const onOrient = () => {
     if (!$('screenRotate').hidden) {
       if (mq.matches && armed) startRound();
@@ -524,69 +519,67 @@ function setupRound(song) {
   if (mq.addEventListener) mq.addEventListener('change', onOrient);
   else window.addEventListener('orientationchange', onOrient);
   window.addEventListener('resize', onOrient);
-
   if (!armed) $('skipRotate').textContent = 'ya está en horizontal — pulsa para empezar';
-  $('skipRotate').addEventListener('click', startRound);
-  $('rotateSpotify').addEventListener('click', () => {
-    $('skipRotate').textContent = 'ahora gira el móvil a horizontal para empezar';
-  });
 
+  $('startBtn').addEventListener('click', startRound);
+  $('skipRotate').addEventListener('click', startRound);
   $('nextCard').addEventListener('click', startScanner);
 }
 
-let roundStarted = false;
 function startRound() {
   if (roundStarted) return;
   roundStarted = true;
   show('screenPlay');
-  startTimer();
+  playPreview();
 }
 
-// =================================================================
-//  TIMER
-// =================================================================
-const DURATION = 20;
-let remaining = DURATION, interval = null;
-const ring = $('timerRing'), numEl = $('timerNum');
-const btnTimer = $('timerBtn'), btnReset = $('resetBtn'), statusEl = $('statusMsg');
-const circ = 2 * Math.PI * 55;
-
-function setRing(secs) {
-  ring.style.strokeDashoffset = circ * (1 - secs / DURATION);
-  ring.style.stroke = secs / DURATION > 0.4 ? 'var(--pulse)' : secs / DURATION > 0.15 ? '#f0a030' : '#e03030';
-}
-
-function startTimer() {
-  clearInterval(interval);
-  remaining = DURATION;
-  numEl.textContent = DURATION;
-  setRing(DURATION);
-  btnReset.style.display = 'none';
+// --- reproducción controlada por el <audio> (preview de ~30 s de Spotify) ---
+audio.addEventListener('timeupdate', () => {
+  if (finished) return;
+  const left = DURATION - audio.currentTime;
+  numEl.textContent = String(Math.max(0, Math.ceil(left)));
+  setRing(left);
+  if (audio.currentTime >= DURATION) finishRound();
+});
+audio.addEventListener('ended', () => { if (!finished) finishRound(); });
+audio.addEventListener('play', () => {
+  soundBtn.textContent = '⏸ Pausar';
   statusEl.textContent = '¡Adivina el año del Festival!';
   statusEl.classList.remove('done');
-  btnTimer.textContent = '▶ Reiniciar cuenta atrás (20 s)';
+});
+audio.addEventListener('pause', () => { if (!finished) soundBtn.textContent = '▶ Seguir'; });
+audio.addEventListener('error', audioFail);
 
-  interval = setInterval(() => {
-    remaining--;
-    numEl.textContent = remaining;
-    setRing(remaining);
-    if (remaining <= 0) {
-      clearInterval(interval); interval = null;
-      numEl.textContent = '✓';
-      ring.style.stroke = 'var(--green)';
-      ring.style.strokeDashoffset = 0;
-      statusEl.textContent = '¡Tiempo! ¿Acertaste el año?';
-      statusEl.classList.add('done');
-      btnReset.style.display = 'block';
-    }
-  }, 1000);
+function playPreview() {
+  if (!audio.src) return audioFail();
+  if (finished || audio.currentTime >= DURATION - 0.05) { audio.currentTime = 0; finished = false; }
+  audio.play().catch(() => {
+    soundBtn.textContent = '▶ Reproducir 20 s';
+    statusEl.textContent = 'Pulsa ▶ para reproducir';
+  });
 }
 
-if (btnTimer) {
-  btnTimer.addEventListener('click', startTimer);
-  btnReset.addEventListener('click', startTimer);
-  setRing(DURATION);
+function finishRound() {
+  finished = true;
+  audio.pause();
+  numEl.textContent = '✓';
+  ring.style.stroke = 'var(--green)';
+  ring.style.strokeDashoffset = 0;
+  statusEl.textContent = '¡Tiempo! ¿Acertaste el año?';
+  statusEl.classList.add('done');
+  soundBtn.textContent = '🔁 Repetir 20 s';
 }
+
+function audioFail() {
+  soundBtn.textContent = '▶ Abrir en Spotify';
+  statusEl.textContent = 'No se pudo cargar el audio. Ábrela en Spotify.';
+}
+
+soundBtn.addEventListener('click', () => {
+  if (!audio.src || audio.error) { window.open(spotifyUrl, '_blank', 'noopener'); return; }
+  if (finished || audio.currentTime >= DURATION - 0.05) { audio.currentTime = 0; finished = false; playPreview(); return; }
+  if (audio.paused) playPreview(); else audio.pause();
+});
 
 // =================================================================
 //  PWA
@@ -609,6 +602,21 @@ installBtn.addEventListener('click', async () => {
   if (outcome === 'accepted') installBtn.style.display = 'none';
   deferredPrompt = null;
 });
+
+// =================================================================
+//  BOOT  (al final: todas las funciones/const ya están definidas)
+// =================================================================
+if (!trackId) {
+  show('screenHome');
+} else if (!song) {
+  show('screenPlay');
+  $('screenPlay').innerHTML =
+    '<div class="err"><h2>Canción no encontrada</h2>' +
+    '<p>Este QR no corresponde a ninguna carta de la lista.</p>' +
+    '<button class="btn btn-ghost" style="margin-top:1.4rem;max-width:320px" onclick="location.search=\'\'">Ir al inicio</button></div>';
+} else {
+  setupRound(song);
+}
 </script>
 </body>
 </html>
