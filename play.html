@@ -62,16 +62,14 @@
     }
 
     /* --- Home --- */
-    .brand {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3.6rem;
-      line-height: 1;
-      letter-spacing: 0.06em;
-      color: #fff;
-      text-shadow: 0 0 6px var(--pink), 0 0 22px var(--pink), 0 0 42px rgba(255,30,156,0.6);
+    .brand-img {
+      width: min(70vw, 300px);
+      height: auto;
+      border-radius: 26px;
+      filter: drop-shadow(0 0 45px rgba(255,30,156,0.35));
     }
     .tagline {
-      margin-top: 0.9rem;
+      margin-top: 1.4rem;
       font-size: 0.72rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -81,12 +79,7 @@
       padding: 0.5rem 0.9rem;
       box-shadow: 0 0 14px rgba(80,64,255,0.35);
     }
-    .speaker {
-      font-size: 8rem;
-      margin: 2.2rem 0;
-      filter: drop-shadow(0 12px 30px rgba(0,0,0,0.6));
-    }
-    .home-actions { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 0.8rem; }
+    .home-actions { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 0.8rem; margin-top: 2.4rem; }
 
     .btn {
       display: flex; align-items: center; justify-content: center; gap: 0.6rem;
@@ -202,6 +195,27 @@
     .btn-timer:hover { border-color: var(--pulse); background: rgba(80,64,255,0.08); }
     .btn-timer:disabled { opacity: 0.4; cursor: not-allowed; }
 
+    .btn-reveal {
+      background: transparent; color: var(--star);
+      border: 1px solid var(--star); font-weight: 700; font-size: 0.85rem;
+      padding: 0.8rem 1.2rem; margin-top: 0.4rem;
+    }
+    .btn-reveal:hover { background: rgba(240,192,64,0.1); }
+
+    .solution {
+      margin-top: 1rem; padding-top: 1.2rem;
+      border-top: 1px solid var(--border);
+      animation: reveal 0.3s ease;
+    }
+    @keyframes reveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+    .sol-edition {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+      letter-spacing: 0.05em; color: var(--star); margin: 0.15rem 0 0.9rem;
+    }
+    .solution .country-name { margin-bottom: 0.5rem; }
+    .sol-song { font-weight: 700; font-size: 1rem; }
+    .sol-artist { color: var(--muted); font-size: 0.85rem; margin-top: 0.15rem; }
+
     .btn-reset {
       background: none; border: none; color: var(--muted); font-size: 0.75rem;
       cursor: pointer; margin-top: 0.4rem; text-decoration: underline; text-underline-offset: 3px;
@@ -238,9 +252,8 @@
 
 <!-- ===== HOME ===== -->
 <div class="screen" id="screenHome" hidden>
-  <div class="brand">HITSTER</div>
+  <img class="brand-img" src="logo.png" alt="Hitster" width="512" height="512">
   <div class="tagline">Edición Eurovisión 2024</div>
-  <div class="speaker">🔊</div>
   <div class="home-actions">
     <button class="btn btn-primary" id="playBtn">JUGAR AHORA</button>
     <button class="btn btn-ghost" id="rulesBtn">Cómo se juega</button>
@@ -271,10 +284,7 @@
 <!-- ===== PLAY ===== -->
 <div class="screen" id="screenPlay" hidden>
   <div class="card">
-    <div class="label">Eurovisión 2024</div>
-    <div class="country" id="countryFlag">🎵</div>
-    <div class="country-name" id="countryName">—</div>
-    <div class="divider"></div>
+    <div class="label">Escucha y adivina el año</div>
 
     <div class="timer-wrap">
       <svg class="timer-svg" viewBox="0 0 120 120">
@@ -298,6 +308,16 @@
     <button class="btn-reset" id="resetBtn">Reiniciar</button>
 
     <p class="status-msg" id="statusMsg">Escucha ~20 s y adivina el año del Festival</p>
+
+    <button class="btn btn-reveal" id="revealBtn">🔓 Revelar solución</button>
+    <div class="solution" id="solution" hidden>
+      <div class="country" id="solFlag">🏳️</div>
+      <div class="country-name" id="solCountry">—</div>
+      <div class="sol-edition" id="solEdition">—</div>
+      <div class="sol-song" id="solSong">—</div>
+      <div class="sol-artist" id="solArtist">—</div>
+    </div>
+
     <div class="logo">HITSTER · EUROVISIÓN</div>
   </div>
   <button class="link-btn" id="nextCard" style="margin-top:1.4rem">Escanear siguiente carta →</button>
@@ -335,32 +355,32 @@
 
 // --- Song data ---
 const SONGS = [
-  { id: "1ssBrm3EZb20Kb19roQIcy", country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",               title: "Liar" },
-  { id: "3q58lQ4ByWV5MR0VSeNer3", country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                  title: "Ramonda" },
-  { id: "2Ozw7k5CLtM5W9SomrOyjw", country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                 title: "Hurricane" },
-  { id: "4QWrK6lpr8rZ6sa8ymqMrq", country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",               title: "No Rules!" },
-  { id: "5ViF3hsL0iwD7jhh5JB2Ip", country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",              title: "In The Middle" },
-  { id: "6EwXG9cPjesjehN0kw30xs", country: "Azerbaiyán",   flag: "🇦🇿", artist: "Fahree feat. Ilkin Dovlatov", title: "Özünlə Apar" },
-  { id: "74mWVYv6xPilcalOxrQa5Y", country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",             title: "One Milkali (One Blood)" },
-  { id: "582OHNxg4RRvlzTn7fuLY9", country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                    title: "Grito" },
-  { id: "6syLoIbMRXvCEr94FMVBHh", country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                       title: "Fighter" },
-  { id: "5L8C1PZGCpZf8STcN79H5j", country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",          title: "Unforgettable" },
-  { id: "4GEmQTg7yfnfZoNhgpCg61", country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",             title: "Dizzy" },
-  { id: "4sDLQ5atDUHhbikD1UQ2mW", country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",               title: "ZARI" },
-  { id: "6awPQdcqY8IYdHzqhEYm3s", country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                       title: "Ulveham" },
-  { id: "49R1F3rIdSzuPk7AcHi6d1", country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",             title: "La Noia" },
-  { id: "4ypCNolz6aRYZPO3UOGp8Z", country: "España",        flag: "🇪🇸", artist: "Nebulossa",                  title: "ZORRA" },
-  { id: "4ZBe9Plh2adT70U4PDxve1", country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",             title: "Luktelk" },
-  { id: "7n3Czk07KugPQOWuqCHDmF", country: "Ucrania",       flag: "🇺🇦", artist: "alyona alyona & Jerry Heil", title: "Teresa & Maria" },
-  { id: "5N7IYups0hGrlVcvj0bmHG", country: "Francia",       flag: "🇫🇷", artist: "Slimane",                    title: "Mon Amour" },
-  { id: "1QpWQMKfQ44QUN1dEg65T8", country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                     title: "We Will Rave" },
-  { id: "3BJ0uXKEz9fUxCbZle1rCE", country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                      title: "Always On The Run" },
-  { id: "1EjIXKhNHI00ZLMRpS8iz8", country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                       title: "The Code" },
-  { id: "4IUMSDTVvUellFQ7RxI3kZ", country: "Polonia",       flag: "🇵🇱", artist: "Luna",                       title: "The Tower" },
-  { id: "6XIerJ9V7H9byQFRZiqyCv", country: "San Marino",   flag: "🇸🇲", artist: "Megara",                     title: "11:11" },
-  { id: "2MiEtw8UquKvxOwu47oTMu", country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                   title: "Jako" },
-  { id: "7qiEoVlFjb3KaytT2zgK1g", country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",                title: "Doomsday Blue" },
-  { id: "0uHrMbMv3c78398pIANDqR", country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",                title: "Europapa" },
+  { id: "1ssBrm3EZb20Kb19roQIcy", year: 2024, country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",               title: "Liar" },
+  { id: "3q58lQ4ByWV5MR0VSeNer3", year: 2024, country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                  title: "Ramonda" },
+  { id: "2Ozw7k5CLtM5W9SomrOyjw", year: 2024, country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                 title: "Hurricane" },
+  { id: "4QWrK6lpr8rZ6sa8ymqMrq", year: 2024, country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",               title: "No Rules!" },
+  { id: "5ViF3hsL0iwD7jhh5JB2Ip", year: 2024, country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",              title: "In The Middle" },
+  { id: "6EwXG9cPjesjehN0kw30xs", year: 2024, country: "Azerbaiyán",   flag: "🇦🇿", artist: "Fahree feat. Ilkin Dovlatov", title: "Özünlə Apar" },
+  { id: "74mWVYv6xPilcalOxrQa5Y", year: 2024, country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",             title: "One Milkali (One Blood)" },
+  { id: "582OHNxg4RRvlzTn7fuLY9", year: 2024, country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                    title: "Grito" },
+  { id: "6syLoIbMRXvCEr94FMVBHh", year: 2024, country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                       title: "Fighter" },
+  { id: "5L8C1PZGCpZf8STcN79H5j", year: 2024, country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",          title: "Unforgettable" },
+  { id: "4GEmQTg7yfnfZoNhgpCg61", year: 2024, country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",             title: "Dizzy" },
+  { id: "4sDLQ5atDUHhbikD1UQ2mW", year: 2024, country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",               title: "ZARI" },
+  { id: "6awPQdcqY8IYdHzqhEYm3s", year: 2024, country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                       title: "Ulveham" },
+  { id: "49R1F3rIdSzuPk7AcHi6d1", year: 2024, country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",             title: "La Noia" },
+  { id: "4ypCNolz6aRYZPO3UOGp8Z", year: 2024, country: "España",        flag: "🇪🇸", artist: "Nebulossa",                  title: "ZORRA" },
+  { id: "4ZBe9Plh2adT70U4PDxve1", year: 2024, country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",             title: "Luktelk" },
+  { id: "7n3Czk07KugPQOWuqCHDmF", year: 2024, country: "Ucrania",       flag: "🇺🇦", artist: "alyona alyona & Jerry Heil", title: "Teresa & Maria" },
+  { id: "5N7IYups0hGrlVcvj0bmHG", year: 2024, country: "Francia",       flag: "🇫🇷", artist: "Slimane",                    title: "Mon Amour" },
+  { id: "1QpWQMKfQ44QUN1dEg65T8", year: 2024, country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                     title: "We Will Rave" },
+  { id: "3BJ0uXKEz9fUxCbZle1rCE", year: 2024, country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                      title: "Always On The Run" },
+  { id: "1EjIXKhNHI00ZLMRpS8iz8", year: 2024, country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                       title: "The Code" },
+  { id: "4IUMSDTVvUellFQ7RxI3kZ", year: 2024, country: "Polonia",       flag: "🇵🇱", artist: "Luna",                       title: "The Tower" },
+  { id: "6XIerJ9V7H9byQFRZiqyCv", year: 2024, country: "San Marino",   flag: "🇸🇲", artist: "Megara",                     title: "11:11" },
+  { id: "2MiEtw8UquKvxOwu47oTMu", year: 2024, country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                   title: "Jako" },
+  { id: "7qiEoVlFjb3KaytT2zgK1g", year: 2024, country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",                title: "Doomsday Blue" },
+  { id: "0uHrMbMv3c78398pIANDqR", year: 2024, country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",                title: "Europapa" },
 ];
 
 const $ = id => document.getElementById(id);
@@ -471,9 +491,20 @@ $('scanClose').addEventListener('click', () => {
 //  ROUND: rotate gate -> play card + timer
 // =================================================================
 function setupRound(song) {
-  document.title = `${song.country} — Hitster Eurovisión`;
-  $('countryFlag').textContent = song.flag;
-  $('countryName').textContent = song.country.toUpperCase();
+  document.title = 'Hitster Eurovisión';
+
+  // Solución (oculta hasta pulsar "Revelar solución")
+  $('solFlag').textContent = song.flag;
+  $('solCountry').textContent = song.country.toUpperCase();
+  $('solEdition').textContent = 'Eurovisión ' + song.year;
+  $('solSong').textContent = song.title;
+  $('solArtist').textContent = song.artist;
+
+  $('revealBtn').addEventListener('click', () => {
+    const sol = $('solution');
+    sol.hidden = !sol.hidden;
+    $('revealBtn').textContent = sol.hidden ? '🔓 Revelar solución' : '🙈 Ocultar solución';
+  });
 
   const spotifyUrl = `https://open.spotify.com/track/${song.id}`;
   $('spotifyBtn').href = spotifyUrl;

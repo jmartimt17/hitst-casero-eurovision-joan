@@ -1,9 +1,12 @@
-const CACHE = 'hitster-v3';
+const CACHE = 'hitster-v4';
 const ASSETS = [
   './',
   './play.html',
   './cards.html',
   './manifest.json',
+  './logo.png',
+  './icon-192.png',
+  './icon-512.png',
   'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js',
   'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js'
