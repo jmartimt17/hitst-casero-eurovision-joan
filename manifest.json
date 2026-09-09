@@ -1,0 +1,25 @@
+{
+  "name": "Hitster Eurovisión",
+  "short_name": "Hitster",
+  "description": "El juego Hitster con canciones de Eurovisión 2024",
+  "start_url": "/hitst-casero-eurovision-joan/play.html",
+  "scope": "/hitst-casero-eurovision-joan/",
+  "display": "standalone",
+  "background_color": "#0a0a14",
+  "theme_color": "#5040ff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

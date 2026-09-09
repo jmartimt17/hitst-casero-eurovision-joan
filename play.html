@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hitster Eurovisión</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#5040ff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Hitster">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -47,7 +56,6 @@
       opacity: 0.4;
       animation: twinkle 3s infinite alternate;
     }
-
     @keyframes twinkle {
       from { opacity: 0.1; }
       to   { opacity: 0.7; }
@@ -74,10 +82,7 @@
       margin-bottom: 0.4rem;
     }
 
-    .country {
-      font-size: 2rem;
-      margin-bottom: 0.15rem;
-    }
+    .country { font-size: 2rem; margin-bottom: 0.15rem; }
 
     .country-name {
       font-family: 'Bebas Neue', sans-serif;
@@ -94,7 +99,6 @@
       margin: 0 auto 1.5rem;
     }
 
-    /* Timer ring */
     .timer-wrap {
       position: relative;
       width: 140px;
@@ -102,18 +106,8 @@
       margin: 0 auto 1.8rem;
     }
 
-    .timer-svg {
-      transform: rotate(-90deg);
-      width: 140px;
-      height: 140px;
-    }
-
-    .timer-track {
-      fill: none;
-      stroke: var(--border);
-      stroke-width: 6;
-    }
-
+    .timer-svg { transform: rotate(-90deg); width: 140px; height: 140px; }
+    .timer-track    { fill: none; stroke: var(--border); stroke-width: 6; }
     .timer-progress {
       fill: none;
       stroke: var(--pulse);
@@ -148,7 +142,6 @@
       text-transform: uppercase;
     }
 
-    /* Buttons */
     .btn-spotify {
       display: flex;
       align-items: center;
@@ -168,7 +161,7 @@
       margin-bottom: 0.75rem;
       transition: transform 0.1s, opacity 0.1s;
     }
-    .btn-spotify:hover { opacity: 0.9; transform: scale(1.02); }
+    .btn-spotify:hover  { opacity: 0.9; transform: scale(1.02); }
     .btn-spotify:active { transform: scale(0.98); }
 
     .btn-timer {
@@ -188,7 +181,7 @@
       cursor: pointer;
       transition: border-color 0.2s, background 0.2s;
     }
-    .btn-timer:hover { border-color: var(--pulse); background: rgba(80,64,255,0.08); }
+    .btn-timer:hover    { border-color: var(--pulse); background: rgba(80,64,255,0.08); }
     .btn-timer:disabled { opacity: 0.4; cursor: not-allowed; }
 
     .btn-reset {
@@ -221,12 +214,29 @@
       color: var(--border);
     }
 
-    /* Error state */
-    .error-card {
-      text-align: center;
-    }
+    .error-card { text-align: center; }
     .error-card h2 { font-size: 1.2rem; margin-bottom: 0.5rem; }
     .error-card p  { color: var(--muted); font-size: 0.85rem; }
+
+    /* Install banner (solo se muestra si hay prompt disponible) */
+    #installBanner {
+      display: none;
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--pulse);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 0.75rem 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(80,64,255,0.4);
+    }
   </style>
 </head>
 <body>
@@ -260,59 +270,58 @@
   <button class="btn-timer" id="timerBtn" disabled>
     ▶ Iniciar temporizador (20 s)
   </button>
-  <button class="btn-reset" id="resetBtn" onclick="resetTimer()">Reiniciar</button>
+  <button class="btn-reset" id="resetBtn">Reiniciar</button>
 
   <p class="status-msg" id="statusMsg">Abre la canción en Spotify y pulsa Iniciar</p>
 
   <div class="logo">HITSTER · EUROVISIÓN</div>
 </div>
 
+<button id="installBanner">📲 Instalar app</button>
+
 <script>
-// --- Stars background ---
+// --- Stars ---
 (function() {
-  const container = document.getElementById('stars');
+  const c = document.getElementById('stars');
   for (let i = 0; i < 80; i++) {
     const s = document.createElement('div');
     s.className = 'star';
-    s.style.left = Math.random() * 100 + '%';
-    s.style.top  = Math.random() * 100 + '%';
-    s.style.animationDelay = (Math.random() * 3) + 's';
-    s.style.animationDuration = (2 + Math.random() * 3) + 's';
-    container.appendChild(s);
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;animation-delay:${Math.random()*3}s;animation-duration:${2+Math.random()*3}s`;
+    c.appendChild(s);
   }
 })();
 
-// --- Song data (inlined, no external file needed) ---
+// --- Song data ---
 const SONGS = [
-  { id: "7oYMGSXtuRBJbdqT1cHJRf", country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",              title: "Liar" },
-  { id: "2zuEKEHfEFsJDsWyAhEGsH", country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                 title: "Ramonda" },
-  { id: "2BHgGbXOaHaXrVHBQW3ZBt", country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                title: "Hurricane" },
-  { id: "1kHFKnFqBYIfx7fDnbTiRX", country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",              title: "No Rules!" },
-  { id: "4qoUTOMLqJWiSnOQfEkAVM", country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",             title: "In The Middle" },
+  { id: "7oYMGSXtuRBJbdqT1cHJRf", country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",               title: "Liar" },
+  { id: "2zuEKEHfEFsJDsWyAhEGsH", country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                  title: "Ramonda" },
+  { id: "2BHgGbXOaHaXrVHBQW3ZBt", country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                 title: "Hurricane" },
+  { id: "1kHFKnFqBYIfx7fDnbTiRX", country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",               title: "No Rules!" },
+  { id: "4qoUTOMLqJWiSnOQfEkAVM", country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",              title: "In The Middle" },
   { id: "3MsHBhHKxXnfbq4Wf2Zhp8", country: "Azerbaiyán",   flag: "🇦🇿", artist: "Fahree feat. Ilkin Dovlatov", title: "Özünlə Apar" },
-  { id: "2tpYCBuqFVhCiXZR3QmFPK", country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",            title: "One Milkali (One Blood)" },
-  { id: "7h1R0iMRgBKPepRDY7fE96", country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                   title: "Grito" },
-  { id: "0smabpMkLHuDHpgJY3tTpW", country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                      title: "Fighter" },
-  { id: "5Hk1iykXXCACKnOUEBRrPd", country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",         title: "Unforgettable" },
-  { id: "5kFpJ0LBKPK6mzxiGrRPt0", country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",            title: "Dizzy" },
-  { id: "1rAnT1j9EKXWBT0FQGqaXO", country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",              title: "ZARI" },
-  { id: "4YaFTU7NJXFV8WUHR6Pf0u", country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                      title: "Ulveham" },
-  { id: "66gIYUJm8vNO0TQBGP3WFr", country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",            title: "La Noia" },
-  { id: "4QdeCjHZA7HN4n3MVfvWkv", country: "España",        flag: "🇪🇸", artist: "Nebulossa",                 title: "ZORRA" },
-  { id: "1vrd6UOGamcKNGnSHJQlSt", country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",            title: "Luktelk" },
+  { id: "2tpYCBuqFVhCiXZR3QmFPK", country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",             title: "One Milkali (One Blood)" },
+  { id: "7h1R0iMRgBKPepRDY7fE96", country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                    title: "Grito" },
+  { id: "0smabpMkLHuDHpgJY3tTpW", country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                       title: "Fighter" },
+  { id: "5Hk1iykXXCACKnOUEBRrPd", country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",          title: "Unforgettable" },
+  { id: "5kFpJ0LBKPK6mzxiGrRPt0", country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",             title: "Dizzy" },
+  { id: "1rAnT1j9EKXWBT0FQGqaXO", country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",               title: "ZARI" },
+  { id: "4YaFTU7NJXFV8WUHR6Pf0u", country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                       title: "Ulveham" },
+  { id: "66gIYUJm8vNO0TQBGP3WFr", country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",             title: "La Noia" },
+  { id: "4QdeCjHZA7HN4n3MVfvWkv", country: "España",        flag: "🇪🇸", artist: "Nebulossa",                  title: "ZORRA" },
+  { id: "1vrd6UOGamcKNGnSHJQlSt", country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",             title: "Luktelk" },
   { id: "1y3fJHMYPVMqhwvVInIZoN", country: "Ucrania",       flag: "🇺🇦", artist: "alyona alyona & Jerry Heil", title: "Teresa & Maria" },
-  { id: "3V4CdWZmFOiRLSe7TYCPEE", country: "Francia",       flag: "🇫🇷", artist: "Slimane",                   title: "Mon Amour" },
-  { id: "5xbMPNpXBx5JnGrFnWoCXj", country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                    title: "We Will Rave" },
-  { id: "1oVBFfFDNPqFsZFQvLfBRK", country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                     title: "Always On The Run" },
-  { id: "2vKHlJ5JYMFL1eTcNwDvHn", country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                      title: "The Code" },
-  { id: "5eEDMkRGkABvAFOScjrNlj", country: "Polonia",       flag: "🇵🇱", artist: "Luna",                      title: "The Tower" },
-  { id: "6KuHXWMnVNqKMqDYY3e8J8", country: "San Marino",   flag: "🇸🇲", artist: "Megara",                    title: "11:11" },
-  { id: "3jMZexLLDuN2gGFdFhiOLT", country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                  title: "Jako" },
-  { id: "4XiWDmgQvh9gXYHDRJisCf", country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",               title: "Doomsday Blue" },
-  { id: "0iJBRBjFJtZkwb5Gu3ETXN", country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",               title: "Europapa" },
+  { id: "3V4CdWZmFOiRLSe7TYCPEE", country: "Francia",       flag: "🇫🇷", artist: "Slimane",                    title: "Mon Amour" },
+  { id: "5xbMPNpXBx5JnGrFnWoCXj", country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                     title: "We Will Rave" },
+  { id: "1oVBFfFDNPqFsZFQvLfBRK", country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                      title: "Always On The Run" },
+  { id: "2vKHlJ5JYMFL1eTcNwDvHn", country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                       title: "The Code" },
+  { id: "5eEDMkRGkABvAFOScjrNlj", country: "Polonia",       flag: "🇵🇱", artist: "Luna",                       title: "The Tower" },
+  { id: "6KuHXWMnVNqKMqDYY3e8J8", country: "San Marino",   flag: "🇸🇲", artist: "Megara",                     title: "11:11" },
+  { id: "3jMZexLLDuN2gGFdFhiOLT", country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                   title: "Jako" },
+  { id: "4XiWDmgQvh9gXYHDRJisCf", country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",                title: "Doomsday Blue" },
+  { id: "0iJBRBjFJtZkwb5Gu3ETXN", country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",                title: "Europapa" },
 ];
 
-// --- Parse song from URL ---
+// --- Load song ---
 const params  = new URL(location.href).searchParams;
 const trackId = params.get('id');
 const song    = SONGS.find(s => s.id === trackId);
@@ -324,16 +333,11 @@ if (!song) {
       <p>El código QR no corresponde a ninguna canción de la lista.</p>
     </div>`;
 } else {
-  // Populate card
   document.getElementById('countryFlag').textContent = song.flag;
   document.getElementById('countryName').textContent = song.country.toUpperCase();
   document.title = `${song.title} — Hitster Eurovisión`;
+  document.getElementById('spotifyBtn').href = `spotify:track:${song.id}`;
 
-  // Spotify deep link
-  const spotifyUri = `spotify:track:${song.id}`;
-  document.getElementById('spotifyBtn').href = spotifyUri;
-
-  // Enable timer after clicking Spotify button
   document.getElementById('spotifyBtn').addEventListener('click', () => {
     setTimeout(() => {
       document.getElementById('timerBtn').disabled = false;
@@ -342,41 +346,38 @@ if (!song) {
   });
 }
 
-// --- Timer logic ---
+// --- Timer ---
 const DURATION = 20;
-let remaining = DURATION;
-let interval  = null;
+let remaining = DURATION, interval = null;
 const ring     = document.getElementById('timerRing');
 const numEl    = document.getElementById('timerNum');
 const btnTimer = document.getElementById('timerBtn');
-const btnReset = document.getElementById('btnReset');
+const btnReset = document.getElementById('resetBtn');
 const statusEl = document.getElementById('statusMsg');
-const circumference = 2 * Math.PI * 55; // r=55 → ~345.4
+const circ     = 2 * Math.PI * 55;
 
 function setRing(secs) {
-  const frac = secs / DURATION;
-  ring.style.strokeDashoffset = circumference * (1 - frac);
-  ring.style.stroke = frac > 0.4 ? 'var(--pulse)' : frac > 0.15 ? '#f0a030' : '#e03030';
+  ring.style.strokeDashoffset = circ * (1 - secs / DURATION);
+  ring.style.stroke = secs / DURATION > 0.4 ? 'var(--pulse)' : secs / DURATION > 0.15 ? '#f0a030' : '#e03030';
 }
 
 function resetTimer() {
-  clearInterval(interval);
-  interval  = null;
+  clearInterval(interval); interval = null;
   remaining = DURATION;
   numEl.textContent = DURATION;
   setRing(DURATION);
   btnTimer.textContent = '▶ Iniciar temporizador (20 s)';
-  btnTimer.disabled    = false;
-  document.getElementById('resetBtn').style.display = 'none';
+  btnTimer.disabled = false;
+  btnReset.style.display = 'none';
   statusEl.textContent = 'Pulsa Iniciar cuando empiece a sonar';
   statusEl.classList.remove('done');
 }
 
-document.getElementById('timerBtn').addEventListener('click', () => {
+btnTimer.addEventListener('click', () => {
   if (interval) return;
   btnTimer.disabled = true;
   btnTimer.textContent = '⏱ Contando...';
-  document.getElementById('resetBtn').style.display = 'block';
+  btnReset.style.display = 'block';
   statusEl.textContent = '¡Adivina el año!';
   statusEl.classList.remove('done');
 
@@ -385,8 +386,7 @@ document.getElementById('timerBtn').addEventListener('click', () => {
     numEl.textContent = remaining;
     setRing(remaining);
     if (remaining <= 0) {
-      clearInterval(interval);
-      interval = null;
+      clearInterval(interval); interval = null;
       numEl.textContent = '✓';
       ring.style.stroke = 'var(--green)';
       ring.style.strokeDashoffset = 0;
@@ -397,7 +397,31 @@ document.getElementById('timerBtn').addEventListener('click', () => {
   }, 1000);
 });
 
+btnReset.addEventListener('click', resetTimer);
 setRing(DURATION);
+
+// --- PWA: Service Worker ---
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(console.error);
+}
+
+// --- PWA: Install banner ---
+let deferredPrompt;
+const installBtn = document.getElementById('installBanner');
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = 'block';
+});
+
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === 'accepted') installBtn.style.display = 'none';
+  deferredPrompt = null;
+});
 </script>
 </body>
 </html>
