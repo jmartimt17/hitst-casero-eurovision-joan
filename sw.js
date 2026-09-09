@@ -1,4 +1,4 @@
-const CACHE = 'hitster-v6';
+const CACHE = 'hitster-v7';
 const ASSETS = [
   './',
   './play.html',
@@ -11,12 +11,12 @@ const ASSETS = [
   'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js',
   'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js'
 ];
+const PRECACHE = new Set(ASSETS.map(a => new URL(a, self.registration.scope).href));
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => Promise.allSettled(
-      ASSETS.map(a => c.add(a))
-    )).then(() => self.skipWaiting())
+    caches.open(CACHE).then(c => Promise.allSettled(ASSETS.map(a => c.add(a))))
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -28,9 +28,10 @@ self.addEventListener('activate', e => {
   );
 });
 
+// Solo servimos de caché los assets del propio juego.
+// Deezer / iTunes / api externas pasan siempre a la red.
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
-  e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
-  );
+  if (!PRECACHE.has(e.request.url)) return;
+  e.respondWith(caches.match(e.request).then(c => c || fetch(e.request)));
 });

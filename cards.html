@@ -2,221 +2,139 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Hitster Eurovisión 2024 — Cartas para imprimir</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cartas Hitster Eurovisión</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background: #1a1a2e;
-      font-family: 'Inter', sans-serif;
-      padding: 2rem;
-    }
-
-    h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      color: #f0eeff;
-      font-size: 2rem;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.3rem;
-    }
-
-    .subtitle { color: #8880aa; font-size: 0.85rem; margin-bottom: 2rem; }
-
+    body { background: #1a1a2e; font-family: 'Inter', sans-serif; padding: 2rem; color: #f0eeff; }
+    h1 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+    .subtitle { color: #8880aa; font-size: 0.85rem; margin-bottom: 1.5rem; }
     .instructions {
-      background: #13132a;
-      border: 1px solid #2a2a4a;
-      border-radius: 12px;
-      padding: 1rem 1.4rem;
-      color: #c0b8ee;
-      font-size: 0.82rem;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-      max-width: 700px;
+      background: #13132a; border: 1px solid #2a2a4a; border-radius: 12px;
+      padding: 1rem 1.4rem; color: #c0b8ee; font-size: 0.82rem; line-height: 1.6;
+      margin-bottom: 1.2rem; max-width: 720px;
     }
     .instructions strong { color: #f0c040; }
-
-    .btn-print {
-      display: inline-block;
-      background: #5040ff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 0.6rem 1.4rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 2rem;
+    .toolbar { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .btn {
+      background: #5040ff; color: #fff; border: none; border-radius: 8px;
+      padding: 0.6rem 1.3rem; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+      font-family: 'Inter', sans-serif;
     }
-    .btn-print:hover { opacity: 0.85; }
+    .btn.alt { background: #2a2a4a; }
+    .btn:hover { opacity: 0.88; }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, 200px);
-      gap: 1.2rem;
-    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, 190px); gap: 1.1rem; }
 
     .card {
-      background: #0a0a14;
-      border: 2px solid #2a2a4a;
-      border-radius: 16px;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      color: #f0eeff;
-      position: relative;
-      overflow: hidden;
+      background: #0a0a14; border: 2px solid #2a2a4a; border-radius: 16px;
+      padding: 0.9rem; display: flex; flex-direction: column; align-items: center;
+      gap: 0.45rem; position: relative; overflow: hidden; min-height: 236px; justify-content: center;
     }
-
     .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
       background: linear-gradient(90deg, #5040ff, #f0c040);
     }
+    .card-logo { font-family: 'Bebas Neue', sans-serif; font-size: 0.62rem; letter-spacing: 0.22em; color: #6a5; }
+    .qr-container { background: #fff; border-radius: 8px; padding: 7px; line-height: 0; }
+    .card-code { font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.18em; color: #4a4a6a; }
 
-    .card-year {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: #8880aa;
-      text-transform: uppercase;
+    /* reverso / respuestas */
+    .card.answer { justify-content: flex-start; padding-top: 1.2rem; text-align: center; }
+    .answer .card-year {
+      font-family: 'Bebas Neue', sans-serif; font-size: 2.1rem; line-height: 1; color: #f0c040; letter-spacing: 0.03em;
     }
-
-    .card-flag  { font-size: 2rem; }
-
-    .card-country {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 0.06em;
-      color: #f0c040;
-      text-align: center;
-    }
-
-    .card-title {
-      font-size: 0.7rem;
-      color: #c0b8ee;
-      text-align: center;
-      font-weight: 600;
-      line-height: 1.3;
-    }
-
-    .card-artist {
-      font-size: 0.65rem;
-      color: #8880aa;
-      text-align: center;
-    }
-
-    .qr-container {
-      background: white;
-      border-radius: 8px;
-      padding: 6px;
-      margin-top: 0.3rem;
-    }
-
-    .card-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.2em;
-      color: #2a2a4a;
-      margin-top: 0.2rem;
-    }
+    .answer .card-flag { font-size: 1.9rem; margin: 0.3rem 0 0.1rem; }
+    .answer .card-country { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 0.06em; color: #c0b8ee; }
+    .answer .card-title { font-size: 0.78rem; font-weight: 700; color: #f0eeff; line-height: 1.25; margin-top: 0.35rem; }
+    .answer .card-artist { font-size: 0.7rem; color: #8880aa; }
+    .answer .card-code { margin-top: auto; }
 
     @media print {
-      body { background: white; padding: 0.5cm; }
-      h1, .subtitle, .instructions, .btn-print { display: none; }
-      .grid { grid-template-columns: repeat(4, 1fr); gap: 0.4cm; }
+      body { background: #fff; color: #000; padding: 0.4cm; }
+      h1, .subtitle, .instructions, .toolbar { display: none; }
+      .grid { grid-template-columns: repeat(4, 1fr); gap: 0.35cm; }
       .card {
-        background: white;
-        border: 1.5px solid #ccc;
-        border-radius: 10px;
-        break-inside: avoid;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
+        background: #fff; border: 1.4px solid #bbb; border-radius: 10px;
+        break-inside: avoid; min-height: 5.4cm;
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
       }
       .card::before { background: linear-gradient(90deg, #5040ff, #f0c040); }
-      .card-country { color: #c09010; }
-      .card-title   { color: #333; }
-      .card-artist  { color: #666; }
-      .card-logo    { color: #ccc; }
+      .card-logo { color: #999; }
+      .card-code { color: #999; }
+      .answer .card-year { color: #c09010; }
+      .answer .card-country { color: #333; }
+      .answer .card-title { color: #111; }
+      .answer .card-artist { color: #555; }
     }
   </style>
 </head>
 <body>
 
-<h1>🎵 HITSTER EUROVISIÓN 2024</h1>
-<p class="subtitle">26 cartas · Gran Final · Malmö, Suecia</p>
+<h1>🎵 CARTAS · HITSTER EUROVISIÓN</h1>
+<p class="subtitle" id="subtitle">— cartas · 1956–2026</p>
 
 <div class="instructions">
-  <strong>Cómo usar:</strong> Los QR ya apuntan a tu web. Pulsa "Imprimir cartas", recórtalas y ¡a jugar!<br><br>
-  <strong>Para jugar:</strong> Escanea el QR → pulsa "Abrir en Spotify" → dale play → pulsa "Iniciar" → ¡adivina el año del Festival!
+  <strong>Cómo imprimir:</strong> pulsa <strong>Imprimir</strong> y saca la hoja de QR. Recorta y a jugar: se escanea el QR, se gira el móvil y suenan 20&nbsp;s.<br><br>
+  <strong>Con respuestas al dorso:</strong> imprime primero los <strong>frentes (QR)</strong>, vuelve a meter el papel y pulsa <strong>Ver reverso</strong> → <strong>Imprimir</strong> (a doble cara, giro por el lado largo). Cada carta lleva un código de 4 letras que empareja frente y dorso.
 </div>
 
-<button class="btn-print" onclick="window.print()">🖨️ Imprimir cartas</button>
+<div class="toolbar">
+  <button class="btn" onclick="window.print()">🖨️ Imprimir</button>
+  <button class="btn alt" id="flipBtn">🔄 Ver reverso (respuestas)</button>
+</div>
 
 <div class="grid" id="grid"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 const BASE_URL = "https://jmartimt17.github.io/hitst-casero-eurovision-joan/play.html";
+const CARDS = [{"id": "1956-lys-assia", "y": 1956, "cc": "CH", "fl": "🇨🇭", "ar": "Lys Assia", "ti": "Refrain", "tag": "win", "code": "LGXK", "co": "Suiza"}, {"id": "1957-corry-brokken", "y": 1957, "cc": "NL", "fl": "🇳🇱", "ar": "Corry Brokken", "ti": "Net als toen", "tag": "win", "code": "WFRE", "co": "Países Bajos"}, {"id": "1958-andre-claveau", "y": 1958, "cc": "FR", "fl": "🇫🇷", "ar": "André Claveau", "ti": "Dors, mon amour", "tag": "win", "code": "DPK4", "co": "Francia"}, {"id": "1958-domenico-modugno", "y": 1958, "cc": "IT", "fl": "🇮🇹", "ar": "Domenico Modugno", "ti": "Nel blu dipinto di blu (Volare)", "tag": "mit", "code": "8DF9", "co": "Italia"}, {"id": "1959-teddy-scholten", "y": 1959, "cc": "NL", "fl": "🇳🇱", "ar": "Teddy Scholten", "ti": "Een beetje", "tag": "win", "code": "BDY0", "co": "Países Bajos"}, {"id": "1960-jacqueline-boyer", "y": 1960, "cc": "FR", "fl": "🇫🇷", "ar": "Jacqueline Boyer", "ti": "Tom Pillibi", "tag": "win", "code": "KDYD", "co": "Francia"}, {"id": "1961-conchita-bautist", "y": 1961, "cc": "ES", "fl": "🇪🇸", "ar": "Conchita Bautista", "ti": "Estando contigo", "tag": "es", "code": "YH9F", "co": "España"}, {"id": "1961-jean-claude-pasc", "y": 1961, "cc": "LU", "fl": "🇱🇺", "ar": "Jean-Claude Pascal", "ti": "Nous les amoureux", "tag": "win", "code": "XCF6", "co": "Luxemburgo"}, {"id": "1962-isabelle-aubret", "y": 1962, "cc": "FR", "fl": "🇫🇷", "ar": "Isabelle Aubret", "ti": "Un premier amour", "tag": "win", "code": "9PB6", "co": "Francia"}, {"id": "1963-grethe-and-jrgen", "y": 1963, "cc": "DK", "fl": "🇩🇰", "ar": "Grethe & Jørgen Ingmann", "ti": "Dansevise", "tag": "win", "code": "XB7V", "co": "Dinamarca"}, {"id": "1964-gigliola-cinquet", "y": 1964, "cc": "IT", "fl": "🇮🇹", "ar": "Gigliola Cinquetti", "ti": "Non ho l'età", "tag": "win", "code": "62WE", "co": "Italia"}, {"id": "1965-france-gall", "y": 1965, "cc": "LU", "fl": "🇱🇺", "ar": "France Gall", "ti": "Poupée de cire, poupée de son", "tag": "win", "code": "KSR7", "co": "Luxemburgo"}, {"id": "1966-udo-jurgens", "y": 1966, "cc": "AT", "fl": "🇦🇹", "ar": "Udo Jürgens", "ti": "Merci, Chérie", "tag": "win", "code": "0U1S", "co": "Austria"}, {"id": "1967-sandie-shaw", "y": 1967, "cc": "GB", "fl": "🇬🇧", "ar": "Sandie Shaw", "ti": "Puppet on a String", "tag": "win", "code": "QP2N", "co": "Reino Unido"}, {"id": "1968-massiel", "y": 1968, "cc": "ES", "fl": "🇪🇸", "ar": "Massiel", "ti": "La, la, la", "tag": "es", "code": "M1CX", "co": "España"}, {"id": "1968-cliff-richard", "y": 1968, "cc": "GB", "fl": "🇬🇧", "ar": "Cliff Richard", "ti": "Congratulations", "tag": "mit", "code": "WN04", "co": "Reino Unido"}, {"id": "1969-salome", "y": 1969, "cc": "ES", "fl": "🇪🇸", "ar": "Salomé", "ti": "Vivo cantando", "tag": "es", "code": "K8JN", "co": "España"}, {"id": "1969-frida-boccara", "y": 1969, "cc": "FR", "fl": "🇫🇷", "ar": "Frida Boccara", "ti": "Un jour, un enfant", "tag": "win", "code": "DGE4", "co": "Francia"}, {"id": "1969-lulu", "y": 1969, "cc": "GB", "fl": "🇬🇧", "ar": "Lulu", "ti": "Boom Bang-a-Bang", "tag": "win", "code": "KYL6", "co": "Reino Unido"}, {"id": "1970-dana", "y": 1970, "cc": "IE", "fl": "🇮🇪", "ar": "Dana", "ti": "All Kinds of Everything", "tag": "win", "code": "A4EY", "co": "Irlanda"}, {"id": "1971-karina", "y": 1971, "cc": "ES", "fl": "🇪🇸", "ar": "Karina", "ti": "En un mundo nuevo", "tag": "es", "code": "Y8Q5", "co": "España"}, {"id": "1971-severine", "y": 1971, "cc": "MC", "fl": "🇲🇨", "ar": "Séverine", "ti": "Un banc, un arbre, une rue", "tag": "win", "code": "DN9N", "co": "Mónaco"}, {"id": "1972-the-new-seekers", "y": 1972, "cc": "GB", "fl": "🇬🇧", "ar": "The New Seekers", "ti": "Beg, Steal or Borrow", "tag": "", "code": "111K", "co": "Reino Unido"}, {"id": "1972-vicky-leandros", "y": 1972, "cc": "LU", "fl": "🇱🇺", "ar": "Vicky Leandros", "ti": "Après toi", "tag": "win", "code": "BRDD", "co": "Luxemburgo"}, {"id": "1973-mocedades", "y": 1973, "cc": "ES", "fl": "🇪🇸", "ar": "Mocedades", "ti": "Eres tú", "tag": "es", "code": "RMBA", "co": "España"}, {"id": "1973-anne-marie-david", "y": 1973, "cc": "LU", "fl": "🇱🇺", "ar": "Anne-Marie David", "ti": "Tu te reconnaîtras", "tag": "win", "code": "14MB", "co": "Luxemburgo"}, {"id": "1974-olivia-newton-jo", "y": 1974, "cc": "GB", "fl": "🇬🇧", "ar": "Olivia Newton-John", "ti": "Long Live Love", "tag": "mit", "code": "S7CQ", "co": "Reino Unido"}, {"id": "1974-gigliola-cinquet", "y": 1974, "cc": "IT", "fl": "🇮🇹", "ar": "Gigliola Cinquetti", "ti": "Sì", "tag": "", "code": "SR2X", "co": "Italia"}, {"id": "1974-abba", "y": 1974, "cc": "SE", "fl": "🇸🇪", "ar": "ABBA", "ti": "Waterloo", "tag": "win", "code": "APWR", "co": "Suecia"}, {"id": "1975-teach-in", "y": 1975, "cc": "NL", "fl": "🇳🇱", "ar": "Teach-In", "ti": "Ding-a-dong", "tag": "win", "code": "WSLS", "co": "Países Bajos"}, {"id": "1976-brotherhood-of-m", "y": 1976, "cc": "GB", "fl": "🇬🇧", "ar": "Brotherhood of Man", "ti": "Save Your Kisses for Me", "tag": "win", "code": "5CME", "co": "Reino Unido"}, {"id": "1977-marie-myriam", "y": 1977, "cc": "FR", "fl": "🇫🇷", "ar": "Marie Myriam", "ti": "L'oiseau et l'enfant", "tag": "win", "code": "Y7FJ", "co": "Francia"}, {"id": "1979-betty-missiego", "y": 1979, "cc": "ES", "fl": "🇪🇸", "ar": "Betty Missiego", "ti": "Su canción", "tag": "es", "code": "6XW9", "co": "España"}, {"id": "1979-milk-and-honey", "y": 1979, "cc": "IL", "fl": "🇮🇱", "ar": "Milk and Honey", "ti": "Hallelujah", "tag": "win", "code": "GD5A", "co": "Israel"}, {"id": "1980-telex", "y": 1980, "cc": "BE", "fl": "🇧🇪", "ar": "Telex", "ti": "Euro-Vision", "tag": "mit", "code": "B28K", "co": "Bélgica"}, {"id": "1980-katja-ebstein", "y": 1980, "cc": "DE", "fl": "🇩🇪", "ar": "Katja Ebstein", "ti": "Theater", "tag": "mit", "code": "D6KB", "co": "Alemania"}, {"id": "1980-johnny-logan", "y": 1980, "cc": "IE", "fl": "🇮🇪", "ar": "Johnny Logan", "ti": "What's Another Year", "tag": "win", "code": "NNTJ", "co": "Irlanda"}, {"id": "1981-lena-valaitis", "y": 1981, "cc": "DE", "fl": "🇩🇪", "ar": "Lena Valaitis", "ti": "Johnny Blue", "tag": "", "code": "VWCB", "co": "Alemania"}, {"id": "1981-bucks-fizz", "y": 1981, "cc": "GB", "fl": "🇬🇧", "ar": "Bucks Fizz", "ti": "Making Your Mind Up", "tag": "win", "code": "PFVS", "co": "Reino Unido"}, {"id": "1982-nicole", "y": 1982, "cc": "DE", "fl": "🇩🇪", "ar": "Nicole", "ti": "Ein bißchen Frieden", "tag": "win", "code": "PPM6", "co": "Alemania"}, {"id": "1982-avi-toledano", "y": 1982, "cc": "IL", "fl": "🇮🇱", "ar": "Avi Toledano", "ti": "Hora", "tag": "", "code": "3YHS", "co": "Israel"}, {"id": "1983-remedios-amaya", "y": 1983, "cc": "ES", "fl": "🇪🇸", "ar": "Remedios Amaya", "ti": "¿Quién maneja mi barca?", "tag": "es", "code": "Y60R", "co": "España"}, {"id": "1983-ofra-haza", "y": 1983, "cc": "IL", "fl": "🇮🇱", "ar": "Ofra Haza", "ti": "Chai", "tag": "mit", "code": "7BH4", "co": "Israel"}, {"id": "1983-corinne-hermes", "y": 1983, "cc": "LU", "fl": "🇱🇺", "ar": "Corinne Hermès", "ti": "Si la vie est cadeau", "tag": "win", "code": "2BLD", "co": "Luxemburgo"}, {"id": "1984-bravo", "y": 1984, "cc": "ES", "fl": "🇪🇸", "ar": "Bravo", "ti": "Lady, Lady", "tag": "es", "code": "1JRH", "co": "España"}, {"id": "1984-linda-martin", "y": 1984, "cc": "IE", "fl": "🇮🇪", "ar": "Linda Martin", "ti": "Terminal 3", "tag": "", "code": "EH38", "co": "Irlanda"}, {"id": "1984-herreys", "y": 1984, "cc": "SE", "fl": "🇸🇪", "ar": "Herreys", "ti": "Diggi-Loo Diggi-Ley", "tag": "win", "code": "HPRC", "co": "Suecia"}, {"id": "1985-wind", "y": 1985, "cc": "DE", "fl": "🇩🇪", "ar": "Wind", "ti": "Für alle", "tag": "", "code": "GJ4X", "co": "Alemania"}, {"id": "1985-bobbysocks", "y": 1985, "cc": "NO", "fl": "🇳🇴", "ar": "Bobbysocks", "ti": "La det swinge", "tag": "win", "code": "P9X5", "co": "Noruega"}, {"id": "1985-kikki-danielsson", "y": 1985, "cc": "SE", "fl": "🇸🇪", "ar": "Kikki Danielsson", "ti": "Bra vibrationer", "tag": "", "code": "AJVS", "co": "Suecia"}, {"id": "1986-sandra-kim", "y": 1986, "cc": "BE", "fl": "🇧🇪", "ar": "Sandra Kim", "ti": "J'aime la vie", "tag": "win", "code": "EGA5", "co": "Bélgica"}, {"id": "1986-daniela-simons", "y": 1986, "cc": "CH", "fl": "🇨🇭", "ar": "Daniela Simons", "ti": "Pas pour moi", "tag": "", "code": "T4K9", "co": "Suiza"}, {"id": "1986-ketil-stokkan", "y": 1986, "cc": "NO", "fl": "🇳🇴", "ar": "Ketil Stokkan", "ti": "Romeo", "tag": "", "code": "79DX", "co": "Noruega"}, {"id": "1987-wind", "y": 1987, "cc": "DE", "fl": "🇩🇪", "ar": "Wind", "ti": "Laß die Sonne in dein Herz", "tag": "", "code": "S9PR", "co": "Alemania"}, {"id": "1987-johnny-logan", "y": 1987, "cc": "IE", "fl": "🇮🇪", "ar": "Johnny Logan", "ti": "Hold Me Now", "tag": "win", "code": "SA03", "co": "Irlanda"}, {"id": "1987-umberto-tozzi-an", "y": 1987, "cc": "IT", "fl": "🇮🇹", "ar": "Umberto Tozzi & Raf", "ti": "Gente di mare", "tag": "mit", "code": "5VXE", "co": "Italia"}, {"id": "1988-celine-dion", "y": 1988, "cc": "CH", "fl": "🇨🇭", "ar": "Céline Dion", "ti": "Ne partez pas sans moi", "tag": "win", "code": "KHW2", "co": "Suiza"}, {"id": "1988-hot-eyes", "y": 1988, "cc": "DK", "fl": "🇩🇰", "ar": "Hot Eyes", "ti": "Ka' du se hva' jeg sa'?", "tag": "", "code": "FC5R", "co": "Dinamarca"}, {"id": "1988-scott-fitzgerald", "y": 1988, "cc": "GB", "fl": "🇬🇧", "ar": "Scott Fitzgerald", "ti": "Go", "tag": "", "code": "GHCH", "co": "Reino Unido"}, {"id": "1989-nina", "y": 1989, "cc": "ES", "fl": "🇪🇸", "ar": "Nina", "ti": "Nacida para amar", "tag": "es", "code": "3Y2N", "co": "España"}, {"id": "1989-riva", "y": 1989, "cc": "YU", "fl": "🇷🇸", "ar": "Riva", "ti": "Rock Me", "tag": "win", "code": "M34R", "co": "Yugoslavia"}, {"id": "1990-azucar-moreno", "y": 1990, "cc": "ES", "fl": "🇪🇸", "ar": "Azúcar Moreno", "ti": "Bandido", "tag": "es", "code": "WJYU", "co": "España"}, {"id": "1990-joelle-ursull", "y": 1990, "cc": "FR", "fl": "🇫🇷", "ar": "Joëlle Ursull", "ti": "White and Black Blues", "tag": "", "code": "CLBR", "co": "Francia"}, {"id": "1990-liam-reilly", "y": 1990, "cc": "IE", "fl": "🇮🇪", "ar": "Liam Reilly", "ti": "Somewhere in Europe", "tag": "", "code": "X909", "co": "Irlanda"}, {"id": "1990-toto-cutugno", "y": 1990, "cc": "IT", "fl": "🇮🇹", "ar": "Toto Cutugno", "ti": "Insieme: 1992", "tag": "win", "code": "769V", "co": "Italia"}, {"id": "1991-sergio-dalma", "y": 1991, "cc": "ES", "fl": "🇪🇸", "ar": "Sergio Dalma", "ti": "Bailar pegados", "tag": "es", "code": "7UDP", "co": "España"}, {"id": "1991-amina", "y": 1991, "cc": "FR", "fl": "🇫🇷", "ar": "Amina", "ti": "C'est le dernier qui a parlé qui a raison", "tag": "", "code": "RQC7", "co": "Francia"}, {"id": "1991-carola", "y": 1991, "cc": "SE", "fl": "🇸🇪", "ar": "Carola", "ti": "Fångad av en stormvind", "tag": "win", "code": "9L5M", "co": "Suecia"}, {"id": "1992-michael-ball", "y": 1992, "cc": "GB", "fl": "🇬🇧", "ar": "Michael Ball", "ti": "One Step Out of Time", "tag": "", "code": "NU5K", "co": "Reino Unido"}, {"id": "1992-linda-martin", "y": 1992, "cc": "IE", "fl": "🇮🇪", "ar": "Linda Martin", "ti": "Why Me?", "tag": "win", "code": "4D2B", "co": "Irlanda"}, {"id": "1992-mary-spiteri", "y": 1992, "cc": "MT", "fl": "🇲🇹", "ar": "Mary Spiteri", "ti": "Little Child", "tag": "", "code": "NDDG", "co": "Malta"}, {"id": "1993-sonia", "y": 1993, "cc": "GB", "fl": "🇬🇧", "ar": "Sonia", "ti": "Better the Devil You Know", "tag": "", "code": "HBQA", "co": "Reino Unido"}, {"id": "1993-niamh-kavanagh", "y": 1993, "cc": "IE", "fl": "🇮🇪", "ar": "Niamh Kavanagh", "ti": "In Your Eyes", "tag": "win", "code": "SK4J", "co": "Irlanda"}, {"id": "1993-arvingarna", "y": 1993, "cc": "SE", "fl": "🇸🇪", "ar": "Arvingarna", "ti": "Eloise", "tag": "", "code": "2LSV", "co": "Suecia"}, {"id": "1994-friderika", "y": 1994, "cc": "HU", "fl": "🇭🇺", "ar": "Friderika", "ti": "Kinek mondjam el vétkeimet?", "tag": "", "code": "1T0X", "co": "Hungría"}, {"id": "1994-paul-harrington", "y": 1994, "cc": "IE", "fl": "🇮🇪", "ar": "Paul Harrington & Charlie McGettigan", "ti": "Rock 'n' Roll Kids", "tag": "win", "code": "PM80", "co": "Irlanda"}, {"id": "1994-edyta-gorniak", "y": 1994, "cc": "PL", "fl": "🇵🇱", "ar": "Edyta Górniak", "ti": "To nie ja!", "tag": "mit", "code": "5RQJ", "co": "Polonia"}, {"id": "1995-anabel-conde", "y": 1995, "cc": "ES", "fl": "🇪🇸", "ar": "Anabel Conde", "ti": "Vuelve conmigo", "tag": "es", "code": "8GFS", "co": "España"}, {"id": "1995-secret-garden", "y": 1995, "cc": "NO", "fl": "🇳🇴", "ar": "Secret Garden", "ti": "Nocturne", "tag": "win", "code": "MUHA", "co": "Noruega"}, {"id": "1995-jan-johansen", "y": 1995, "cc": "SE", "fl": "🇸🇪", "ar": "Jan Johansen", "ti": "Se på mej", "tag": "", "code": "PR0Y", "co": "Suecia"}, {"id": "1996-gina-g", "y": 1996, "cc": "GB", "fl": "🇬🇧", "ar": "Gina G", "ti": "Ooh Aah... Just a Little Bit", "tag": "mit", "code": "XDV1", "co": "Reino Unido"}, {"id": "1996-eimear-quinn", "y": 1996, "cc": "IE", "fl": "🇮🇪", "ar": "Eimear Quinn", "ti": "The Voice", "tag": "win", "code": "533Q", "co": "Irlanda"}, {"id": "1996-elisabeth-andrea", "y": 1996, "cc": "NO", "fl": "🇳🇴", "ar": "Elisabeth Andreassen", "ti": "I evighet", "tag": "", "code": "5G85", "co": "Noruega"}, {"id": "1997-marcos-llunas", "y": 1997, "cc": "ES", "fl": "🇪🇸", "ar": "Marcos Llunas", "ti": "Sin rencor", "tag": "es", "code": "0Q51", "co": "España"}, {"id": "1997-katrina-and-the", "y": 1997, "cc": "GB", "fl": "🇬🇧", "ar": "Katrina and the Waves", "ti": "Love Shine a Light", "tag": "win", "code": "WX7U", "co": "Reino Unido"}, {"id": "1997-marc-roberts", "y": 1997, "cc": "IE", "fl": "🇮🇪", "ar": "Marc Roberts", "ti": "Mysterious Woman", "tag": "", "code": "9035", "co": "Irlanda"}, {"id": "1997-jalisse", "y": 1997, "cc": "IT", "fl": "🇮🇹", "ar": "Jalisse", "ti": "Fiumi di parole", "tag": "", "code": "1Q1V", "co": "Italia"}, {"id": "1998-guildo-horn", "y": 1998, "cc": "DE", "fl": "🇩🇪", "ar": "Guildo Horn", "ti": "Guildo hat euch lieb!", "tag": "mit", "code": "JJDK", "co": "Alemania"}, {"id": "1998-imaani", "y": 1998, "cc": "GB", "fl": "🇬🇧", "ar": "Imaani", "ti": "Where Are You?", "tag": "", "code": "N4FV", "co": "Reino Unido"}, {"id": "1998-dana-internation", "y": 1998, "cc": "IL", "fl": "🇮🇱", "ar": "Dana International", "ti": "Diva", "tag": "win", "code": "6XSD", "co": "Israel"}, {"id": "1998-chiara", "y": 1998, "cc": "MT", "fl": "🇲🇹", "ar": "Chiara", "ti": "The One That I Love", "tag": "", "code": "A2NU", "co": "Malta"}, {"id": "1999-surpriz", "y": 1999, "cc": "DE", "fl": "🇩🇪", "ar": "Sürpriz", "ti": "Reise nach Jerusalem", "tag": "", "code": "8VJW", "co": "Alemania"}, {"id": "1999-selma", "y": 1999, "cc": "IS", "fl": "🇮🇸", "ar": "Selma", "ti": "All Out of Luck", "tag": "", "code": "3DV5", "co": "Islandia"}, {"id": "1999-charlotte-nilsso", "y": 1999, "cc": "SE", "fl": "🇸🇪", "ar": "Charlotte Nilsson", "ti": "Take Me to Your Heaven", "tag": "win", "code": "QDTH", "co": "Suecia"}, {"id": "2000-olsen-brothers", "y": 2000, "cc": "DK", "fl": "🇩🇰", "ar": "Olsen Brothers", "ti": "Fly on the Wings of Love", "tag": "win", "code": "2MEK", "co": "Dinamarca"}, {"id": "2000-ines", "y": 2000, "cc": "EE", "fl": "🇪🇪", "ar": "Ines", "ti": "Once in a Lifetime", "tag": "", "code": "9VTH", "co": "Estonia"}, {"id": "2000-brainstorm", "y": 2000, "cc": "LV", "fl": "🇱🇻", "ar": "BrainStorm", "ti": "My Star", "tag": "", "code": "2H94", "co": "Letonia"}, {"id": "2000-alsou", "y": 2000, "cc": "RU", "fl": "🇷🇺", "ar": "Alsou", "ti": "Solo", "tag": "", "code": "3NQR", "co": "Rusia"}, {"id": "2001-rollo-and-king", "y": 2001, "cc": "DK", "fl": "🇩🇰", "ar": "Rollo & King", "ti": "Never Ever Let You Go", "tag": "", "code": "649A", "co": "Dinamarca"}, {"id": "2001-david-civera", "y": 2001, "cc": "ES", "fl": "🇪🇸", "ar": "David Civera", "ti": "Dile que la quiero", "tag": "es", "code": "PNBR", "co": "España"}, {"id": "2001-antique", "y": 2001, "cc": "GR", "fl": "🇬🇷", "ar": "Antique", "ti": "(I Would) Die for You", "tag": "", "code": "J6RS", "co": "Grecia"}, {"id": "2002-rosa", "y": 2002, "cc": "ES", "fl": "🇪🇸", "ar": "Rosa", "ti": "Europe's Living a Celebration", "tag": "es", "code": "EVGH", "co": "España"}, {"id": "2002-jessica-garlick", "y": 2002, "cc": "GB", "fl": "🇬🇧", "ar": "Jessica Garlick", "ti": "Come Back", "tag": "", "code": "TX5U", "co": "Reino Unido"}, {"id": "2002-marie-n", "y": 2002, "cc": "LV", "fl": "🇱🇻", "ar": "Marie N", "ti": "I Wanna", "tag": "win", "code": "QNX3", "co": "Letonia"}, {"id": "2002-ira-losco", "y": 2002, "cc": "MT", "fl": "🇲🇹", "ar": "Ira Losco", "ti": "7th Wonder", "tag": "", "code": "94X6", "co": "Malta"}, {"id": "2003-alf-poier", "y": 2003, "cc": "AT", "fl": "🇦🇹", "ar": "Alf Poier", "ti": "Weil der Mensch zählt", "tag": "mit", "code": "PGXF", "co": "Austria"}, {"id": "2003-urban-trad", "y": 2003, "cc": "BE", "fl": "🇧🇪", "ar": "Urban Trad", "ti": "Sanomi", "tag": "mit", "code": "7FJW", "co": "Bélgica"}, {"id": "2003-beth", "y": 2003, "cc": "ES", "fl": "🇪🇸", "ar": "Beth", "ti": "Dime", "tag": "es", "code": "PA3E", "co": "España"}, {"id": "2003-jemini", "y": 2003, "cc": "GB", "fl": "🇬🇧", "ar": "Jemini", "ti": "Cry Baby", "tag": "mit", "code": "M7PA", "co": "Reino Unido"}, {"id": "2003-t-a-t-u", "y": 2003, "cc": "RU", "fl": "🇷🇺", "ar": "t.A.T.u.", "ti": "Ne ver', ne boysia", "tag": "mit", "code": "YSGQ", "co": "Rusia"}, {"id": "2003-sertab-erener", "y": 2003, "cc": "TR", "fl": "🇹🇷", "ar": "Sertab Erener", "ti": "Everyway That I Can", "tag": "win", "code": "2H96", "co": "Turquía"}, {"id": "2004-lisa-andreas", "y": 2004, "cc": "CY", "fl": "🇨🇾", "ar": "Lisa Andreas", "ti": "Stronger Every Minute", "tag": "", "code": "UF6W", "co": "Chipre"}, {"id": "2004-ramon", "y": 2004, "cc": "ES", "fl": "🇪🇸", "ar": "Ramón", "ti": "Para llenarme de ti", "tag": "es", "code": "98Y8", "co": "España"}, {"id": "2004-sakis-rouvas", "y": 2004, "cc": "GR", "fl": "🇬🇷", "ar": "Sakis Rouvas", "ti": "Shake It", "tag": "", "code": "BJMG", "co": "Grecia"}, {"id": "2004-zeljko-joksimovi", "y": 2004, "cc": "RS/ME", "fl": "🇷🇸", "ar": "Željko Joksimović", "ti": "Lane moje", "tag": "mit", "code": "F0R9", "co": "Serbia y Montenegro"}, {"id": "2004-ruslana", "y": 2004, "cc": "UA", "fl": "🇺🇦", "ar": "Ruslana", "ti": "Wild Dances", "tag": "win", "code": "0D3K", "co": "Ucrania"}, {"id": "2005-helena-paparizou", "y": 2005, "cc": "GR", "fl": "🇬🇷", "ar": "Helena Paparizou", "ti": "My Number One", "tag": "win", "code": "V217", "co": "Grecia"}, {"id": "2005-zdob-si-zdub", "y": 2005, "cc": "MD", "fl": "🇲🇩", "ar": "Zdob și Zdub", "ti": "Bunica bate toba", "tag": "mit", "code": "L0F2", "co": "Moldavia"}, {"id": "2005-chiara", "y": 2005, "cc": "MT", "fl": "🇲🇹", "ar": "Chiara", "ti": "Angel", "tag": "", "code": "J0F3", "co": "Malta"}, {"id": "2005-wig-wam", "y": 2005, "cc": "NO", "fl": "🇳🇴", "ar": "Wig Wam", "ti": "In My Dreams", "tag": "mit", "code": "GSTP", "co": "Noruega"}, {"id": "2005-luminita-anghel", "y": 2005, "cc": "RO", "fl": "🇷🇴", "ar": "Luminița Anghel & Sistem", "ti": "Let Me Try", "tag": "", "code": "JXC4", "co": "Rumanía"}, {"id": "2006-hari-mata-hari", "y": 2006, "cc": "BA", "fl": "🇧🇦", "ar": "Hari Mata Hari", "ti": "Lejla", "tag": "", "code": "R7HB", "co": "Bosnia y Herzegovina"}, {"id": "2006-lordi", "y": 2006, "cc": "FI", "fl": "🇫🇮", "ar": "Lordi", "ti": "Hard Rock Hallelujah", "tag": "win", "code": "31A9", "co": "Finlandia"}, {"id": "2006-daz-sampson", "y": 2006, "cc": "GB", "fl": "🇬🇧", "ar": "Daz Sampson", "ti": "Teenage Life", "tag": "mit", "code": "4FTE", "co": "Reino Unido"}, {"id": "2006-silvia-night", "y": 2006, "cc": "IS", "fl": "🇮🇸", "ar": "Silvía Night", "ti": "Congratulations", "tag": "mit", "code": "HGTV", "co": "Islandia"}, {"id": "2006-lt-united", "y": 2006, "cc": "LT", "fl": "🇱🇹", "ar": "LT United", "ti": "We Are the Winners", "tag": "mit", "code": "C3KH", "co": "Lituania"}, {"id": "2006-dima-bilan", "y": 2006, "cc": "RU", "fl": "🇷🇺", "ar": "Dima Bilan", "ti": "Never Let You Go", "tag": "", "code": "LFL6", "co": "Rusia"}, {"id": "2007-d-nash", "y": 2007, "cc": "ES", "fl": "🇪🇸", "ar": "D'Nash", "ti": "I Love You Mi Vida", "tag": "es", "code": "BD4M", "co": "España"}, {"id": "2007-les-fatals-picar", "y": 2007, "cc": "FR", "fl": "🇫🇷", "ar": "Les Fatals Picards", "ti": "L'amour à la française", "tag": "mit", "code": "L0JV", "co": "Francia"}, {"id": "2007-scooch", "y": 2007, "cc": "GB", "fl": "🇬🇧", "ar": "Scooch", "ti": "Flying the Flag (For You)", "tag": "mit", "code": "GF1M", "co": "Reino Unido"}, {"id": "2007-marija-serifovic", "y": 2007, "cc": "RS", "fl": "🇷🇸", "ar": "Marija Šerifović", "ti": "Molitva", "tag": "win", "code": "7SSM", "co": "Serbia"}, {"id": "2007-serebro", "y": 2007, "cc": "RU", "fl": "🇷🇺", "ar": "Serebro", "ti": "Song #1", "tag": "", "code": "CPFA", "co": "Rusia"}, {"id": "2007-verka-serduchka", "y": 2007, "cc": "UA", "fl": "🇺🇦", "ar": "Verka Serduchka", "ti": "Dancing Lasha Tumbai", "tag": "mit", "code": "7J6C", "co": "Ucrania"}, {"id": "2008-rodolfo-chikilic", "y": 2008, "cc": "ES", "fl": "🇪🇸", "ar": "Rodolfo Chikilicuatre", "ti": "Baila el Chiki Chiki", "tag": "es", "code": "Q2SN", "co": "España"}, {"id": "2008-sebastien-tellie", "y": 2008, "cc": "FR", "fl": "🇫🇷", "ar": "Sébastien Tellier", "ti": "Divine", "tag": "mit", "code": "6P2P", "co": "Francia"}, {"id": "2008-kalomira", "y": 2008, "cc": "GR", "fl": "🇬🇷", "ar": "Kalomira", "ti": "Secret Combination", "tag": "", "code": "F1X2", "co": "Grecia"}, {"id": "2008-dustin-the-turke", "y": 2008, "cc": "IE", "fl": "🇮🇪", "ar": "Dustin the Turkey", "ti": "Irelande Douze Pointe", "tag": "mit", "code": "6DN4", "co": "Irlanda"}, {"id": "2008-dima-bilan", "y": 2008, "cc": "RU", "fl": "🇷🇺", "ar": "Dima Bilan", "ti": "Believe", "tag": "win", "code": "6VCY", "co": "Rusia"}, {"id": "2008-ani-lorak", "y": 2008, "cc": "UA", "fl": "🇺🇦", "ar": "Ani Lorak", "ti": "Shady Lady", "tag": "", "code": "UK64", "co": "Ucrania"}, {"id": "2009-aysel-and-arash", "y": 2009, "cc": "AZ", "fl": "🇦🇿", "ar": "AySel & Arash", "ti": "Always", "tag": "", "code": "HLEY", "co": "Azerbaiyán"}, {"id": "2009-soraya", "y": 2009, "cc": "ES", "fl": "🇪🇸", "ar": "Soraya", "ti": "La noche es para mí", "tag": "es", "code": "PY8F", "co": "España"}, {"id": "2009-yohanna", "y": 2009, "cc": "IS", "fl": "🇮🇸", "ar": "Yohanna", "ti": "Is It True?", "tag": "", "code": "WDQL", "co": "Islandia"}, {"id": "2009-alexander-rybak", "y": 2009, "cc": "NO", "fl": "🇳🇴", "ar": "Alexander Rybak", "ti": "Fairytale", "tag": "win", "code": "N62M", "co": "Noruega"}, {"id": "2009-hadise", "y": 2009, "cc": "TR", "fl": "🇹🇷", "ar": "Hadise", "ti": "Düm Tek Tek", "tag": "", "code": "PA28", "co": "Turquía"}, {"id": "2010-lena", "y": 2010, "cc": "DE", "fl": "🇩🇪", "ar": "Lena", "ti": "Satellite", "tag": "win", "code": "L4L3", "co": "Alemania"}, {"id": "2010-daniel-diges", "y": 2010, "cc": "ES", "fl": "🇪🇸", "ar": "Daniel Diges", "ti": "Algo pequeñito", "tag": "es", "code": "AMFF", "co": "España"}, {"id": "2010-sunstroke-projec", "y": 2010, "cc": "MD", "fl": "🇲🇩", "ar": "SunStroke Project & Olia Tira", "ti": "Run Away", "tag": "mit", "code": "C2PY", "co": "Moldavia"}, {"id": "2010-paula-seling-and", "y": 2010, "cc": "RO", "fl": "🇷🇴", "ar": "Paula Seling & Ovi", "ti": "Playing with Fire", "tag": "", "code": "NPTQ", "co": "Rumanía"}, {"id": "2010-manga", "y": 2010, "cc": "TR", "fl": "🇹🇷", "ar": "maNga", "ti": "We Could Be the Same", "tag": "", "code": "QLRF", "co": "Turquía"}, {"id": "2011-ell-and-nikki", "y": 2011, "cc": "AZ", "fl": "🇦🇿", "ar": "Ell & Nikki", "ti": "Running Scared", "tag": "win", "code": "0VQN", "co": "Azerbaiyán"}, {"id": "2011-getter-jaani", "y": 2011, "cc": "EE", "fl": "🇪🇪", "ar": "Getter Jaani", "ti": "Rockefeller Street", "tag": "mit", "code": "H4C5", "co": "Estonia"}, {"id": "2011-lucia-perez", "y": 2011, "cc": "ES", "fl": "🇪🇸", "ar": "Lucía Pérez", "ti": "Que me quiten lo bailao", "tag": "es", "code": "PA23", "co": "España"}, {"id": "2011-jedward", "y": 2011, "cc": "IE", "fl": "🇮🇪", "ar": "Jedward", "ti": "Lipstick", "tag": "mit", "code": "0D67", "co": "Irlanda"}, {"id": "2011-zdob-si-zdub", "y": 2011, "cc": "MD", "fl": "🇲🇩", "ar": "Zdob și Zdub", "ti": "So Lucky", "tag": "mit", "code": "R8C5", "co": "Moldavia"}, {"id": "2011-eric-saade", "y": 2011, "cc": "SE", "fl": "🇸🇪", "ar": "Eric Saade", "ti": "Popular", "tag": "mit", "code": "LGUL", "co": "Suecia"}, {"id": "2012-pastora-soler", "y": 2012, "cc": "ES", "fl": "🇪🇸", "ar": "Pastora Soler", "ti": "Quédate conmigo", "tag": "es", "code": "XAFU", "co": "España"}, {"id": "2012-pasha-parfeni", "y": 2012, "cc": "MD", "fl": "🇲🇩", "ar": "Pasha Parfeni", "ti": "Lăutar", "tag": "mit", "code": "1EHB", "co": "Moldavia"}, {"id": "2012-zeljko-joksimovi", "y": 2012, "cc": "RS", "fl": "🇷🇸", "ar": "Željko Joksimović", "ti": "Nije ljubav stvar", "tag": "", "code": "7XYK", "co": "Serbia"}, {"id": "2012-buranovskiye-bab", "y": 2012, "cc": "RU", "fl": "🇷🇺", "ar": "Buranovskiye Babushki", "ti": "Party for Everybody", "tag": "mit", "code": "2VF8", "co": "Rusia"}, {"id": "2012-loreen", "y": 2012, "cc": "SE", "fl": "🇸🇪", "ar": "Loreen", "ti": "Euphoria", "tag": "win", "code": "RFQP", "co": "Suecia"}, {"id": "2013-farid-mammadov", "y": 2013, "cc": "AZ", "fl": "🇦🇿", "ar": "Farid Mammadov", "ti": "Hold Me", "tag": "", "code": "0SLL", "co": "Azerbaiyán"}, {"id": "2013-emmelie-de-fores", "y": 2013, "cc": "DK", "fl": "🇩🇰", "ar": "Emmelie de Forest", "ti": "Only Teardrops", "tag": "win", "code": "CTW2", "co": "Dinamarca"}, {"id": "2013-el-sueno-de-morf", "y": 2013, "cc": "ES", "fl": "🇪🇸", "ar": "El Sueño de Morfeo", "ti": "Contigo hasta el final", "tag": "es", "code": "7BF6", "co": "España"}, {"id": "2013-krista-siegfrids", "y": 2013, "cc": "FI", "fl": "🇫🇮", "ar": "Krista Siegfrids", "ti": "Marry Me", "tag": "mit", "code": "DT8V", "co": "Finlandia"}, {"id": "2013-koza-mostra-and", "y": 2013, "cc": "GR", "fl": "🇬🇷", "ar": "Koza Mostra & Agathonas Iakovidis", "ti": "Alcohol Is Free", "tag": "mit", "code": "8BGR", "co": "Grecia"}, {"id": "2013-cezar", "y": 2013, "cc": "RO", "fl": "🇷🇴", "ar": "Cezar", "ti": "It's My Life", "tag": "mit", "code": "A3RF", "co": "Rumanía"}, {"id": "2013-zlata-ognevich", "y": 2013, "cc": "UA", "fl": "🇺🇦", "ar": "Zlata Ognevich", "ti": "Gravity", "tag": "", "code": "QAK8", "co": "Ucrania"}, {"id": "2014-conchita-wurst", "y": 2014, "cc": "AT", "fl": "🇦🇹", "ar": "Conchita Wurst", "ti": "Rise Like a Phoenix", "tag": "win", "code": "QNDL", "co": "Austria"}, {"id": "2014-ruth-lorenzo", "y": 2014, "cc": "ES", "fl": "🇪🇸", "ar": "Ruth Lorenzo", "ti": "Dancing in the Rain", "tag": "es", "code": "PNH1", "co": "España"}, {"id": "2014-the-common-linne", "y": 2014, "cc": "NL", "fl": "🇳🇱", "ar": "The Common Linnets", "ti": "Calm After the Storm", "tag": "mit", "code": "K69U", "co": "Países Bajos"}, {"id": "2014-donatan-and-cleo", "y": 2014, "cc": "PL", "fl": "🇵🇱", "ar": "Donatan & Cleo", "ti": "My Słowianie", "tag": "mit", "code": "37AF", "co": "Polonia"}, {"id": "2014-sanna-nielsen", "y": 2014, "cc": "SE", "fl": "🇸🇪", "ar": "Sanna Nielsen", "ti": "Undo", "tag": "", "code": "Y4GD", "co": "Suecia"}, {"id": "2015-guy-sebastian", "y": 2015, "cc": "AU", "fl": "🇦🇺", "ar": "Guy Sebastian", "ti": "Tonight Again", "tag": "mit", "code": "DH82", "co": "Australia"}, {"id": "2015-loic-nottet", "y": 2015, "cc": "BE", "fl": "🇧🇪", "ar": "Loïc Nottet", "ti": "Rhythm Inside", "tag": "mit", "code": "E4UY", "co": "Bélgica"}, {"id": "2015-elina-born-and-s", "y": 2015, "cc": "EE", "fl": "🇪🇪", "ar": "Elina Born & Stig Rästa", "ti": "Goodbye to Yesterday", "tag": "", "code": "RRDU", "co": "Estonia"}, {"id": "2015-edurne", "y": 2015, "cc": "ES", "fl": "🇪🇸", "ar": "Edurne", "ti": "Amanecer", "tag": "es", "code": "32QH", "co": "España"}, {"id": "2015-il-volo", "y": 2015, "cc": "IT", "fl": "🇮🇹", "ar": "Il Volo", "ti": "Grande amore", "tag": "mit", "code": "5198", "co": "Italia"}, {"id": "2015-aminata", "y": 2015, "cc": "LV", "fl": "🇱🇻", "ar": "Aminata", "ti": "Love Injected", "tag": "", "code": "DAF0", "co": "Letonia"}, {"id": "2015-mans-zelmerlow", "y": 2015, "cc": "SE", "fl": "🇸🇪", "ar": "Måns Zelmerlöw", "ti": "Heroes", "tag": "win", "code": "80C0", "co": "Suecia"}, {"id": "2016-dami-im", "y": 2016, "cc": "AU", "fl": "🇦🇺", "ar": "Dami Im", "ti": "Sound of Silence", "tag": "mit", "code": "AEQ0", "co": "Australia"}, {"id": "2016-poli-genova", "y": 2016, "cc": "BG", "fl": "🇧🇬", "ar": "Poli Genova", "ti": "If Love Was a Crime", "tag": "", "code": "97QH", "co": "Bulgaria"}, {"id": "2016-barei", "y": 2016, "cc": "ES", "fl": "🇪🇸", "ar": "Barei", "ti": "Say Yay!", "tag": "es", "code": "AYJ7", "co": "España"}, {"id": "2016-amir", "y": 2016, "cc": "FR", "fl": "🇫🇷", "ar": "Amir", "ti": "J'ai cherché", "tag": "mit", "code": "ARNE", "co": "Francia"}, {"id": "2016-micha-szpak", "y": 2016, "cc": "PL", "fl": "🇵🇱", "ar": "Michał Szpak", "ti": "Color of Your Life", "tag": "", "code": "KDVH", "co": "Polonia"}, {"id": "2016-sergey-lazarev", "y": 2016, "cc": "RU", "fl": "🇷🇺", "ar": "Sergey Lazarev", "ti": "You Are the Only One", "tag": "", "code": "R6C4", "co": "Rusia"}, {"id": "2016-frans", "y": 2016, "cc": "SE", "fl": "🇸🇪", "ar": "Frans", "ti": "If I Were Sorry", "tag": "", "code": "B339", "co": "Suecia"}, {"id": "2016-serhat", "y": 2016, "cc": "SM", "fl": "🇸🇲", "ar": "Serhat", "ti": "I Didn't Know", "tag": "mit", "code": "Y30F", "co": "San Marino"}, {"id": "2016-jamala", "y": 2016, "cc": "UA", "fl": "🇺🇦", "ar": "Jamala", "ti": "1944", "tag": "win", "code": "2F7Q", "co": "Ucrania"}, {"id": "2017-blanche", "y": 2017, "cc": "BE", "fl": "🇧🇪", "ar": "Blanche", "ti": "City Lights", "tag": "mit", "code": "BEP5", "co": "Bélgica"}, {"id": "2017-kristian-kostov", "y": 2017, "cc": "BG", "fl": "🇧🇬", "ar": "Kristian Kostov", "ti": "Beautiful Mess", "tag": "", "code": "RC4K", "co": "Bulgaria"}, {"id": "2017-levina", "y": 2017, "cc": "DE", "fl": "🇩🇪", "ar": "Levina", "ti": "Perfect Life", "tag": "", "code": "VXFV", "co": "Alemania"}, {"id": "2017-manel-navarro", "y": 2017, "cc": "ES", "fl": "🇪🇸", "ar": "Manel Navarro", "ti": "Do It for Your Lover", "tag": "es", "code": "UXHD", "co": "España"}, {"id": "2017-jacques-houdek", "y": 2017, "cc": "HR", "fl": "🇭🇷", "ar": "Jacques Houdek", "ti": "My Friend", "tag": "mit", "code": "F8RM", "co": "Croacia"}, {"id": "2017-francesco-gabban", "y": 2017, "cc": "IT", "fl": "🇮🇹", "ar": "Francesco Gabbani", "ti": "Occidentali's Karma", "tag": "mit", "code": "FTBM", "co": "Italia"}, {"id": "2017-sunstroke-projec", "y": 2017, "cc": "MD", "fl": "🇲🇩", "ar": "SunStroke Project", "ti": "Hey Mamma", "tag": "mit", "code": "1B2B", "co": "Moldavia"}, {"id": "2017-salvador-sobral", "y": 2017, "cc": "PT", "fl": "🇵🇹", "ar": "Salvador Sobral", "ti": "Amar pelos dois", "tag": "win", "code": "9YKR", "co": "Portugal"}, {"id": "2017-ilinca-and-alex", "y": 2017, "cc": "RO", "fl": "🇷🇴", "ar": "Ilinca & Alex Florea", "ti": "Yodel It!", "tag": "mit", "code": "KTX4", "co": "Rumanía"}, {"id": "2018-cesar-sampson", "y": 2018, "cc": "AT", "fl": "🇦🇹", "ar": "Cesár Sampson", "ti": "Nobody but You", "tag": "", "code": "2HK7", "co": "Austria"}, {"id": "2018-eleni-foureira", "y": 2018, "cc": "CY", "fl": "🇨🇾", "ar": "Eleni Foureira", "ti": "Fuego", "tag": "mit", "code": "H2YX", "co": "Chipre"}, {"id": "2018-mikolas-josef", "y": 2018, "cc": "CZ", "fl": "🇨🇿", "ar": "Mikolas Josef", "ti": "Lie to Me", "tag": "mit", "code": "P5X3", "co": "Chequia"}, {"id": "2018-michael-schulte", "y": 2018, "cc": "DE", "fl": "🇩🇪", "ar": "Michael Schulte", "ti": "You Let Me Walk Alone", "tag": "", "code": "UKKT", "co": "Alemania"}, {"id": "2018-elina-nechayeva", "y": 2018, "cc": "EE", "fl": "🇪🇪", "ar": "Elina Nechayeva", "ti": "La forza", "tag": "", "code": "BBRG", "co": "Estonia"}, {"id": "2018-amaia-y-alfred", "y": 2018, "cc": "ES", "fl": "🇪🇸", "ar": "Amaia y Alfred", "ti": "Tu canción", "tag": "es", "code": "509L", "co": "España"}, {"id": "2018-netta", "y": 2018, "cc": "IL", "fl": "🇮🇱", "ar": "Netta", "ti": "Toy", "tag": "win", "code": "GJ2B", "co": "Israel"}, {"id": "2018-ermal-meta-and-f", "y": 2018, "cc": "IT", "fl": "🇮🇹", "ar": "Ermal Meta & Fabrizio Moro", "ti": "Non mi avete fatto niente", "tag": "", "code": "1G0S", "co": "Italia"}, {"id": "2018-doredos", "y": 2018, "cc": "MD", "fl": "🇲🇩", "ar": "DoReDoS", "ti": "My Lucky Day", "tag": "mit", "code": "WNTR", "co": "Moldavia"}, {"id": "2019-kate-miller-heid", "y": 2019, "cc": "AU", "fl": "🇦🇺", "ar": "Kate Miller-Heidke", "ti": "Zero Gravity", "tag": "mit", "code": "743J", "co": "Australia"}, {"id": "2019-luca-hanni", "y": 2019, "cc": "CH", "fl": "🇨🇭", "ar": "Luca Hänni", "ti": "She Got Me", "tag": "", "code": "EU9U", "co": "Suiza"}, {"id": "2019-miki", "y": 2019, "cc": "ES", "fl": "🇪🇸", "ar": "Miki", "ti": "La venda", "tag": "es", "code": "10KN", "co": "España"}, {"id": "2019-hatari", "y": 2019, "cc": "IS", "fl": "🇮🇸", "ar": "Hatari", "ti": "Hatrið mun sigra", "tag": "mit", "code": "ECDW", "co": "Islandia"}, {"id": "2019-mahmood", "y": 2019, "cc": "IT", "fl": "🇮🇹", "ar": "Mahmood", "ti": "Soldi", "tag": "mit", "code": "AXUU", "co": "Italia"}, {"id": "2019-duncan-laurence", "y": 2019, "cc": "NL", "fl": "🇳🇱", "ar": "Duncan Laurence", "ti": "Arcade", "tag": "win", "code": "C3RE", "co": "Países Bajos"}, {"id": "2019-keiino", "y": 2019, "cc": "NO", "fl": "🇳🇴", "ar": "KEiiNO", "ti": "Spirit in the Sky", "tag": "mit", "code": "3L9F", "co": "Noruega"}, {"id": "2019-john-lundvik", "y": 2019, "cc": "SE", "fl": "🇸🇪", "ar": "John Lundvik", "ti": "Too Late for Love", "tag": "", "code": "U83V", "co": "Suecia"}, {"id": "2019-serhat", "y": 2019, "cc": "SM", "fl": "🇸🇲", "ar": "Serhat", "ti": "Say Na Na Na", "tag": "mit", "code": "CJR4", "co": "San Marino"}, {"id": "2020-victoria", "y": 2020, "cc": "BG", "fl": "🇧🇬", "ar": "Victoria", "ti": "Tears Getting Sober", "tag": "", "code": "4MYR", "co": "Bulgaria"}, {"id": "2020-blas-canto", "y": 2020, "cc": "ES", "fl": "🇪🇸", "ar": "Blas Cantó", "ti": "Universo", "tag": "es", "code": "T16X", "co": "España"}, {"id": "2020-dai-og-gagnamagn", "y": 2020, "cc": "IS", "fl": "🇮🇸", "ar": "Daði og Gagnamagnið", "ti": "Think About Things", "tag": "mit", "code": "CWMC", "co": "Islandia"}, {"id": "2020-the-roop", "y": 2020, "cc": "LT", "fl": "🇱🇹", "ar": "The Roop", "ti": "On Fire", "tag": "mit", "code": "8HPB", "co": "Lituania"}, {"id": "2020-little-big", "y": 2020, "cc": "RU", "fl": "🇷🇺", "ar": "Little Big", "ti": "Uno", "tag": "mit", "code": "KMQC", "co": "Rusia"}, {"id": "2021-efendi", "y": 2021, "cc": "AZ", "fl": "🇦🇿", "ar": "Efendi", "ti": "Mata Hari", "tag": "mit", "code": "SRT4", "co": "Azerbaiyán"}, {"id": "2021-gjon-s-tears", "y": 2021, "cc": "CH", "fl": "🇨🇭", "ar": "Gjon's Tears", "ti": "Tout l'univers", "tag": "", "code": "N3JY", "co": "Suiza"}, {"id": "2021-blas-canto", "y": 2021, "cc": "ES", "fl": "🇪🇸", "ar": "Blas Cantó", "ti": "Voy a quedarme", "tag": "es", "code": "AUTA", "co": "España"}, {"id": "2021-blind-channel", "y": 2021, "cc": "FI", "fl": "🇫🇮", "ar": "Blind Channel", "ti": "Dark Side", "tag": "", "code": "QWNP", "co": "Finlandia"}, {"id": "2021-barbara-pravi", "y": 2021, "cc": "FR", "fl": "🇫🇷", "ar": "Barbara Pravi", "ti": "Voilà", "tag": "mit", "code": "8QP1", "co": "Francia"}, {"id": "2021-maneskin", "y": 2021, "cc": "IT", "fl": "🇮🇹", "ar": "Måneskin", "ti": "Zitti e buoni", "tag": "win", "code": "QEA3", "co": "Italia"}, {"id": "2021-the-roop", "y": 2021, "cc": "LT", "fl": "🇱🇹", "ar": "The Roop", "ti": "Discoteque", "tag": "mit", "code": "37WR", "co": "Lituania"}, {"id": "2021-destiny", "y": 2021, "cc": "MT", "fl": "🇲🇹", "ar": "Destiny", "ti": "Je me casse", "tag": "", "code": "4SK8", "co": "Malta"}, {"id": "2021-manizha", "y": 2021, "cc": "RU", "fl": "🇷🇺", "ar": "Manizha", "ti": "Russian Woman", "tag": "", "code": "59F1", "co": "Rusia"}, {"id": "2021-senhit", "y": 2021, "cc": "SM", "fl": "🇸🇲", "ar": "Senhit", "ti": "Adrenalina", "tag": "mit", "code": "P8D1", "co": "San Marino"}, {"id": "2021-go-a", "y": 2021, "cc": "UA", "fl": "🇺🇦", "ar": "Go_A", "ti": "Shum", "tag": "mit", "code": "FKUH", "co": "Ucrania"}, {"id": "2022-rosa-linn", "y": 2022, "cc": "AM", "fl": "🇦🇲", "ar": "Rosa Linn", "ti": "Snap", "tag": "mit", "code": "EEBP", "co": "Armenia"}, {"id": "2022-we-are-domi", "y": 2022, "cc": "CZ", "fl": "🇨🇿", "ar": "We Are Domi", "ti": "Lights Off", "tag": "", "code": "W6CK", "co": "Chequia"}, {"id": "2022-chanel", "y": 2022, "cc": "ES", "fl": "🇪🇸", "ar": "Chanel", "ti": "SloMo", "tag": "es", "code": "DRJH", "co": "España"}, {"id": "2022-sam-ryder", "y": 2022, "cc": "GB", "fl": "🇬🇧", "ar": "Sam Ryder", "ti": "Space Man", "tag": "mit", "code": "HURA", "co": "Reino Unido"}, {"id": "2022-amanda-georgiadi", "y": 2022, "cc": "GR", "fl": "🇬🇷", "ar": "Amanda Georgiadi Tenfjord", "ti": "Die Together", "tag": "", "code": "9QBX", "co": "Grecia"}, {"id": "2022-mahmood-and-blan", "y": 2022, "cc": "IT", "fl": "🇮🇹", "ar": "Mahmood & Blanco", "ti": "Brividi", "tag": "", "code": "NQ5T", "co": "Italia"}, {"id": "2022-s10", "y": 2022, "cc": "NL", "fl": "🇳🇱", "ar": "S10", "ti": "De diepte", "tag": "", "code": "95N9", "co": "Países Bajos"}, {"id": "2022-subwoolfer", "y": 2022, "cc": "NO", "fl": "🇳🇴", "ar": "Subwoolfer", "ti": "Give That Wolf a Banana", "tag": "mit", "code": "7F73", "co": "Noruega"}, {"id": "2022-ochman", "y": 2022, "cc": "PL", "fl": "🇵🇱", "ar": "Ochman", "ti": "River", "tag": "", "code": "PLH0", "co": "Polonia"}, {"id": "2022-cornelia-jakobs", "y": 2022, "cc": "SE", "fl": "🇸🇪", "ar": "Cornelia Jakobs", "ti": "Hold Me Closer", "tag": "", "code": "DXN5", "co": "Suecia"}, {"id": "2022-kalush-orchestra", "y": 2022, "cc": "UA", "fl": "🇺🇦", "ar": "Kalush Orchestra", "ti": "Stefania", "tag": "win", "code": "LYK5", "co": "Ucrania"}, {"id": "2023-voyager", "y": 2023, "cc": "AU", "fl": "🇦🇺", "ar": "Voyager", "ti": "Promise", "tag": "mit", "code": "UMCF", "co": "Australia"}, {"id": "2023-gustaph", "y": 2023, "cc": "BE", "fl": "🇧🇪", "ar": "Gustaph", "ti": "Because of You", "tag": "", "code": "6YCC", "co": "Bélgica"}, {"id": "2023-blanca-paloma", "y": 2023, "cc": "ES", "fl": "🇪🇸", "ar": "Blanca Paloma", "ti": "Eaea", "tag": "es", "code": "0RAX", "co": "España"}, {"id": "2023-kaarija", "y": 2023, "cc": "FI", "fl": "🇫🇮", "ar": "Käärijä", "ti": "Cha Cha Cha", "tag": "mit", "code": "J2WT", "co": "Finlandia"}, {"id": "2023-la-zarra", "y": 2023, "cc": "FR", "fl": "🇫🇷", "ar": "La Zarra", "ti": "Évidemment", "tag": "", "code": "DP1N", "co": "Francia"}, {"id": "2023-let-3", "y": 2023, "cc": "HR", "fl": "🇭🇷", "ar": "Let 3", "ti": "Mama ŠČ!", "tag": "mit", "code": "NB2G", "co": "Croacia"}, {"id": "2023-noa-kirel", "y": 2023, "cc": "IL", "fl": "🇮🇱", "ar": "Noa Kirel", "ti": "Unicorn", "tag": "", "code": "5N2C", "co": "Israel"}, {"id": "2023-marco-mengoni", "y": 2023, "cc": "IT", "fl": "🇮🇹", "ar": "Marco Mengoni", "ti": "Due vite", "tag": "", "code": "KFKT", "co": "Italia"}, {"id": "2023-alessandra", "y": 2023, "cc": "NO", "fl": "🇳🇴", "ar": "Alessandra", "ti": "Queen of Kings", "tag": "mit", "code": "2M5L", "co": "Noruega"}, {"id": "2023-loreen", "y": 2023, "cc": "SE", "fl": "🇸🇪", "ar": "Loreen", "ti": "Tattoo", "tag": "win", "code": "RVGH", "co": "Suecia"}, {"id": "2023-tvorchi", "y": 2023, "cc": "UA", "fl": "🇺🇦", "ar": "Tvorchi", "ti": "Heart of Steel", "tag": "", "code": "7P5M", "co": "Ucrania"}, {"id": "2024-nemo", "y": 2024, "cc": "CH", "fl": "🇨🇭", "ar": "Nemo", "ti": "The Code", "tag": "win", "code": "S36F", "co": "Suiza"}, {"id": "2024-nebulossa", "y": 2024, "cc": "ES", "fl": "🇪🇸", "ar": "Nebulossa", "ti": "Zorra", "tag": "es", "code": "E54H", "co": "España"}, {"id": "2024-windows95man", "y": 2024, "cc": "FI", "fl": "🇫🇮", "ar": "Windows95man", "ti": "No Rules!", "tag": "mit", "code": "MA02", "co": "Finlandia"}, {"id": "2024-slimane", "y": 2024, "cc": "FR", "fl": "🇫🇷", "ar": "Slimane", "ti": "Mon amour", "tag": "", "code": "P1DH", "co": "Francia"}, {"id": "2024-marina-satti", "y": 2024, "cc": "GR", "fl": "🇬🇷", "ar": "Marina Satti", "ti": "Zari", "tag": "", "code": "SNHT", "co": "Grecia"}, {"id": "2024-baby-lasagna", "y": 2024, "cc": "HR", "fl": "🇭🇷", "ar": "Baby Lasagna", "ti": "Rim Tim Tagi Dim", "tag": "mit", "code": "VVB6", "co": "Croacia"}, {"id": "2024-bambie-thug", "y": 2024, "cc": "IE", "fl": "🇮🇪", "ar": "Bambie Thug", "ti": "Doomsday Blue", "tag": "mit", "code": "SKT1", "co": "Irlanda"}, {"id": "2024-eden-golan", "y": 2024, "cc": "IL", "fl": "🇮🇱", "ar": "Eden Golan", "ti": "Hurricane", "tag": "", "code": "M38J", "co": "Israel"}, {"id": "2024-angelina-mango", "y": 2024, "cc": "IT", "fl": "🇮🇹", "ar": "Angelina Mango", "ti": "La noia", "tag": "mit", "code": "JE15", "co": "Italia"}, {"id": "2024-joost-klein", "y": 2024, "cc": "NL", "fl": "🇳🇱", "ar": "Joost Klein", "ti": "Europapa", "tag": "mit", "code": "68MB", "co": "Países Bajos"}, {"id": "2024-teya-dora", "y": 2024, "cc": "RS", "fl": "🇷🇸", "ar": "Teya Dora", "ti": "Ramonda", "tag": "mit", "code": "2E8K", "co": "Serbia"}, {"id": "2024-alyona-alyona-an", "y": 2024, "cc": "UA", "fl": "🇺🇦", "ar": "alyona alyona & Jerry Heil", "ti": "Teresa & Maria", "tag": "", "code": "VLG8", "co": "Ucrania"}, {"id": "2025-shkodra-elektron", "y": 2025, "cc": "AL", "fl": "🇦🇱", "ar": "Shkodra Elektronike", "ti": "Zjerm", "tag": "", "code": "6K2N", "co": "Albania"}, {"id": "2025-jj", "y": 2025, "cc": "AT", "fl": "🇦🇹", "ar": "JJ", "ti": "Wasted Love", "tag": "win", "code": "W9TP", "co": "Austria"}, {"id": "2025-tommy-cash", "y": 2025, "cc": "EE", "fl": "🇪🇪", "ar": "Tommy Cash", "ti": "Espresso Macchiato", "tag": "mit", "code": "76EG", "co": "Estonia"}, {"id": "2025-melody", "y": 2025, "cc": "ES", "fl": "🇪🇸", "ar": "Melody", "ti": "Esa diva", "tag": "es", "code": "EYQT", "co": "España"}, {"id": "2025-erika-vikman", "y": 2025, "cc": "FI", "fl": "🇫🇮", "ar": "Erika Vikman", "ti": "Ich komme", "tag": "mit", "code": "K1XE", "co": "Finlandia"}, {"id": "2025-louane", "y": 2025, "cc": "FR", "fl": "🇫🇷", "ar": "Louane", "ti": "Maman", "tag": "", "code": "1F91", "co": "Francia"}, {"id": "2025-yuval-raphael", "y": 2025, "cc": "IL", "fl": "🇮🇱", "ar": "Yuval Raphael", "ti": "New Day Will Rise", "tag": "", "code": "TNKS", "co": "Israel"}, {"id": "2025-lucio-corsi", "y": 2025, "cc": "IT", "fl": "🇮🇹", "ar": "Lucio Corsi", "ti": "Volevo essere un duro", "tag": "", "code": "9L14", "co": "Italia"}, {"id": "2025-claude", "y": 2025, "cc": "NL", "fl": "🇳🇱", "ar": "Claude", "ti": "C'est la vie", "tag": "", "code": "VAS5", "co": "Países Bajos"}, {"id": "2025-kaj", "y": 2025, "cc": "SE", "fl": "🇸🇪", "ar": "KAJ", "ti": "Bara bada bastu", "tag": "mit", "code": "4UAY", "co": "Suecia"}, {"id": "2026-delta-goodrem", "y": 2026, "cc": "AU", "fl": "🇦🇺", "ar": "Delta Goodrem", "ti": "Eclipse", "tag": "", "code": "2K53", "co": "Australia"}, {"id": "2026-dara", "y": 2026, "cc": "BG", "fl": "🇧🇬", "ar": "Dara", "ti": "Bangaranga", "tag": "win", "code": "GUWB", "co": "Bulgaria"}, {"id": "2026-noam-bettan", "y": 2026, "cc": "IL", "fl": "🇮🇱", "ar": "Noam Bettan", "ti": "Michelle", "tag": "", "code": "1SBR", "co": "Israel"}, {"id": "2026-sal-da-vinci", "y": 2026, "cc": "IT", "fl": "🇮🇹", "ar": "Sal Da Vinci", "ti": "Per sempre sì", "tag": "", "code": "Y2QW", "co": "Italia"}, {"id": "2026-alexandra-capita", "y": 2026, "cc": "RO", "fl": "🇷🇴", "ar": "Alexandra Căpitănescu", "ti": "Choke Me", "tag": "", "code": "LQP9", "co": "Rumanía"}];
 
-const SONGS = [
-  { id: "1ssBrm3EZb20Kb19roQIcy", country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",               title: "Liar" },
-  { id: "3q58lQ4ByWV5MR0VSeNer3", country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                  title: "Ramonda" },
-  { id: "2Ozw7k5CLtM5W9SomrOyjw", country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                 title: "Hurricane" },
-  { id: "4QWrK6lpr8rZ6sa8ymqMrq", country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",               title: "No Rules!" },
-  { id: "5ViF3hsL0iwD7jhh5JB2Ip", country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",              title: "In The Middle" },
-  { id: "6EwXG9cPjesjehN0kw30xs", country: "Azerbaiyán",   flag: "🇦🇿", artist: "Fahree feat. Ilkin Dovlatov", title: "Özünlə Apar" },
-  { id: "74mWVYv6xPilcalOxrQa5Y", country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",             title: "One Milkali (One Blood)" },
-  { id: "582OHNxg4RRvlzTn7fuLY9", country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                    title: "Grito" },
-  { id: "6syLoIbMRXvCEr94FMVBHh", country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                       title: "Fighter" },
-  { id: "5L8C1PZGCpZf8STcN79H5j", country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",          title: "Unforgettable" },
-  { id: "4GEmQTg7yfnfZoNhgpCg61", country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",             title: "Dizzy" },
-  { id: "4sDLQ5atDUHhbikD1UQ2mW", country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",               title: "ZARI" },
-  { id: "6awPQdcqY8IYdHzqhEYm3s", country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                       title: "Ulveham" },
-  { id: "49R1F3rIdSzuPk7AcHi6d1", country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",             title: "La Noia" },
-  { id: "4ypCNolz6aRYZPO3UOGp8Z", country: "España",        flag: "🇪🇸", artist: "Nebulossa",                  title: "ZORRA" },
-  { id: "4ZBe9Plh2adT70U4PDxve1", country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",             title: "Luktelk" },
-  { id: "7n3Czk07KugPQOWuqCHDmF", country: "Ucrania",       flag: "🇺🇦", artist: "alyona alyona & Jerry Heil", title: "Teresa & Maria" },
-  { id: "5N7IYups0hGrlVcvj0bmHG", country: "Francia",       flag: "🇫🇷", artist: "Slimane",                    title: "Mon Amour" },
-  { id: "1QpWQMKfQ44QUN1dEg65T8", country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                     title: "We Will Rave" },
-  { id: "3BJ0uXKEz9fUxCbZle1rCE", country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                      title: "Always On The Run" },
-  { id: "1EjIXKhNHI00ZLMRpS8iz8", country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                       title: "The Code" },
-  { id: "4IUMSDTVvUellFQ7RxI3kZ", country: "Polonia",       flag: "🇵🇱", artist: "Luna",                       title: "The Tower" },
-  { id: "6XIerJ9V7H9byQFRZiqyCv", country: "San Marino",   flag: "🇸🇲", artist: "Megara",                     title: "11:11" },
-  { id: "2MiEtw8UquKvxOwu47oTMu", country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                   title: "Jako" },
-  { id: "7qiEoVlFjb3KaytT2zgK1g", country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",                title: "Doomsday Blue" },
-  { id: "0uHrMbMv3c78398pIANDqR", country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",                title: "Europapa" },
-];
-
+document.getElementById('subtitle').textContent = CARDS.length + ' cartas · 1956–2026';
 const grid = document.getElementById('grid');
+let showingAnswers = false;
 
-SONGS.forEach(song => {
-  const url  = `${BASE_URL}?id=${song.id}`;
-  const card = document.createElement('div');
-  card.className = 'card';
-  card.innerHTML = `
-    <div class="card-year">EUROVISIÓN 2024</div>
-    <div class="card-flag">${song.flag}</div>
-    <div class="card-country">${song.country.toUpperCase()}</div>
-    <div class="card-title">${song.title}</div>
-    <div class="card-artist">${song.artist}</div>
-    <div class="qr-container" id="qr-${song.id}"></div>
-    <div class="card-logo">HITSTER · EUROVISIÓN</div>
-  `;
-  grid.appendChild(card);
-
-  new QRCode(document.getElementById(`qr-${song.id}`), {
-    text: url,
-    width: 110,
-    height: 110,
-    colorDark: '#000000',
-    colorLight: '#ffffff',
-    correctLevel: QRCode.CorrectLevel.M
+function render() {
+  grid.innerHTML = '';
+  CARDS.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'card' + (showingAnswers ? ' answer' : '');
+    if (showingAnswers) {
+      card.innerHTML =
+        `<div class="card-year">${c.y}</div>` +
+        `<div class="card-flag">${c.fl}</div>` +
+        `<div class="card-country">${c.co.toUpperCase()}</div>` +
+        `<div class="card-title">${c.ti}</div>` +
+        `<div class="card-artist">${c.ar}</div>` +
+        `<div class="card-code">${c.code}</div>`;
+    } else {
+      card.innerHTML =
+        `<div class="card-logo">HITSTER · EUROVISIÓN</div>` +
+        `<div class="qr-container" id="qr-${c.id}"></div>` +
+        `<div class="card-code">${c.code}</div>`;
+    }
+    grid.appendChild(card);
+    if (!showingAnswers) {
+      new QRCode(document.getElementById('qr-' + c.id), {
+        text: BASE_URL + '?id=' + c.id,
+        width: 108, height: 108,
+        colorDark: '#000000', colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    }
   });
+}
+
+document.getElementById('flipBtn').addEventListener('click', () => {
+  showingAnswers = !showingAnswers;
+  document.getElementById('flipBtn').textContent = showingAnswers
+    ? '🔄 Ver frente (QR)' : '🔄 Ver reverso (respuestas)';
+  render();
 });
+
+render();
 </script>
 </body>
 </html>

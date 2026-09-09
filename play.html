@@ -253,13 +253,13 @@
 <!-- ===== HOME ===== -->
 <div class="screen" id="screenHome" hidden>
   <img class="brand-img" src="logo.png" alt="Hitster" width="512" height="512">
-  <div class="tagline">Edición Eurovisión 2024</div>
+  <div class="tagline">Eurovisión · 1956–2026</div>
   <div class="home-actions">
     <button class="btn btn-primary" id="playBtn">JUGAR AHORA</button>
     <button class="btn btn-ghost" id="rulesBtn">Cómo se juega</button>
     <a class="btn btn-ghost" href="cards.html">🖨️ Imprimir las cartas</a>
   </div>
-  <div class="logo" style="margin-top:2rem">26 CANCIONES · MALMÖ 2024</div>
+  <div class="logo" style="margin-top:2rem" id="homeCount">CANCIONES · 70 EDICIONES</div>
 </div>
 
 <!-- ===== SCANNER ===== -->
@@ -297,10 +297,10 @@
       </div>
     </div>
 
-    <audio id="audio" preload="auto" playsinline></audio>
+    <audio id="audio" preload="auto" playsinline crossorigin="anonymous"></audio>
 
     <button class="btn btn-spotify" id="soundBtn">▶ Reproducir 20 s</button>
-    <a class="btn btn-timer" id="spotifyBtn" href="#" target="_blank" rel="noopener">Abrir canción completa en Spotify</a>
+    <a class="btn btn-timer" id="spotifyBtn" href="#" target="_blank" rel="noopener">Buscar en Spotify</a>
 
     <p class="status-msg" id="statusMsg">Escucha ~20 s y adivina el año del Festival</p>
 
@@ -348,65 +348,291 @@
   }
 })();
 
-// --- Song data ---
+// --- Datos (generado) ---
+const CNAME = {"AL": "Albania", "AM": "Armenia", "AT": "Austria", "AU": "Australia", "AZ": "Azerbaiyán", "BA": "Bosnia y Herzegovina", "BE": "Bélgica", "BG": "Bulgaria", "CH": "Suiza", "CY": "Chipre", "CZ": "Chequia", "DE": "Alemania", "DK": "Dinamarca", "EE": "Estonia", "ES": "España", "FI": "Finlandia", "FR": "Francia", "GB": "Reino Unido", "GR": "Grecia", "HR": "Croacia", "HU": "Hungría", "IE": "Irlanda", "IL": "Israel", "IS": "Islandia", "IT": "Italia", "LT": "Lituania", "LU": "Luxemburgo", "LV": "Letonia", "MC": "Mónaco", "MD": "Moldavia", "MT": "Malta", "NL": "Países Bajos", "NO": "Noruega", "PL": "Polonia", "PT": "Portugal", "RO": "Rumanía", "RS": "Serbia", "RS/ME": "Serbia y Montenegro", "RU": "Rusia", "SE": "Suecia", "SM": "San Marino", "TR": "Turquía", "UA": "Ucrania", "YU": "Yugoslavia"};
 const SONGS = [
-  { id: "1ssBrm3EZb20Kb19roQIcy", year: 2024, country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",               title: "Liar", pv: "c4a1df4eb2d922d0925071b60bb181438a700585" },
-  { id: "3q58lQ4ByWV5MR0VSeNer3", year: 2024, country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                  title: "Ramonda", pv: "408c6daab3514bc536ee2d669aafd00baa0b651d" },
-  { id: "2Ozw7k5CLtM5W9SomrOyjw", year: 2024, country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                 title: "Hurricane", pv: "cde96fd2bc64c850016ce160505f1eab451fc7c0" },
-  { id: "4QWrK6lpr8rZ6sa8ymqMrq", year: 2024, country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",               title: "No Rules!", pv: "005801d73892012d798b1020f04f2709a48f0739" },
-  { id: "5ViF3hsL0iwD7jhh5JB2Ip", year: 2024, country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",              title: "In The Middle", pv: "639e961474e1eb8f24ab11cea8c7cb9300a95f50" },
-  { id: "6EwXG9cPjesjehN0kw30xs", year: 2024, country: "Azerbaiyán",   flag: "🇦🇿", artist: "Fahree feat. Ilkin Dovlatov", title: "Özünlə Apar", pv: "93a879b4e1d02b1e392084ffd016ab0719da8953" },
-  { id: "74mWVYv6xPilcalOxrQa5Y", year: 2024, country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",             title: "One Milkali (One Blood)", pv: "79f084c65b4244c8f16380989da3836665727fc5" },
-  { id: "582OHNxg4RRvlzTn7fuLY9", year: 2024, country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                    title: "Grito", pv: "a72766eb02a733146bea026a8a7cf2683e9e586f" },
-  { id: "6syLoIbMRXvCEr94FMVBHh", year: 2024, country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                       title: "Fighter", pv: "e2ff57ccf836613dba0e2194339e78d25e484daa" },
-  { id: "5L8C1PZGCpZf8STcN79H5j", year: 2024, country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",          title: "Unforgettable", pv: "b0f8146b036f3b5ef6d5abf877dea327bfe6c606" },
-  { id: "4GEmQTg7yfnfZoNhgpCg61", year: 2024, country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",             title: "Dizzy", pv: "15fc1ae37805e2e63eba2a931fcdf2759c533c95" },
-  { id: "4sDLQ5atDUHhbikD1UQ2mW", year: 2024, country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",               title: "ZARI", pv: "8045da7e62384a51b05f5ee1b7881c2048757fd6" },
-  { id: "6awPQdcqY8IYdHzqhEYm3s", year: 2024, country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                       title: "Ulveham", pv: "979ca2232bac552c846d49e968d7ed677e2103e4" },
-  { id: "49R1F3rIdSzuPk7AcHi6d1", year: 2024, country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",             title: "La Noia", pv: "6ceb7797040378d3a984c0bee2e4107bcce46c46" },
-  { id: "4ypCNolz6aRYZPO3UOGp8Z", year: 2024, country: "España",        flag: "🇪🇸", artist: "Nebulossa",                  title: "ZORRA", pv: "9282f511673c6ef9466ac9ae3226c5567cc10e0f" },
-  { id: "4ZBe9Plh2adT70U4PDxve1", year: 2024, country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",             title: "Luktelk", pv: "3355e62b74afab7efe26939f48d8d990c44e07e2" },
-  { id: "7n3Czk07KugPQOWuqCHDmF", year: 2024, country: "Ucrania",       flag: "🇺🇦", artist: "alyona alyona & Jerry Heil", title: "Teresa & Maria", pv: "8465d47338a7aa21397aa565eebfe24c2f561fb4" },
-  { id: "5N7IYups0hGrlVcvj0bmHG", year: 2024, country: "Francia",       flag: "🇫🇷", artist: "Slimane",                    title: "Mon Amour", pv: "ad89fa428c447ac3926785c0c56fd9e6af4641e5" },
-  { id: "1QpWQMKfQ44QUN1dEg65T8", year: 2024, country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                     title: "We Will Rave", pv: "cacd8ade4c93b5eccf74846870fd6a0037d531c6" },
-  { id: "3BJ0uXKEz9fUxCbZle1rCE", year: 2024, country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                      title: "Always On The Run", pv: "a8471549e28c5388b2b2760725e25ec55cff8395" },
-  { id: "1EjIXKhNHI00ZLMRpS8iz8", year: 2024, country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                       title: "The Code", pv: "e2cef9b3f240bcef7771b1e8b0edc2d6e17e8635" },
-  { id: "4IUMSDTVvUellFQ7RxI3kZ", year: 2024, country: "Polonia",       flag: "🇵🇱", artist: "Luna",                       title: "The Tower", pv: "141694f25b972ad32930e8f5b3e9a3aad2ed83e4" },
-  { id: "6XIerJ9V7H9byQFRZiqyCv", year: 2024, country: "San Marino",   flag: "🇸🇲", artist: "Megara",                     title: "11:11", pv: "0dd06ce62f44a10ed35a9c14114d78d9ed1de28f" },
-  { id: "2MiEtw8UquKvxOwu47oTMu", year: 2024, country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                   title: "Jako", pv: "2d43fe264f0f57b62996f3bccbde74c1f7731cc5" },
-  { id: "7qiEoVlFjb3KaytT2zgK1g", year: 2024, country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",                title: "Doomsday Blue", pv: "49fde0058f2cf8ca85f6dcabf529e56643e9d8f5" },
-  { id: "0uHrMbMv3c78398pIANDqR", year: 2024, country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",                title: "Europapa", pv: "adf1afd42554acfb8f165649b5a5c7c4d95cc5bd" },
+  {id:"1956-lys-assia", y:1956, cc:"CH", fl:"🇨🇭", ar:"Lys Assia", ti:"Refrain", tag:"win", a:"dz", r:"87339363"},
+  {id:"1957-corry-brokken", y:1957, cc:"NL", fl:"🇳🇱", ar:"Corry Brokken", ti:"Net als toen", tag:"win", a:"dz", r:"1240513242"},
+  {id:"1958-andre-claveau", y:1958, cc:"FR", fl:"🇫🇷", ar:"André Claveau", ti:"Dors, mon amour", tag:"win", a:"dz", r:"2389314505"},
+  {id:"1958-domenico-modugno", y:1958, cc:"IT", fl:"🇮🇹", ar:"Domenico Modugno", ti:"Nel blu dipinto di blu (Volare)", tag:"mit", a:"dz", r:"82484814"},
+  {id:"1959-teddy-scholten", y:1959, cc:"NL", fl:"🇳🇱", ar:"Teddy Scholten", ti:"Een beetje", tag:"win", a:"dz", r:"87116523"},
+  {id:"1960-jacqueline-boyer", y:1960, cc:"FR", fl:"🇫🇷", ar:"Jacqueline Boyer", ti:"Tom Pillibi", tag:"win", a:"dz", r:"74144396"},
+  {id:"1961-conchita-bautist", y:1961, cc:"ES", fl:"🇪🇸", ar:"Conchita Bautista", ti:"Estando contigo", tag:"es", a:"dz", r:"1670114862"},
+  {id:"1961-jean-claude-pasc", y:1961, cc:"LU", fl:"🇱🇺", ar:"Jean-Claude Pascal", ti:"Nous les amoureux", tag:"win", a:"dz", r:"3503665"},
+  {id:"1962-isabelle-aubret", y:1962, cc:"FR", fl:"🇫🇷", ar:"Isabelle Aubret", ti:"Un premier amour", tag:"win", a:"dz", r:"125656684"},
+  {id:"1963-grethe-and-jrgen", y:1963, cc:"DK", fl:"🇩🇰", ar:"Grethe & Jørgen Ingmann", ti:"Dansevise", tag:"win", a:"dz", r:"87700795"},
+  {id:"1964-gigliola-cinquet", y:1964, cc:"IT", fl:"🇮🇹", ar:"Gigliola Cinquetti", ti:"Non ho l'età", tag:"win", a:"dz", r:"690256"},
+  {id:"1965-france-gall", y:1965, cc:"LU", fl:"🇱🇺", ar:"France Gall", ti:"Poupée de cire, poupée de son", tag:"win", a:"dz", r:"639971642"},
+  {id:"1966-udo-jurgens", y:1966, cc:"AT", fl:"🇦🇹", ar:"Udo Jürgens", ti:"Merci, Chérie", tag:"win", a:"dz", r:"3950899241"},
+  {id:"1967-sandie-shaw", y:1967, cc:"GB", fl:"🇬🇧", ar:"Sandie Shaw", ti:"Puppet on a String", tag:"win", a:"dz", r:"693402662"},
+  {id:"1968-massiel", y:1968, cc:"ES", fl:"🇪🇸", ar:"Massiel", ti:"La, la, la", tag:"es", a:"dz", r:"93889042"},
+  {id:"1968-cliff-richard", y:1968, cc:"GB", fl:"🇬🇧", ar:"Cliff Richard", ti:"Congratulations", tag:"mit", a:"dz", r:"3421034"},
+  {id:"1969-salome", y:1969, cc:"ES", fl:"🇪🇸", ar:"Salomé", ti:"Vivo cantando", tag:"es", a:"dz", r:"3544433471"},
+  {id:"1969-frida-boccara", y:1969, cc:"FR", fl:"🇫🇷", ar:"Frida Boccara", ti:"Un jour, un enfant", tag:"win", a:"dz", r:"3977355871"},
+  {id:"1969-lulu", y:1969, cc:"GB", fl:"🇬🇧", ar:"Lulu", ti:"Boom Bang-a-Bang", tag:"win", a:"dz", r:"439723892"},
+  {id:"1970-dana", y:1970, cc:"IE", fl:"🇮🇪", ar:"Dana", ti:"All Kinds of Everything", tag:"win", a:"dz", r:"117945478"},
+  {id:"1971-karina", y:1971, cc:"ES", fl:"🇪🇸", ar:"Karina", ti:"En un mundo nuevo", tag:"es", a:"dz", r:"3518620"},
+  {id:"1971-severine", y:1971, cc:"MC", fl:"🇲🇨", ar:"Séverine", ti:"Un banc, un arbre, une rue", tag:"win", a:"dz", r:"71050859"},
+  {id:"1972-the-new-seekers", y:1972, cc:"GB", fl:"🇬🇧", ar:"The New Seekers", ti:"Beg, Steal or Borrow", tag:"", a:"dz", r:"630832662"},
+  {id:"1972-vicky-leandros", y:1972, cc:"LU", fl:"🇱🇺", ar:"Vicky Leandros", ti:"Après toi", tag:"win", a:"dz", r:"103472552"},
+  {id:"1973-mocedades", y:1973, cc:"ES", fl:"🇪🇸", ar:"Mocedades", ti:"Eres tú", tag:"es", a:"dz", r:"513121952"},
+  {id:"1973-anne-marie-david", y:1973, cc:"LU", fl:"🇱🇺", ar:"Anne-Marie David", ti:"Tu te reconnaîtras", tag:"win", a:"dz", r:"355133861"},
+  {id:"1974-olivia-newton-jo", y:1974, cc:"GB", fl:"🇬🇧", ar:"Olivia Newton-John", ti:"Long Live Love", tag:"mit", a:"dz", r:"3838596771"},
+  {id:"1974-gigliola-cinquet", y:1974, cc:"IT", fl:"🇮🇹", ar:"Gigliola Cinquetti", ti:"Sì", tag:"", a:"dz", r:"57191171"},
+  {id:"1974-abba", y:1974, cc:"SE", fl:"🇸🇪", ar:"ABBA", ti:"Waterloo", tag:"win", a:"dz", r:"76376889"},
+  {id:"1975-teach-in", y:1975, cc:"NL", fl:"🇳🇱", ar:"Teach-In", ti:"Ding-a-dong", tag:"win", a:"dz", r:"1349645782"},
+  {id:"1976-brotherhood-of-m", y:1976, cc:"GB", fl:"🇬🇧", ar:"Brotherhood of Man", ti:"Save Your Kisses for Me", tag:"win", a:"dz", r:"4895130"},
+  {id:"1977-marie-myriam", y:1977, cc:"FR", fl:"🇫🇷", ar:"Marie Myriam", ti:"L'oiseau et l'enfant", tag:"win", a:"dz", r:"3352713141"},
+  {id:"1979-betty-missiego", y:1979, cc:"ES", fl:"🇪🇸", ar:"Betty Missiego", ti:"Su canción", tag:"es", a:"dz", r:"110957356"},
+  {id:"1979-milk-and-honey", y:1979, cc:"IL", fl:"🇮🇱", ar:"Milk and Honey", ti:"Hallelujah", tag:"win", a:"dz", r:"618946842"},
+  {id:"1980-telex", y:1980, cc:"BE", fl:"🇧🇪", ar:"Telex", ti:"Euro-Vision", tag:"mit", a:"dz", r:"1684015267"},
+  {id:"1980-katja-ebstein", y:1980, cc:"DE", fl:"🇩🇪", ar:"Katja Ebstein", ti:"Theater", tag:"mit", a:"dz", r:"3758999632"},
+  {id:"1980-johnny-logan", y:1980, cc:"IE", fl:"🇮🇪", ar:"Johnny Logan", ti:"What's Another Year", tag:"win", a:"dz", r:"10287180"},
+  {id:"1981-lena-valaitis", y:1981, cc:"DE", fl:"🇩🇪", ar:"Lena Valaitis", ti:"Johnny Blue", tag:"", a:"dz", r:"2368399035"},
+  {id:"1981-bucks-fizz", y:1981, cc:"GB", fl:"🇬🇧", ar:"Bucks Fizz", ti:"Making Your Mind Up", tag:"win", a:"dz", r:"599530"},
+  {id:"1982-nicole", y:1982, cc:"DE", fl:"🇩🇪", ar:"Nicole", ti:"Ein bißchen Frieden", tag:"win", a:"dz", r:"15755556"},
+  {id:"1982-avi-toledano", y:1982, cc:"IL", fl:"🇮🇱", ar:"Avi Toledano", ti:"Hora", tag:"", a:"dz", r:"2572115292"},
+  {id:"1983-remedios-amaya", y:1983, cc:"ES", fl:"🇪🇸", ar:"Remedios Amaya", ti:"¿Quién maneja mi barca?", tag:"es", a:"dz", r:"1008903"},
+  {id:"1983-ofra-haza", y:1983, cc:"IL", fl:"🇮🇱", ar:"Ofra Haza", ti:"Chai", tag:"mit", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/fb/45/f6/fb45f6b8-cdad-074c-c4d7-32b4c91863b4/mzaf_3738667129448751157.plus.aac.p.m4a"},
+  {id:"1983-corinne-hermes", y:1983, cc:"LU", fl:"🇱🇺", ar:"Corinne Hermès", ti:"Si la vie est cadeau", tag:"win", a:"dz", r:"822112032"},
+  {id:"1984-bravo", y:1984, cc:"ES", fl:"🇪🇸", ar:"Bravo", ti:"Lady, Lady", tag:"es", a:"dz", r:"106590932"},
+  {id:"1984-linda-martin", y:1984, cc:"IE", fl:"🇮🇪", ar:"Linda Martin", ti:"Terminal 3", tag:"", a:"dz", r:"13359789"},
+  {id:"1984-herreys", y:1984, cc:"SE", fl:"🇸🇪", ar:"Herreys", ti:"Diggi-Loo Diggi-Ley", tag:"win", a:"dz", r:"12732239"},
+  {id:"1985-wind", y:1985, cc:"DE", fl:"🇩🇪", ar:"Wind", ti:"Für alle", tag:"", a:"dz", r:"2428321"},
+  {id:"1985-bobbysocks", y:1985, cc:"NO", fl:"🇳🇴", ar:"Bobbysocks", ti:"La det swinge", tag:"win", a:"dz", r:"581887802"},
+  {id:"1985-kikki-danielsson", y:1985, cc:"SE", fl:"🇸🇪", ar:"Kikki Danielsson", ti:"Bra vibrationer", tag:"", a:"dz", r:"802874"},
+  {id:"1986-sandra-kim", y:1986, cc:"BE", fl:"🇧🇪", ar:"Sandra Kim", ti:"J'aime la vie", tag:"win", a:"dz", r:"1008428002"},
+  {id:"1986-daniela-simons", y:1986, cc:"CH", fl:"🇨🇭", ar:"Daniela Simons", ti:"Pas pour moi", tag:"", a:"dz", r:"737204652"},
+  {id:"1986-ketil-stokkan", y:1986, cc:"NO", fl:"🇳🇴", ar:"Ketil Stokkan", ti:"Romeo", tag:"", a:"dz", r:"593477752"},
+  {id:"1987-wind", y:1987, cc:"DE", fl:"🇩🇪", ar:"Wind", ti:"Laß die Sonne in dein Herz", tag:"", a:"dz", r:"2247022"},
+  {id:"1987-johnny-logan", y:1987, cc:"IE", fl:"🇮🇪", ar:"Johnny Logan", ti:"Hold Me Now", tag:"win", a:"dz", r:"5404560"},
+  {id:"1987-umberto-tozzi-an", y:1987, cc:"IT", fl:"🇮🇹", ar:"Umberto Tozzi & Raf", ti:"Gente di mare", tag:"mit", a:"dz", r:"1404480992"},
+  {id:"1988-celine-dion", y:1988, cc:"CH", fl:"🇨🇭", ar:"Céline Dion", ti:"Ne partez pas sans moi", tag:"win", a:"dz", r:"2465156"},
+  {id:"1988-hot-eyes", y:1988, cc:"DK", fl:"🇩🇰", ar:"Hot Eyes", ti:"Ka' du se hva' jeg sa'?", tag:"", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/37/ab/be/37abbe61-c868-2f01-1444-75d06a68707f/mzaf_10422736496035342102.plus.aac.p.m4a"},
+  {id:"1988-scott-fitzgerald", y:1988, cc:"GB", fl:"🇬🇧", ar:"Scott Fitzgerald", ti:"Go", tag:"", a:"dz", r:"1250095302"},
+  {id:"1989-nina", y:1989, cc:"ES", fl:"🇪🇸", ar:"Nina", ti:"Nacida para amar", tag:"es", a:"dz", r:"401783182"},
+  {id:"1989-riva", y:1989, cc:"YU", fl:"🇷🇸", ar:"Riva", ti:"Rock Me", tag:"win", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/d1/d5/b2/d1d5b263-5157-a3da-a6bb-cc9286062b3c/mzaf_12435674488131430489.plus.aac.p.m4a"},
+  {id:"1990-azucar-moreno", y:1990, cc:"ES", fl:"🇪🇸", ar:"Azúcar Moreno", ti:"Bandido", tag:"es", a:"dz", r:"2455212"},
+  {id:"1990-joelle-ursull", y:1990, cc:"FR", fl:"🇫🇷", ar:"Joëlle Ursull", ti:"White and Black Blues", tag:"", a:"dz", r:"1067923292"},
+  {id:"1990-liam-reilly", y:1990, cc:"IE", fl:"🇮🇪", ar:"Liam Reilly", ti:"Somewhere in Europe", tag:"", a:"dz", r:"12919338"},
+  {id:"1990-toto-cutugno", y:1990, cc:"IT", fl:"🇮🇹", ar:"Toto Cutugno", ti:"Insieme: 1992", tag:"win", a:"dz", r:"111889676"},
+  {id:"1991-sergio-dalma", y:1991, cc:"ES", fl:"🇪🇸", ar:"Sergio Dalma", ti:"Bailar pegados", tag:"es", a:"dz", r:"1568438"},
+  {id:"1991-amina", y:1991, cc:"FR", fl:"🇫🇷", ar:"Amina", ti:"C'est le dernier qui a parlé qui a raison", tag:"", a:"dz", r:"2534680"},
+  {id:"1991-carola", y:1991, cc:"SE", fl:"🇸🇪", ar:"Carola", ti:"Fångad av en stormvind", tag:"win", a:"dz", r:"7779271"},
+  {id:"1992-michael-ball", y:1992, cc:"GB", fl:"🇬🇧", ar:"Michael Ball", ti:"One Step Out of Time", tag:"", a:"dz", r:"2251809527"},
+  {id:"1992-linda-martin", y:1992, cc:"IE", fl:"🇮🇪", ar:"Linda Martin", ti:"Why Me?", tag:"win", a:"dz", r:"13232715"},
+  {id:"1992-mary-spiteri", y:1992, cc:"MT", fl:"🇲🇹", ar:"Mary Spiteri", ti:"Little Child", tag:"", a:"dz", r:"76214324"},
+  {id:"1993-sonia", y:1993, cc:"GB", fl:"🇬🇧", ar:"Sonia", ti:"Better the Devil You Know", tag:"", a:"dz", r:"1013456732"},
+  {id:"1993-niamh-kavanagh", y:1993, cc:"IE", fl:"🇮🇪", ar:"Niamh Kavanagh", ti:"In Your Eyes", tag:"win", a:"dz", r:"13213879"},
+  {id:"1993-arvingarna", y:1993, cc:"SE", fl:"🇸🇪", ar:"Arvingarna", ti:"Eloise", tag:"", a:"dz", r:"98754990"},
+  {id:"1994-friderika", y:1994, cc:"HU", fl:"🇭🇺", ar:"Friderika", ti:"Kinek mondjam el vétkeimet?", tag:"", a:"dz", r:"6126741"},
+  {id:"1994-paul-harrington", y:1994, cc:"IE", fl:"🇮🇪", ar:"Paul Harrington & Charlie McGettigan", ti:"Rock 'n' Roll Kids", tag:"win", a:"dz", r:"505509042"},
+  {id:"1994-edyta-gorniak", y:1994, cc:"PL", fl:"🇵🇱", ar:"Edyta Górniak", ti:"To nie ja!", tag:"mit", a:"dz", r:"951194112"},
+  {id:"1995-anabel-conde", y:1995, cc:"ES", fl:"🇪🇸", ar:"Anabel Conde", ti:"Vuelve conmigo", tag:"es", a:"dz", r:"3532585831"},
+  {id:"1995-secret-garden", y:1995, cc:"NO", fl:"🇳🇴", ar:"Secret Garden", ti:"Nocturne", tag:"win", a:"dz", r:"504219992"},
+  {id:"1995-jan-johansen", y:1995, cc:"SE", fl:"🇸🇪", ar:"Jan Johansen", ti:"Se på mej", tag:"", a:"dz", r:"15088713"},
+  {id:"1996-gina-g", y:1996, cc:"GB", fl:"🇬🇧", ar:"Gina G", ti:"Ooh Aah... Just a Little Bit", tag:"mit", a:"dz", r:"502171982"},
+  {id:"1996-eimear-quinn", y:1996, cc:"IE", fl:"🇮🇪", ar:"Eimear Quinn", ti:"The Voice", tag:"win", a:"dz", r:"929902002"},
+  {id:"1996-elisabeth-andrea", y:1996, cc:"NO", fl:"🇳🇴", ar:"Elisabeth Andreassen", ti:"I evighet", tag:"", a:"dz", r:"3363115621"},
+  {id:"1997-marcos-llunas", y:1997, cc:"ES", fl:"🇪🇸", ar:"Marcos Llunas", ti:"Sin rencor", tag:"es", a:"dz", r:"4217664202"},
+  {id:"1997-katrina-and-the", y:1997, cc:"GB", fl:"🇬🇧", ar:"Katrina and the Waves", ti:"Love Shine a Light", tag:"win", a:"dz", r:"3703703932"},
+  {id:"1997-marc-roberts", y:1997, cc:"IE", fl:"🇮🇪", ar:"Marc Roberts", ti:"Mysterious Woman", tag:"", a:"dz", r:"3364206341"},
+  {id:"1997-jalisse", y:1997, cc:"IT", fl:"🇮🇹", ar:"Jalisse", ti:"Fiumi di parole", tag:"", a:"dz", r:"3583715131"},
+  {id:"1998-guildo-horn", y:1998, cc:"DE", fl:"🇩🇪", ar:"Guildo Horn", ti:"Guildo hat euch lieb!", tag:"mit", a:"dz", r:"2233554377"},
+  {id:"1998-imaani", y:1998, cc:"GB", fl:"🇬🇧", ar:"Imaani", ti:"Where Are You?", tag:"", a:"dz", r:"3173546411"},
+  {id:"1998-dana-internation", y:1998, cc:"IL", fl:"🇮🇱", ar:"Dana International", ti:"Diva", tag:"win", a:"dz", r:"3497558971"},
+  {id:"1998-chiara", y:1998, cc:"MT", fl:"🇲🇹", ar:"Chiara", ti:"The One That I Love", tag:"", a:"dz", r:"76214329"},
+  {id:"1999-surpriz", y:1999, cc:"DE", fl:"🇩🇪", ar:"Sürpriz", ti:"Reise nach Jerusalem", tag:"", a:"dz", r:"16235489"},
+  {id:"1999-selma", y:1999, cc:"IS", fl:"🇮🇸", ar:"Selma", ti:"All Out of Luck", tag:"", a:"dz", r:"3462370461"},
+  {id:"1999-charlotte-nilsso", y:1999, cc:"SE", fl:"🇸🇪", ar:"Charlotte Nilsson", ti:"Take Me to Your Heaven", tag:"win", a:"dz", r:"397672562"},
+  {id:"2000-olsen-brothers", y:2000, cc:"DK", fl:"🇩🇰", ar:"Olsen Brothers", ti:"Fly on the Wings of Love", tag:"win", a:"dz", r:"62321631"},
+  {id:"2000-ines", y:2000, cc:"EE", fl:"🇪🇪", ar:"Ines", ti:"Once in a Lifetime", tag:"", a:"dz", r:"875874072"},
+  {id:"2000-brainstorm", y:2000, cc:"LV", fl:"🇱🇻", ar:"BrainStorm", ti:"My Star", tag:"", a:"dz", r:"84707707"},
+  {id:"2000-alsou", y:2000, cc:"RU", fl:"🇷🇺", ar:"Alsou", ti:"Solo", tag:"", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/81/d1/5c/81d15c7f-944b-4427-1271-ce973ab5bed7/mzaf_12284988688476843575.plus.aac.p.m4a"},
+  {id:"2001-rollo-and-king", y:2001, cc:"DK", fl:"🇩🇰", ar:"Rollo & King", ti:"Never Ever Let You Go", tag:"", a:"dz", r:"63099363"},
+  {id:"2001-david-civera", y:2001, cc:"ES", fl:"🇪🇸", ar:"David Civera", ti:"Dile que la quiero", tag:"es", a:"dz", r:"7408934"},
+  {id:"2001-antique", y:2001, cc:"GR", fl:"🇬🇷", ar:"Antique", ti:"(I Would) Die for You", tag:"", a:"dz", r:"10764553"},
+  {id:"2002-rosa", y:2002, cc:"ES", fl:"🇪🇸", ar:"Rosa", ti:"Europe's Living a Celebration", tag:"es", a:"dz", r:"15404145"},
+  {id:"2002-jessica-garlick", y:2002, cc:"GB", fl:"🇬🇧", ar:"Jessica Garlick", ti:"Come Back", tag:"", a:"dz", r:"1781767197"},
+  {id:"2002-marie-n", y:2002, cc:"LV", fl:"🇱🇻", ar:"Marie N", ti:"I Wanna", tag:"win", a:"dz", r:"2147418037"},
+  {id:"2002-ira-losco", y:2002, cc:"MT", fl:"🇲🇹", ar:"Ira Losco", ti:"7th Wonder", tag:"", a:"dz", r:"15454909"},
+  {id:"2003-alf-poier", y:2003, cc:"AT", fl:"🇦🇹", ar:"Alf Poier", ti:"Weil der Mensch zählt", tag:"mit", a:"dz", r:"142781864"},
+  {id:"2003-urban-trad", y:2003, cc:"BE", fl:"🇧🇪", ar:"Urban Trad", ti:"Sanomi", tag:"mit", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/4f/e0/96/4fe096a4-420b-f38b-f44e-95cab59cedb7/mzaf_78869741636816851.plus.aac.p.m4a"},
+  {id:"2003-beth", y:2003, cc:"ES", fl:"🇪🇸", ar:"Beth", ti:"Dime", tag:"es", a:"dz", r:"2286550667"},
+  {id:"2003-jemini", y:2003, cc:"GB", fl:"🇬🇧", ar:"Jemini", ti:"Cry Baby", tag:"mit", a:"dz", r:"124266800"},
+  {id:"2003-t-a-t-u", y:2003, cc:"RU", fl:"🇷🇺", ar:"t.A.T.u.", ti:"Ne ver', ne boysia", tag:"mit", a:"dz", r:"884781"},
+  {id:"2003-sertab-erener", y:2003, cc:"TR", fl:"🇹🇷", ar:"Sertab Erener", ti:"Everyway That I Can", tag:"win", a:"dz", r:"13204343"},
+  {id:"2004-lisa-andreas", y:2004, cc:"CY", fl:"🇨🇾", ar:"Lisa Andreas", ti:"Stronger Every Minute", tag:"", a:"dz", r:"1876925077"},
+  {id:"2004-ramon", y:2004, cc:"ES", fl:"🇪🇸", ar:"Ramón", ti:"Para llenarme de ti", tag:"es", a:"dz", r:"1372362242"},
+  {id:"2004-sakis-rouvas", y:2004, cc:"GR", fl:"🇬🇷", ar:"Sakis Rouvas", ti:"Shake It", tag:"", a:"dz", r:"3284390"},
+  {id:"2004-zeljko-joksimovi", y:2004, cc:"RS/ME", fl:"🇷🇸", ar:"Željko Joksimović", ti:"Lane moje", tag:"mit", a:"dz", r:"15324811"},
+  {id:"2004-ruslana", y:2004, cc:"UA", fl:"🇺🇦", ar:"Ruslana", ti:"Wild Dances", tag:"win", a:"dz", r:"3137454"},
+  {id:"2005-helena-paparizou", y:2005, cc:"GR", fl:"🇬🇷", ar:"Helena Paparizou", ti:"My Number One", tag:"win", a:"dz", r:"13189747"},
+  {id:"2005-zdob-si-zdub", y:2005, cc:"MD", fl:"🇲🇩", ar:"Zdob și Zdub", ti:"Bunica bate toba", tag:"mit", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview113/v4/77/49/fe/7749feb4-e82d-4b8e-1951-de06eec21fe9/mzaf_14182302457053705958.plus.aac.p.m4a"},
+  {id:"2005-chiara", y:2005, cc:"MT", fl:"🇲🇹", ar:"Chiara", ti:"Angel", tag:"", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/74/b4/82/74b4823d-159a-82ca-9f14-1cd92eb492d5/mzaf_6754921028719364995.plus.aac.p.m4a"},
+  {id:"2005-wig-wam", y:2005, cc:"NO", fl:"🇳🇴", ar:"Wig Wam", ti:"In My Dreams", tag:"mit", a:"dz", r:"627288932"},
+  {id:"2005-luminita-anghel", y:2005, cc:"RO", fl:"🇷🇴", ar:"Luminița Anghel & Sistem", ti:"Let Me Try", tag:"", a:"dz", r:"2010197747"},
+  {id:"2006-hari-mata-hari", y:2006, cc:"BA", fl:"🇧🇦", ar:"Hari Mata Hari", ti:"Lejla", tag:"", a:"dz", r:"2155165937"},
+  {id:"2006-lordi", y:2006, cc:"FI", fl:"🇫🇮", ar:"Lordi", ti:"Hard Rock Hallelujah", tag:"win", a:"dz", r:"562246"},
+  {id:"2006-daz-sampson", y:2006, cc:"GB", fl:"🇬🇧", ar:"Daz Sampson", ti:"Teenage Life", tag:"mit", a:"dz", r:"1790474457"},
+  {id:"2006-silvia-night", y:2006, cc:"IS", fl:"🇮🇸", ar:"Silvía Night", ti:"Congratulations", tag:"mit", a:"dz", r:"90082945"},
+  {id:"2006-lt-united", y:2006, cc:"LT", fl:"🇱🇹", ar:"LT United", ti:"We Are the Winners", tag:"mit", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/2a/d2/90/2ad290e0-c3bf-72a0-6472-5d3f6f7b65a4/mzaf_2839970899011454996.plus.aac.p.m4a"},
+  {id:"2006-dima-bilan", y:2006, cc:"RU", fl:"🇷🇺", ar:"Dima Bilan", ti:"Never Let You Go", tag:"", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1a/00/28/1a0028bb-d7cc-0c44-72c7-ae758865a257/mzaf_4104185703495106399.plus.aac.p.m4a"},
+  {id:"2007-d-nash", y:2007, cc:"ES", fl:"🇪🇸", ar:"D'Nash", ti:"I Love You Mi Vida", tag:"es", a:"dz", r:"794123"},
+  {id:"2007-les-fatals-picar", y:2007, cc:"FR", fl:"🇫🇷", ar:"Les Fatals Picards", ti:"L'amour à la française", tag:"mit", a:"dz", r:"794751"},
+  {id:"2007-scooch", y:2007, cc:"GB", fl:"🇬🇧", ar:"Scooch", ti:"Flying the Flag (For You)", tag:"mit", a:"dz", r:"791020"},
+  {id:"2007-marija-serifovic", y:2007, cc:"RS", fl:"🇷🇸", ar:"Marija Šerifović", ti:"Molitva", tag:"win", a:"dz", r:"1091551"},
+  {id:"2007-serebro", y:2007, cc:"RU", fl:"🇷🇺", ar:"Serebro", ti:"Song #1", tag:"", a:"dz", r:"65751941"},
+  {id:"2007-verka-serduchka", y:2007, cc:"UA", fl:"🇺🇦", ar:"Verka Serduchka", ti:"Dancing Lasha Tumbai", tag:"mit", a:"dz", r:"66321038"},
+  {id:"2008-rodolfo-chikilic", y:2008, cc:"ES", fl:"🇪🇸", ar:"Rodolfo Chikilicuatre", ti:"Baila el Chiki Chiki", tag:"es", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/24/29/22/24292282-b087-a476-0b64-4101b7d29cdf/mzaf_719126668940857123.plus.aac.p.m4a"},
+  {id:"2008-sebastien-tellie", y:2008, cc:"FR", fl:"🇫🇷", ar:"Sébastien Tellier", ti:"Divine", tag:"mit", a:"dz", r:"2749366431"},
+  {id:"2008-kalomira", y:2008, cc:"GR", fl:"🇬🇷", ar:"Kalomira", ti:"Secret Combination", tag:"", a:"dz", r:"1625259692"},
+  {id:"2008-dustin-the-turke", y:2008, cc:"IE", fl:"🇮🇪", ar:"Dustin the Turkey", ti:"Irelande Douze Pointe", tag:"mit", a:"dz", r:"13108564"},
+  {id:"2008-dima-bilan", y:2008, cc:"RU", fl:"🇷🇺", ar:"Dima Bilan", ti:"Believe", tag:"win", a:"dz", r:"3704954292"},
+  {id:"2008-ani-lorak", y:2008, cc:"UA", fl:"🇺🇦", ar:"Ani Lorak", ti:"Shady Lady", tag:"", a:"dz", r:"2125988487"},
+  {id:"2009-aysel-and-arash", y:2009, cc:"AZ", fl:"🇦🇿", ar:"AySel & Arash", ti:"Always", tag:"", a:"dz", r:"14620767"},
+  {id:"2009-soraya", y:2009, cc:"ES", fl:"🇪🇸", ar:"Soraya", ti:"La noche es para mí", tag:"es", a:"dz", r:"2160716"},
+  {id:"2009-yohanna", y:2009, cc:"IS", fl:"🇮🇸", ar:"Yohanna", ti:"Is It True?", tag:"", a:"dz", r:"1789107797"},
+  {id:"2009-alexander-rybak", y:2009, cc:"NO", fl:"🇳🇴", ar:"Alexander Rybak", ti:"Fairytale", tag:"win", a:"dz", r:"578980732"},
+  {id:"2009-hadise", y:2009, cc:"TR", fl:"🇹🇷", ar:"Hadise", ti:"Düm Tek Tek", tag:"", a:"dz", r:"68055318"},
+  {id:"2010-lena", y:2010, cc:"DE", fl:"🇩🇪", ar:"Lena", ti:"Satellite", tag:"win", a:"dz", r:"6447685"},
+  {id:"2010-daniel-diges", y:2010, cc:"ES", fl:"🇪🇸", ar:"Daniel Diges", ti:"Algo pequeñito", tag:"es", a:"dz", r:"6786533"},
+  {id:"2010-sunstroke-projec", y:2010, cc:"MD", fl:"🇲🇩", ar:"SunStroke Project & Olia Tira", ti:"Run Away", tag:"mit", a:"dz", r:"2585428212"},
+  {id:"2010-paula-seling-and", y:2010, cc:"RO", fl:"🇷🇴", ar:"Paula Seling & Ovi", ti:"Playing with Fire", tag:"", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/6d/98/49/6d9849fb-9003-42eb-1ee2-e028b954ce4d/mzaf_5489875614644509777.plus.aac.p.m4a"},
+  {id:"2010-manga", y:2010, cc:"TR", fl:"🇹🇷", ar:"maNga", ti:"We Could Be the Same", tag:"", a:"dz", r:"983435822"},
+  {id:"2011-ell-and-nikki", y:2011, cc:"AZ", fl:"🇦🇿", ar:"Ell & Nikki", ti:"Running Scared", tag:"win", a:"dz", r:"485636782"},
+  {id:"2011-getter-jaani", y:2011, cc:"EE", fl:"🇪🇪", ar:"Getter Jaani", ti:"Rockefeller Street", tag:"mit", a:"dz", r:"58327991"},
+  {id:"2011-lucia-perez", y:2011, cc:"ES", fl:"🇪🇸", ar:"Lucía Pérez", ti:"Que me quiten lo bailao", tag:"es", a:"dz", r:"10324174"},
+  {id:"2011-jedward", y:2011, cc:"IE", fl:"🇮🇪", ar:"Jedward", ti:"Lipstick", tag:"mit", a:"dz", r:"13732981"},
+  {id:"2011-zdob-si-zdub", y:2011, cc:"MD", fl:"🇲🇩", ar:"Zdob și Zdub", ti:"So Lucky", tag:"mit", a:"dz", r:"488752742"},
+  {id:"2011-eric-saade", y:2011, cc:"SE", fl:"🇸🇪", ar:"Eric Saade", ti:"Popular", tag:"mit", a:"dz", r:"76458291"},
+  {id:"2012-pastora-soler", y:2012, cc:"ES", fl:"🇪🇸", ar:"Pastora Soler", ti:"Quédate conmigo", tag:"es", a:"dz", r:"17345982"},
+  {id:"2012-pasha-parfeni", y:2012, cc:"MD", fl:"🇲🇩", ar:"Pasha Parfeni", ti:"Lăutar", tag:"mit", a:"dz", r:"413577302"},
+  {id:"2012-zeljko-joksimovi", y:2012, cc:"RS", fl:"🇷🇸", ar:"Željko Joksimović", ti:"Nije ljubav stvar", tag:"", a:"dz", r:"1989365287"},
+  {id:"2012-buranovskiye-bab", y:2012, cc:"RU", fl:"🇷🇺", ar:"Buranovskiye Babushki", ti:"Party for Everybody", tag:"mit", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/27/11/ae/2711aefd-89dd-9787-fab8-2aa4dd5d83d2/mzaf_6432004846149485643.plus.aac.p.m4a"},
+  {id:"2012-loreen", y:2012, cc:"SE", fl:"🇸🇪", ar:"Loreen", ti:"Euphoria", tag:"win", a:"dz", r:"67466760"},
+  {id:"2013-farid-mammadov", y:2013, cc:"AZ", fl:"🇦🇿", ar:"Farid Mammadov", ti:"Hold Me", tag:"", a:"dz", r:"66337999"},
+  {id:"2013-emmelie-de-fores", y:2013, cc:"DK", fl:"🇩🇰", ar:"Emmelie de Forest", ti:"Only Teardrops", tag:"win", a:"dz", r:"67082965"},
+  {id:"2013-el-sueno-de-morf", y:2013, cc:"ES", fl:"🇪🇸", ar:"El Sueño de Morfeo", ti:"Contigo hasta el final", tag:"es", a:"dz", r:"66851717"},
+  {id:"2013-krista-siegfrids", y:2013, cc:"FI", fl:"🇫🇮", ar:"Krista Siegfrids", ti:"Marry Me", tag:"mit", a:"dz", r:"66710427"},
+  {id:"2013-koza-mostra-and", y:2013, cc:"GR", fl:"🇬🇷", ar:"Koza Mostra & Agathonas Iakovidis", ti:"Alcohol Is Free", tag:"mit", a:"dz", r:"3899822021"},
+  {id:"2013-cezar", y:2013, cc:"RO", fl:"🇷🇴", ar:"Cezar", ti:"It's My Life", tag:"mit", a:"dz", r:"534515062"},
+  {id:"2013-zlata-ognevich", y:2013, cc:"UA", fl:"🇺🇦", ar:"Zlata Ognevich", ti:"Gravity", tag:"", a:"dz", r:"388626701"},
+  {id:"2014-conchita-wurst", y:2014, cc:"AT", fl:"🇦🇹", ar:"Conchita Wurst", ti:"Rise Like a Phoenix", tag:"win", a:"dz", r:"76214374"},
+  {id:"2014-ruth-lorenzo", y:2014, cc:"ES", fl:"🇪🇸", ar:"Ruth Lorenzo", ti:"Dancing in the Rain", tag:"es", a:"dz", r:"76394641"},
+  {id:"2014-the-common-linne", y:2014, cc:"NL", fl:"🇳🇱", ar:"The Common Linnets", ti:"Calm After the Storm", tag:"mit", a:"dz", r:"75970890"},
+  {id:"2014-donatan-and-cleo", y:2014, cc:"PL", fl:"🇵🇱", ar:"Donatan & Cleo", ti:"My Słowianie", tag:"mit", a:"dz", r:"72369258"},
+  {id:"2014-sanna-nielsen", y:2014, cc:"SE", fl:"🇸🇪", ar:"Sanna Nielsen", ti:"Undo", tag:"", a:"dz", r:"75372562"},
+  {id:"2015-guy-sebastian", y:2015, cc:"AU", fl:"🇦🇺", ar:"Guy Sebastian", ti:"Tonight Again", tag:"mit", a:"dz", r:"98011950"},
+  {id:"2015-loic-nottet", y:2015, cc:"BE", fl:"🇧🇪", ar:"Loïc Nottet", ti:"Rhythm Inside", tag:"mit", a:"dz", r:"96458854"},
+  {id:"2015-elina-born-and-s", y:2015, cc:"EE", fl:"🇪🇪", ar:"Elina Born & Stig Rästa", ti:"Goodbye to Yesterday", tag:"", a:"dz", r:"3537291741"},
+  {id:"2015-edurne", y:2015, cc:"ES", fl:"🇪🇸", ar:"Edurne", ti:"Amanecer", tag:"es", a:"dz", r:"95447688"},
+  {id:"2015-il-volo", y:2015, cc:"IT", fl:"🇮🇹", ar:"Il Volo", ti:"Grande amore", tag:"mit", a:"dz", r:"99156366"},
+  {id:"2015-aminata", y:2015, cc:"LV", fl:"🇱🇻", ar:"Aminata", ti:"Love Injected", tag:"", a:"dz", r:"123073266"},
+  {id:"2015-mans-zelmerlow", y:2015, cc:"SE", fl:"🇸🇪", ar:"Måns Zelmerlöw", ti:"Heroes", tag:"win", a:"dz", r:"95585876"},
+  {id:"2016-dami-im", y:2016, cc:"AU", fl:"🇦🇺", ar:"Dami Im", ti:"Sound of Silence", tag:"mit", a:"dz", r:"120732226"},
+  {id:"2016-poli-genova", y:2016, cc:"BG", fl:"🇧🇬", ar:"Poli Genova", ti:"If Love Was a Crime", tag:"", a:"dz", r:"121851992"},
+  {id:"2016-barei", y:2016, cc:"ES", fl:"🇪🇸", ar:"Barei", ti:"Say Yay!", tag:"es", a:"dz", r:"2353844205"},
+  {id:"2016-amir", y:2016, cc:"FR", fl:"🇫🇷", ar:"Amir", ti:"J'ai cherché", tag:"mit", a:"dz", r:"123494358"},
+  {id:"2016-micha-szpak", y:2016, cc:"PL", fl:"🇵🇱", ar:"Michał Szpak", ti:"Color of Your Life", tag:"", a:"dz", r:"112662088"},
+  {id:"2016-sergey-lazarev", y:2016, cc:"RU", fl:"🇷🇺", ar:"Sergey Lazarev", ti:"You Are the Only One", tag:"", a:"dz", r:"1998188147"},
+  {id:"2016-frans", y:2016, cc:"SE", fl:"🇸🇪", ar:"Frans", ti:"If I Were Sorry", tag:"", a:"dz", r:"120037738"},
+  {id:"2016-serhat", y:2016, cc:"SM", fl:"🇸🇲", ar:"Serhat", ti:"I Didn't Know", tag:"mit", a:"dz", r:"2844009252"},
+  {id:"2016-jamala", y:2016, cc:"UA", fl:"🇺🇦", ar:"Jamala", ti:"1944", tag:"win", a:"dz", r:"2104555137"},
+  {id:"2017-blanche", y:2017, cc:"BE", fl:"🇧🇪", ar:"Blanche", ti:"City Lights", tag:"mit", a:"dz", r:"143464436"},
+  {id:"2017-kristian-kostov", y:2017, cc:"BG", fl:"🇧🇬", ar:"Kristian Kostov", ti:"Beautiful Mess", tag:"", a:"dz", r:"144210328"},
+  {id:"2017-levina", y:2017, cc:"DE", fl:"🇩🇪", ar:"Levina", ti:"Perfect Life", tag:"", a:"dz", r:"344719281"},
+  {id:"2017-manel-navarro", y:2017, cc:"ES", fl:"🇪🇸", ar:"Manel Navarro", ti:"Do It for Your Lover", tag:"es", a:"dz", r:"141341669"},
+  {id:"2017-jacques-houdek", y:2017, cc:"HR", fl:"🇭🇷", ar:"Jacques Houdek", ti:"My Friend", tag:"mit", a:"dz", r:"143324462"},
+  {id:"2017-francesco-gabban", y:2017, cc:"IT", fl:"🇮🇹", ar:"Francesco Gabbani", ti:"Occidentali's Karma", tag:"mit", a:"dz", r:"3782865312"},
+  {id:"2017-sunstroke-projec", y:2017, cc:"MD", fl:"🇲🇩", ar:"SunStroke Project", ti:"Hey Mamma", tag:"mit", a:"dz", r:"2409359825"},
+  {id:"2017-salvador-sobral", y:2017, cc:"PT", fl:"🇵🇹", ar:"Salvador Sobral", ti:"Amar pelos dois", tag:"win", a:"dz", r:"1001004212"},
+  {id:"2017-ilinca-and-alex", y:2017, cc:"RO", fl:"🇷🇴", ar:"Ilinca & Alex Florea", ti:"Yodel It!", tag:"mit", a:"dz", r:"145268908"},
+  {id:"2018-cesar-sampson", y:2018, cc:"AT", fl:"🇦🇹", ar:"Cesár Sampson", ti:"Nobody but You", tag:"", a:"dz", r:"493822672"},
+  {id:"2018-eleni-foureira", y:2018, cc:"CY", fl:"🇨🇾", ar:"Eleni Foureira", ti:"Fuego", tag:"mit", a:"dz", r:"501879292"},
+  {id:"2018-mikolas-josef", y:2018, cc:"CZ", fl:"🇨🇿", ar:"Mikolas Josef", ti:"Lie to Me", tag:"mit", a:"dz", r:"482235912"},
+  {id:"2018-michael-schulte", y:2018, cc:"DE", fl:"🇩🇪", ar:"Michael Schulte", ti:"You Let Me Walk Alone", tag:"", a:"dz", r:"474046422"},
+  {id:"2018-elina-nechayeva", y:2018, cc:"EE", fl:"🇪🇪", ar:"Elina Nechayeva", ti:"La forza", tag:"", a:"dz", r:"455611432"},
+  {id:"2018-amaia-y-alfred", y:2018, cc:"ES", fl:"🇪🇸", ar:"Amaia y Alfred", ti:"Tu canción", tag:"es", a:"dz", r:"454940852"},
+  {id:"2018-netta", y:2018, cc:"IL", fl:"🇮🇱", ar:"Netta", ti:"Toy", tag:"win", a:"dz", r:"3807414562"},
+  {id:"2018-ermal-meta-and-f", y:2018, cc:"IT", fl:"🇮🇹", ar:"Ermal Meta & Fabrizio Moro", ti:"Non mi avete fatto niente", tag:"", a:"dz", r:"459288852"},
+  {id:"2018-doredos", y:2018, cc:"MD", fl:"🇲🇩", ar:"DoReDoS", ti:"My Lucky Day", tag:"mit", a:"dz", r:"2617868212"},
+  {id:"2019-kate-miller-heid", y:2019, cc:"AU", fl:"🇦🇺", ar:"Kate Miller-Heidke", ti:"Zero Gravity", tag:"mit", a:"dz", r:"620280812"},
+  {id:"2019-luca-hanni", y:2019, cc:"CH", fl:"🇨🇭", ar:"Luca Hänni", ti:"She Got Me", tag:"", a:"dz", r:"639133012"},
+  {id:"2019-miki", y:2019, cc:"ES", fl:"🇪🇸", ar:"Miki", ti:"La venda", tag:"es", a:"dz", r:"642279132"},
+  {id:"2019-hatari", y:2019, cc:"IS", fl:"🇮🇸", ar:"Hatari", ti:"Hatrið mun sigra", tag:"mit", a:"dz", r:"1866525877"},
+  {id:"2019-mahmood", y:2019, cc:"IT", fl:"🇮🇹", ar:"Mahmood", ti:"Soldi", tag:"mit", a:"dz", r:"2202756977"},
+  {id:"2019-duncan-laurence", y:2019, cc:"NL", fl:"🇳🇱", ar:"Duncan Laurence", ti:"Arcade", tag:"win", a:"dz", r:"1144025002"},
+  {id:"2019-keiino", y:2019, cc:"NO", fl:"🇳🇴", ar:"KEiiNO", ti:"Spirit in the Sky", tag:"mit", a:"dz", r:"609806412"},
+  {id:"2019-john-lundvik", y:2019, cc:"SE", fl:"🇸🇪", ar:"John Lundvik", ti:"Too Late for Love", tag:"", a:"dz", r:"676125412"},
+  {id:"2019-serhat", y:2019, cc:"SM", fl:"🇸🇲", ar:"Serhat", ti:"Say Na Na Na", tag:"mit", a:"dz", r:"2844010262"},
+  {id:"2020-victoria", y:2020, cc:"BG", fl:"🇧🇬", ar:"Victoria", ti:"Tears Getting Sober", tag:"", a:"dz", r:"3495707481"},
+  {id:"2020-blas-canto", y:2020, cc:"ES", fl:"🇪🇸", ar:"Blas Cantó", ti:"Universo", tag:"es", a:"dz", r:"862409532"},
+  {id:"2020-dai-og-gagnamagn", y:2020, cc:"IS", fl:"🇮🇸", ar:"Daði og Gagnamagnið", ti:"Think About Things", tag:"mit", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview115/v4/d7/32/f2/d732f292-c78a-977a-6833-73c190341768/mzaf_2026988522468996746.plus.aac.p.m4a"},
+  {id:"2020-the-roop", y:2020, cc:"LT", fl:"🇱🇹", ar:"The Roop", ti:"On Fire", tag:"mit", a:"dz", r:"852836632"},
+  {id:"2020-little-big", y:2020, cc:"RU", fl:"🇷🇺", ar:"Little Big", ti:"Uno", tag:"mit", a:"dz", r:"900879392"},
+  {id:"2021-efendi", y:2021, cc:"AZ", fl:"🇦🇿", ar:"Efendi", ti:"Mata Hari", tag:"mit", a:"dz", r:"1265886882"},
+  {id:"2021-gjon-s-tears", y:2021, cc:"CH", fl:"🇨🇭", ar:"Gjon's Tears", ti:"Tout l'univers", tag:"", a:"dz", r:"1705749287"},
+  {id:"2021-blas-canto", y:2021, cc:"ES", fl:"🇪🇸", ar:"Blas Cantó", ti:"Voy a quedarme", tag:"es", a:"dz", r:"1234599402"},
+  {id:"2021-blind-channel", y:2021, cc:"FI", fl:"🇫🇮", ar:"Blind Channel", ti:"Dark Side", tag:"", a:"dz", r:"3962016011"},
+  {id:"2021-barbara-pravi", y:2021, cc:"FR", fl:"🇫🇷", ar:"Barbara Pravi", ti:"Voilà", tag:"mit", a:"dz", r:"1125778602"},
+  {id:"2021-maneskin", y:2021, cc:"IT", fl:"🇮🇹", ar:"Måneskin", ti:"Zitti e buoni", tag:"win", a:"dz", r:"1262536082"},
+  {id:"2021-the-roop", y:2021, cc:"LT", fl:"🇱🇹", ar:"The Roop", ti:"Discoteque", tag:"mit", a:"dz", r:"1212810032"},
+  {id:"2021-destiny", y:2021, cc:"MT", fl:"🇲🇹", ar:"Destiny", ti:"Je me casse", tag:"", a:"dz", r:"1296726342"},
+  {id:"2021-manizha", y:2021, cc:"RU", fl:"🇷🇺", ar:"Manizha", ti:"Russian Woman", tag:"", a:"dz", r:"1275981092"},
+  {id:"2021-senhit", y:2021, cc:"SM", fl:"🇸🇲", ar:"Senhit", ti:"Adrenalina", tag:"mit", a:"dz", r:"1256996942"},
+  {id:"2021-go-a", y:2021, cc:"UA", fl:"🇺🇦", ar:"Go_A", ti:"Shum", tag:"mit", a:"dz", r:"1454324742"},
+  {id:"2022-rosa-linn", y:2022, cc:"AM", fl:"🇦🇲", ar:"Rosa Linn", ti:"Snap", tag:"mit", a:"dz", r:"2800395192"},
+  {id:"2022-we-are-domi", y:2022, cc:"CZ", fl:"🇨🇿", ar:"We Are Domi", ti:"Lights Off", tag:"", a:"dz", r:"1670177512"},
+  {id:"2022-chanel", y:2022, cc:"ES", fl:"🇪🇸", ar:"Chanel", ti:"SloMo", tag:"es", a:"dz", r:"3695892112"},
+  {id:"2022-sam-ryder", y:2022, cc:"GB", fl:"🇬🇧", ar:"Sam Ryder", ti:"Space Man", tag:"mit", a:"dz", r:"1755023747"},
+  {id:"2022-amanda-georgiadi", y:2022, cc:"GR", fl:"🇬🇷", ar:"Amanda Georgiadi Tenfjord", ti:"Die Together", tag:"", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/9e/db/15/9edb1595-c6e8-9a59-e34f-d461314c49e4/mzaf_7650371878312266123.plus.aac.p.m4a"},
+  {id:"2022-mahmood-and-blan", y:2022, cc:"IT", fl:"🇮🇹", ar:"Mahmood & Blanco", ti:"Brividi", tag:"", a:"dz", r:"1641875012"},
+  {id:"2022-s10", y:2022, cc:"NL", fl:"🇳🇱", ar:"S10", ti:"De diepte", tag:"", a:"dz", r:"1669976682"},
+  {id:"2022-subwoolfer", y:2022, cc:"NO", fl:"🇳🇴", ar:"Subwoolfer", ti:"Give That Wolf a Banana", tag:"mit", a:"dz", r:"1608862162"},
+  {id:"2022-ochman", y:2022, cc:"PL", fl:"🇵🇱", ar:"Ochman", ti:"River", tag:"", a:"dz", r:"1636805742"},
+  {id:"2022-cornelia-jakobs", y:2022, cc:"SE", fl:"🇸🇪", ar:"Cornelia Jakobs", ti:"Hold Me Closer", tag:"", a:"dz", r:"1635675002"},
+  {id:"2022-kalush-orchestra", y:2022, cc:"UA", fl:"🇺🇦", ar:"Kalush Orchestra", ti:"Stefania", tag:"win", a:"dz", r:"1642678862"},
+  {id:"2023-voyager", y:2023, cc:"AU", fl:"🇦🇺", ar:"Voyager", ti:"Promise", tag:"mit", a:"dz", r:"2143690257"},
+  {id:"2023-gustaph", y:2023, cc:"BE", fl:"🇧🇪", ar:"Gustaph", ti:"Because of You", tag:"", a:"dz", r:"2071547847"},
+  {id:"2023-blanca-paloma", y:2023, cc:"ES", fl:"🇪🇸", ar:"Blanca Paloma", ti:"Eaea", tag:"es", a:"dz", r:"2074853247"},
+  {id:"2023-kaarija", y:2023, cc:"FI", fl:"🇫🇮", ar:"Käärijä", ti:"Cha Cha Cha", tag:"mit", a:"dz", r:"2080403567"},
+  {id:"2023-la-zarra", y:2023, cc:"FR", fl:"🇫🇷", ar:"La Zarra", ti:"Évidemment", tag:"", a:"dz", r:"2157829607"},
+  {id:"2023-let-3", y:2023, cc:"HR", fl:"🇭🇷", ar:"Let 3", ti:"Mama ŠČ!", tag:"mit", a:"dz", r:"2114884607"},
+  {id:"2023-noa-kirel", y:2023, cc:"IL", fl:"🇮🇱", ar:"Noa Kirel", ti:"Unicorn", tag:"", a:"dz", r:"2182763357"},
+  {id:"2023-marco-mengoni", y:2023, cc:"IT", fl:"🇮🇹", ar:"Marco Mengoni", ti:"Due vite", tag:"", a:"dz", r:"2141012867"},
+  {id:"2023-alessandra", y:2023, cc:"NO", fl:"🇳🇴", ar:"Alessandra", ti:"Queen of Kings", tag:"mit", a:"dz", r:"2094147047"},
+  {id:"2023-loreen", y:2023, cc:"SE", fl:"🇸🇪", ar:"Loreen", ti:"Tattoo", tag:"win", a:"dz", r:"2166864777"},
+  {id:"2023-tvorchi", y:2023, cc:"UA", fl:"🇺🇦", ar:"Tvorchi", ti:"Heart of Steel", tag:"", a:"dz", r:"2175906637"},
+  {id:"2024-nemo", y:2024, cc:"CH", fl:"🇨🇭", ar:"Nemo", ti:"The Code", tag:"win", a:"dz", r:"2673518242"},
+  {id:"2024-nebulossa", y:2024, cc:"ES", fl:"🇪🇸", ar:"Nebulossa", ti:"Zorra", tag:"es", a:"dz", r:"2570901852"},
+  {id:"2024-windows95man", y:2024, cc:"FI", fl:"🇫🇮", ar:"Windows95man", ti:"No Rules!", tag:"mit", a:"dz", r:"2591611592"},
+  {id:"2024-slimane", y:2024, cc:"FR", fl:"🇫🇷", ar:"Slimane", ti:"Mon amour", tag:"", a:"dz", r:"2530801451"},
+  {id:"2024-marina-satti", y:2024, cc:"GR", fl:"🇬🇷", ar:"Marina Satti", ti:"Zari", tag:"", a:"dz", r:"2688123632"},
+  {id:"2024-baby-lasagna", y:2024, cc:"HR", fl:"🇭🇷", ar:"Baby Lasagna", ti:"Rim Tim Tagi Dim", tag:"mit", a:"dz", r:"2615453312"},
+  {id:"2024-bambie-thug", y:2024, cc:"IE", fl:"🇮🇪", ar:"Bambie Thug", ti:"Doomsday Blue", tag:"mit", a:"dz", r:"2473779471"},
+  {id:"2024-eden-golan", y:2024, cc:"IL", fl:"🇮🇱", ar:"Eden Golan", ti:"Hurricane", tag:"", a:"dz", r:"2690868382"},
+  {id:"2024-angelina-mango", y:2024, cc:"IT", fl:"🇮🇹", ar:"Angelina Mango", ti:"La noia", tag:"mit", a:"dz", r:"2652530492"},
+  {id:"2024-joost-klein", y:2024, cc:"NL", fl:"🇳🇱", ar:"Joost Klein", ti:"Europapa", tag:"mit", a:"dz", r:"2668763592"},
+  {id:"2024-teya-dora", y:2024, cc:"RS", fl:"🇷🇸", ar:"Teya Dora", ti:"Ramonda", tag:"mit", a:"dz", r:"2737438081"},
+  {id:"2024-alyona-alyona-an", y:2024, cc:"UA", fl:"🇺🇦", ar:"alyona alyona & Jerry Heil", ti:"Teresa & Maria", tag:"", a:"dz", r:"2609821432"},
+  {id:"2025-shkodra-elektron", y:2025, cc:"AL", fl:"🇦🇱", ar:"Shkodra Elektronike", ti:"Zjerm", tag:"", a:"dz", r:"4107286681"},
+  {id:"2025-jj", y:2025, cc:"AT", fl:"🇦🇹", ar:"JJ", ti:"Wasted Love", tag:"win", a:"dz", r:"3241286841"},
+  {id:"2025-tommy-cash", y:2025, cc:"EE", fl:"🇪🇪", ar:"Tommy Cash", ti:"Espresso Macchiato", tag:"mit", a:"dz", r:"3277457081"},
+  {id:"2025-melody", y:2025, cc:"ES", fl:"🇪🇸", ar:"Melody", ti:"Esa diva", tag:"es", a:"dz", r:"3281862341"},
+  {id:"2025-erika-vikman", y:2025, cc:"FI", fl:"🇫🇮", ar:"Erika Vikman", ti:"Ich komme", tag:"mit", a:"dz", r:"3168567301"},
+  {id:"2025-louane", y:2025, cc:"FR", fl:"🇫🇷", ar:"Louane", ti:"Maman", tag:"", a:"dz", r:"3278611801"},
+  {id:"2025-yuval-raphael", y:2025, cc:"IL", fl:"🇮🇱", ar:"Yuval Raphael", ti:"New Day Will Rise", tag:"", a:"dz", r:"3270162161"},
+  {id:"2025-lucio-corsi", y:2025, cc:"IT", fl:"🇮🇹", ar:"Lucio Corsi", ti:"Volevo essere un duro", tag:"", a:"dz", r:"3229656661"},
+  {id:"2025-claude", y:2025, cc:"NL", fl:"🇳🇱", ar:"Claude", ti:"C'est la vie", tag:"", a:"dz", r:"3234336791"},
+  {id:"2025-kaj", y:2025, cc:"SE", fl:"🇸🇪", ar:"KAJ", ti:"Bara bada bastu", tag:"mit", a:"dz", r:"3226932221"},
+  {id:"2026-delta-goodrem", y:2026, cc:"AU", fl:"🇦🇺", ar:"Delta Goodrem", ti:"Eclipse", tag:"", a:"im", r:"https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5c/1a/3a/5c1a3a0b-afc6-c46b-fd4a-0e8730103877/mzaf_13526107705965385749.plus.aac.p.m4a"},
+  {id:"2026-dara", y:2026, cc:"BG", fl:"🇧🇬", ar:"Dara", ti:"Bangaranga", tag:"win", a:"dz", r:"3891981571"},
+  {id:"2026-noam-bettan", y:2026, cc:"IL", fl:"🇮🇱", ar:"Noam Bettan", ti:"Michelle", tag:"", a:"dz", r:"3884267871"},
+  {id:"2026-sal-da-vinci", y:2026, cc:"IT", fl:"🇮🇹", ar:"Sal Da Vinci", ti:"Per sempre sì", tag:"", a:"dz", r:"3865636721"},
+  {id:"2026-alexandra-capita", y:2026, cc:"RO", fl:"🇷🇴", ar:"Alexandra Căpitănescu", ti:"Choke Me", tag:"", a:"dz", r:"3827221551"},
 ];
-
-// Cartas impresas ANTES de corregir los Track IDs: traduce el ID viejo del QR al nuevo.
-const LEGACY = {
-  "7oYMGSXtuRBJbdqT1cHJRf": "1ssBrm3EZb20Kb19roQIcy",
-  "2zuEKEHfEFsJDsWyAhEGsH": "3q58lQ4ByWV5MR0VSeNer3",
-  "2BHgGbXOaHaXrVHBQW3ZBt": "2Ozw7k5CLtM5W9SomrOyjw",
-  "1kHFKnFqBYIfx7fDnbTiRX": "4QWrK6lpr8rZ6sa8ymqMrq",
-  "4qoUTOMLqJWiSnOQfEkAVM": "5ViF3hsL0iwD7jhh5JB2Ip",
-  "3MsHBhHKxXnfbq4Wf2Zhp8": "6EwXG9cPjesjehN0kw30xs",
-  "2tpYCBuqFVhCiXZR3QmFPK": "74mWVYv6xPilcalOxrQa5Y",
-  "7h1R0iMRgBKPepRDY7fE96": "582OHNxg4RRvlzTn7fuLY9",
-  "0smabpMkLHuDHpgJY3tTpW": "6syLoIbMRXvCEr94FMVBHh",
-  "5Hk1iykXXCACKnOUEBRrPd": "5L8C1PZGCpZf8STcN79H5j",
-  "5kFpJ0LBKPK6mzxiGrRPt0": "4GEmQTg7yfnfZoNhgpCg61",
-  "1rAnT1j9EKXWBT0FQGqaXO": "4sDLQ5atDUHhbikD1UQ2mW",
-  "4YaFTU7NJXFV8WUHR6Pf0u": "6awPQdcqY8IYdHzqhEYm3s",
-  "66gIYUJm8vNO0TQBGP3WFr": "49R1F3rIdSzuPk7AcHi6d1",
-  "4QdeCjHZA7HN4n3MVfvWkv": "4ypCNolz6aRYZPO3UOGp8Z",
-  "1vrd6UOGamcKNGnSHJQlSt": "4ZBe9Plh2adT70U4PDxve1",
-  "1y3fJHMYPVMqhwvVInIZoN": "7n3Czk07KugPQOWuqCHDmF",
-  "3V4CdWZmFOiRLSe7TYCPEE": "5N7IYups0hGrlVcvj0bmHG",
-  "5xbMPNpXBx5JnGrFnWoCXj": "1QpWQMKfQ44QUN1dEg65T8",
-  "1oVBFfFDNPqFsZFQvLfBRK": "3BJ0uXKEz9fUxCbZle1rCE",
-  "2vKHlJ5JYMFL1eTcNwDvHn": "1EjIXKhNHI00ZLMRpS8iz8",
-  "5eEDMkRGkABvAFOScjrNlj": "4IUMSDTVvUellFQ7RxI3kZ",
-  "6KuHXWMnVNqKMqDYY3e8J8": "6XIerJ9V7H9byQFRZiqyCv",
-  "3jMZexLLDuN2gGFdFhiOLT": "2MiEtw8UquKvxOwu47oTMu",
-  "4XiWDmgQvh9gXYHDRJisCf": "7qiEoVlFjb3KaytT2zgK1g",
-  "0iJBRBjFJtZkwb5Gu3ETXN": "0uHrMbMv3c78398pIANDqR",
-};
+const LEGACY = {"2zuEKEHfEFsJDsWyAhEGsH": "2024-teya-dora","3q58lQ4ByWV5MR0VSeNer3": "2024-teya-dora","2BHgGbXOaHaXrVHBQW3ZBt": "2024-eden-golan","2Ozw7k5CLtM5W9SomrOyjw": "2024-eden-golan","1kHFKnFqBYIfx7fDnbTiRX": "2024-windows95man","4QWrK6lpr8rZ6sa8ymqMrq": "2024-windows95man","1rAnT1j9EKXWBT0FQGqaXO": "2024-marina-satti","4sDLQ5atDUHhbikD1UQ2mW": "2024-marina-satti","66gIYUJm8vNO0TQBGP3WFr": "2024-angelina-mango","49R1F3rIdSzuPk7AcHi6d1": "2024-angelina-mango","4QdeCjHZA7HN4n3MVfvWkv": "2024-nebulossa","4ypCNolz6aRYZPO3UOGp8Z": "2024-nebulossa","1y3fJHMYPVMqhwvVInIZoN": "2024-alyona-alyona-an","7n3Czk07KugPQOWuqCHDmF": "2024-alyona-alyona-an","3V4CdWZmFOiRLSe7TYCPEE": "2024-slimane","5N7IYups0hGrlVcvj0bmHG": "2024-slimane","2vKHlJ5JYMFL1eTcNwDvHn": "2024-nemo","1EjIXKhNHI00ZLMRpS8iz8": "2024-nemo","4XiWDmgQvh9gXYHDRJisCf": "2024-bambie-thug","7qiEoVlFjb3KaytT2zgK1g": "2024-bambie-thug","0iJBRBjFJtZkwb5Gu3ETXN": "2024-joost-klein","0uHrMbMv3c78398pIANDqR": "2024-joost-klein"};
 const resolveId = raw => (raw && LEGACY[raw]) || raw;
 
 const $ = id => document.getElementById(id);
@@ -422,7 +648,9 @@ const params  = new URL(location.href).searchParams;
 const trackId = resolveId(params.get('id'));
 const song    = trackId ? SONGS.find(s => s.id === trackId) : null;
 
-// --- Home buttons ---
+$('homeCount').textContent = SONGS.length + ' CANCIONES · 70 EDICIONES';
+
+// --- Home ---
 $('playBtn').addEventListener('click', startScanner);
 $('rulesBtn').addEventListener('click', () => show('screenRules'));
 $('rulesBack').addEventListener('click', () => show('screenHome'));
@@ -491,9 +719,10 @@ function extractId(text) {
     const q = u.searchParams.get('id');
     if (q) return q.trim();
   } catch (e) { /* not a URL */ }
-  if (/^[A-Za-z0-9]{22}$/.test(text)) return text;
-  const m = text.match(/[?&]id=([A-Za-z0-9]{22})/);
-  return m ? m[1] : null;
+  const m = text.match(/[?&]id=([^&\s]+)/);
+  if (m) return decodeURIComponent(m[1]);
+  if (/^[A-Za-z0-9-]{3,40}$/.test(text)) return text;
+  return null;
 }
 
 $('scanClose').addEventListener('click', () => {
@@ -502,13 +731,15 @@ $('scanClose').addEventListener('click', () => {
 });
 
 // =================================================================
-//  ROUND: pantalla "gira el teléfono" -> reproducir 20 s de la canción
+//  RONDA: "gira el teléfono" -> reproducir 20 s
 // =================================================================
 const DURATION = 20;
 const ring = $('timerRing'), numEl = $('timerNum'), statusEl = $('statusMsg');
 const soundBtn = $('soundBtn'), audio = $('audio');
 const circ = 2 * Math.PI * 55;
-let finished = false, spotifyUrl = '#', roundStarted = false;
+let finished = false, roundStarted = false, wantPlay = false;
+let audioState = 'idle';   // idle | loading | ready | failed
+let searchUrl = '#';
 
 function setRing(secs) {
   const f = Math.max(0, Math.min(1, secs / DURATION));
@@ -516,31 +747,29 @@ function setRing(secs) {
   ring.style.stroke = f > 0.4 ? 'var(--pulse)' : f > 0.15 ? '#f0a030' : '#e03030';
 }
 
-function setupRound(song) {
+function setupRound(s) {
   document.title = 'Hitster Eurovisión';
   setRing(DURATION);
 
-  $('solFlag').textContent = song.flag;
-  $('solCountry').textContent = song.country.toUpperCase();
-  $('solEdition').textContent = 'Eurovisión ' + song.year;
-  $('solSong').textContent = song.title;
-  $('solArtist').textContent = song.artist;
+  $('solFlag').textContent = s.fl;
+  $('solCountry').textContent = (CNAME[s.cc] || s.cc).toUpperCase();
+  $('solEdition').textContent = 'Eurovisión ' + s.y;
+  $('solSong').textContent = s.ti;
+  $('solArtist').textContent = s.ar;
   $('revealBtn').addEventListener('click', () => {
     const sol = $('solution');
     sol.hidden = !sol.hidden;
     $('revealBtn').textContent = sol.hidden ? '🔓 Revelar solución' : '🙈 Ocultar solución';
   });
 
-  spotifyUrl = `https://open.spotify.com/track/${song.id}`;
-  $('spotifyBtn').href = spotifyUrl;
+  searchUrl = 'https://open.spotify.com/search/' + encodeURIComponent(s.ar + ' ' + s.ti);
+  $('spotifyBtn').href = searchUrl;
 
-  audio.src = song.pv ? ('https://p.scdn.co/mp3-preview/' + song.pv) : '';
-  if (audio.src) audio.load();
-
+  loadAudio(s);
   show('screenRotate');
 
   const mq = window.matchMedia('(orientation: landscape)');
-  let armed = !mq.matches;                 // solo dispara con un giro real vertical -> horizontal
+  let armed = !mq.matches;
   const onOrient = () => {
     if (!$('screenRotate').hidden) {
       if (mq.matches && armed) startRound();
@@ -564,7 +793,39 @@ function startRound() {
   playPreview();
 }
 
-// --- reproducción controlada por el <audio> (preview de ~30 s de Spotify) ---
+// --- carga del audio: Deezer (JSONP) o iTunes (URL directa) ---
+let deezToken = 0;
+function loadAudio(s) {
+  audioState = 'loading';
+  if (s.a === 'im') {
+    audio.src = s.r;
+    audio.load();
+    audioState = 'ready';
+    return;
+  }
+  // Deezer: pedimos una URL de preview fresca por JSONP
+  const myToken = ++deezToken;
+  const cb = '__deez' + myToken;
+  const timer = setTimeout(() => { if (audioState === 'loading') audioFail(); }, 9000);
+  window[cb] = data => {
+    clearTimeout(timer);
+    try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+    if (myToken !== deezToken) return;
+    if (data && data.preview) {
+      audio.src = data.preview;
+      audio.load();
+      audioState = 'ready';
+      if (wantPlay) doPlay();
+    } else {
+      audioFail();
+    }
+  };
+  const sc = document.createElement('script');
+  sc.src = 'https://api.deezer.com/track/' + encodeURIComponent(s.r) + '?output=jsonp&callback=' + cb;
+  sc.onerror = () => { clearTimeout(timer); audioFail(); };
+  document.head.appendChild(sc);
+}
+
 audio.addEventListener('timeupdate', () => {
   if (finished) return;
   const left = DURATION - audio.currentTime;
@@ -578,11 +839,21 @@ audio.addEventListener('play', () => {
   statusEl.textContent = '¡Adivina el año del Festival!';
   statusEl.classList.remove('done');
 });
-audio.addEventListener('pause', () => { if (!finished) soundBtn.textContent = '▶ Seguir'; });
-audio.addEventListener('error', audioFail);
+audio.addEventListener('pause', () => { if (!finished && audioState === 'ready') soundBtn.textContent = '▶ Seguir'; });
+audio.addEventListener('error', () => { if (audioState !== 'failed') audioFail(); });
 
 function playPreview() {
-  if (!audio.src) return audioFail();
+  wantPlay = true;
+  if (audioState === 'failed') { window.open(searchUrl, '_blank', 'noopener'); return; }
+  if (audioState === 'loading') {
+    soundBtn.textContent = '⏳ Cargando…';
+    statusEl.textContent = 'Cargando el fragmento…';
+    return;
+  }
+  doPlay();
+}
+
+function doPlay() {
   if (finished || audio.currentTime >= DURATION - 0.05) { audio.currentTime = 0; finished = false; }
   audio.play().catch(() => {
     soundBtn.textContent = '▶ Reproducir 20 s';
@@ -602,14 +873,16 @@ function finishRound() {
 }
 
 function audioFail() {
+  audioState = 'failed';
   soundBtn.textContent = '▶ Abrir en Spotify';
-  statusEl.textContent = 'No se pudo cargar el audio. Ábrela en Spotify.';
+  statusEl.textContent = 'Sin fragmento — ábrela en Spotify y dale al play.';
 }
 
 soundBtn.addEventListener('click', () => {
-  if (!audio.src || audio.error) { window.open(spotifyUrl, '_blank', 'noopener'); return; }
-  if (finished || audio.currentTime >= DURATION - 0.05) { audio.currentTime = 0; finished = false; playPreview(); return; }
-  if (audio.paused) playPreview(); else audio.pause();
+  if (audioState === 'failed') { window.open(searchUrl, '_blank', 'noopener'); return; }
+  if (audioState !== 'ready') { playPreview(); return; }
+  if (finished || audio.currentTime >= DURATION - 0.05) { audio.currentTime = 0; finished = false; doPlay(); return; }
+  if (audio.paused) doPlay(); else audio.pause();
 });
 
 // =================================================================
@@ -635,7 +908,7 @@ installBtn.addEventListener('click', async () => {
 });
 
 // =================================================================
-//  BOOT  (al final: todas las funciones/const ya están definidas)
+//  BOOT
 // =================================================================
 if (!trackId) {
   show('screenHome');
@@ -643,7 +916,7 @@ if (!trackId) {
   show('screenPlay');
   $('screenPlay').innerHTML =
     '<div class="err"><h2>Canción no encontrada</h2>' +
-    '<p>Este QR no corresponde a ninguna carta de la lista.</p>' +
+    '<p>Este QR no corresponde a ninguna carta del mazo actual.</p>' +
     '<button class="btn btn-ghost" style="margin-top:1.4rem;max-width:320px" onclick="location.search=\'\'">Ir al inicio</button></div>';
 } else {
   setupRound(song);

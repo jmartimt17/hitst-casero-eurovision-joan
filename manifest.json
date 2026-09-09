@@ -1,7 +1,7 @@
 {
   "name": "Hitster Eurovisión",
   "short_name": "Hitster",
-  "description": "El juego Hitster con canciones de Eurovisión 2024",
+  "description": "El juego Hitster con canciones icónicas de Eurovisión (1956–2026)",
   "start_url": "/hitst-casero-eurovision-joan/play.html",
   "scope": "/hitst-casero-eurovision-joan/",
   "display": "standalone",
