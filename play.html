@@ -293,40 +293,53 @@
 
 // --- Song data ---
 const SONGS = [
-  { id: "7oYMGSXtuRBJbdqT1cHJRf", country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",               title: "Liar" },
-  { id: "2zuEKEHfEFsJDsWyAhEGsH", country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                  title: "Ramonda" },
-  { id: "2BHgGbXOaHaXrVHBQW3ZBt", country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                 title: "Hurricane" },
-  { id: "1kHFKnFqBYIfx7fDnbTiRX", country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",               title: "No Rules!" },
-  { id: "4qoUTOMLqJWiSnOQfEkAVM", country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",              title: "In The Middle" },
-  { id: "3MsHBhHKxXnfbq4Wf2Zhp8", country: "Azerbaiyán",   flag: "🇦🇿", artist: "Fahree feat. Ilkin Dovlatov", title: "Özünlə Apar" },
-  { id: "2tpYCBuqFVhCiXZR3QmFPK", country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",             title: "One Milkali (One Blood)" },
-  { id: "7h1R0iMRgBKPepRDY7fE96", country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                    title: "Grito" },
-  { id: "0smabpMkLHuDHpgJY3tTpW", country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                       title: "Fighter" },
-  { id: "5Hk1iykXXCACKnOUEBRrPd", country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",          title: "Unforgettable" },
-  { id: "5kFpJ0LBKPK6mzxiGrRPt0", country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",             title: "Dizzy" },
-  { id: "1rAnT1j9EKXWBT0FQGqaXO", country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",               title: "ZARI" },
-  { id: "4YaFTU7NJXFV8WUHR6Pf0u", country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                       title: "Ulveham" },
-  { id: "66gIYUJm8vNO0TQBGP3WFr", country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",             title: "La Noia" },
-  { id: "4QdeCjHZA7HN4n3MVfvWkv", country: "España",        flag: "🇪🇸", artist: "Nebulossa",                  title: "ZORRA" },
-  { id: "1vrd6UOGamcKNGnSHJQlSt", country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",             title: "Luktelk" },
-  { id: "1y3fJHMYPVMqhwvVInIZoN", country: "Ucrania",       flag: "🇺🇦", artist: "alyona alyona & Jerry Heil", title: "Teresa & Maria" },
-  { id: "3V4CdWZmFOiRLSe7TYCPEE", country: "Francia",       flag: "🇫🇷", artist: "Slimane",                    title: "Mon Amour" },
-  { id: "5xbMPNpXBx5JnGrFnWoCXj", country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                     title: "We Will Rave" },
-  { id: "1oVBFfFDNPqFsZFQvLfBRK", country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                      title: "Always On The Run" },
-  { id: "2vKHlJ5JYMFL1eTcNwDvHn", country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                       title: "The Code" },
-  { id: "5eEDMkRGkABvAFOScjrNlj", country: "Polonia",       flag: "🇵🇱", artist: "Luna",                       title: "The Tower" },
-  { id: "6KuHXWMnVNqKMqDYY3e8J8", country: "San Marino",   flag: "🇸🇲", artist: "Megara",                     title: "11:11" },
-  { id: "3jMZexLLDuN2gGFdFhiOLT", country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                   title: "Jako" },
-  { id: "4XiWDmgQvh9gXYHDRJisCf", country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",                title: "Doomsday Blue" },
-  { id: "0iJBRBjFJtZkwb5Gu3ETXN", country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",                title: "Europapa" },
+  { id: "1ssBrm3EZb20Kb19roQIcy", country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",               title: "Liar" },
+  { id: "3q58lQ4ByWV5MR0VSeNer3", country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                  title: "Ramonda" },
+  { id: "2Ozw7k5CLtM5W9SomrOyjw", country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                 title: "Hurricane" },
+  { id: "4QWrK6lpr8rZ6sa8ymqMrq", country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",               title: "No Rules!" },
+  { id: "5ViF3hsL0iwD7jhh5JB2Ip", country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",              title: "In The Middle" },
+  { id: "6EwXG9cPjesjehN0kw30xs", country: "Azerbaiyán",   flag: "🇦🇿", artist: "Fahree feat. Ilkin Dovlatov", title: "Özünlə Apar" },
+  { id: "74mWVYv6xPilcalOxrQa5Y", country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",             title: "One Milkali (One Blood)" },
+  { id: "582OHNxg4RRvlzTn7fuLY9", country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                    title: "Grito" },
+  { id: "6syLoIbMRXvCEr94FMVBHh", country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                       title: "Fighter" },
+  { id: "5L8C1PZGCpZf8STcN79H5j", country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",          title: "Unforgettable" },
+  { id: "4GEmQTg7yfnfZoNhgpCg61", country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",             title: "Dizzy" },
+  { id: "4sDLQ5atDUHhbikD1UQ2mW", country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",               title: "ZARI" },
+  { id: "6awPQdcqY8IYdHzqhEYm3s", country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                       title: "Ulveham" },
+  { id: "49R1F3rIdSzuPk7AcHi6d1", country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",             title: "La Noia" },
+  { id: "4ypCNolz6aRYZPO3UOGp8Z", country: "España",        flag: "🇪🇸", artist: "Nebulossa",                  title: "ZORRA" },
+  { id: "4ZBe9Plh2adT70U4PDxve1", country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",             title: "Luktelk" },
+  { id: "7n3Czk07KugPQOWuqCHDmF", country: "Ucrania",       flag: "🇺🇦", artist: "alyona alyona & Jerry Heil", title: "Teresa & Maria" },
+  { id: "5N7IYups0hGrlVcvj0bmHG", country: "Francia",       flag: "🇫🇷", artist: "Slimane",                    title: "Mon Amour" },
+  { id: "1QpWQMKfQ44QUN1dEg65T8", country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                     title: "We Will Rave" },
+  { id: "3BJ0uXKEz9fUxCbZle1rCE", country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                      title: "Always On The Run" },
+  { id: "1EjIXKhNHI00ZLMRpS8iz8", country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                       title: "The Code" },
+  { id: "4IUMSDTVvUellFQ7RxI3kZ", country: "Polonia",       flag: "🇵🇱", artist: "Luna",                       title: "The Tower" },
+  { id: "6XIerJ9V7H9byQFRZiqyCv", country: "San Marino",   flag: "🇸🇲", artist: "Megara",                     title: "11:11" },
+  { id: "2MiEtw8UquKvxOwu47oTMu", country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                   title: "Jako" },
+  { id: "7qiEoVlFjb3KaytT2zgK1g", country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",                title: "Doomsday Blue" },
+  { id: "0uHrMbMv3c78398pIANDqR", country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",                title: "Europapa" },
 ];
 
 // --- Load song ---
 const params  = new URL(location.href).searchParams;
 const trackId = params.get('id');
-const song    = SONGS.find(s => s.id === trackId);
+const song    = trackId ? SONGS.find(s => s.id === trackId) : null;
 
-if (!song) {
+if (!trackId) {
+  document.getElementById('card').innerHTML = `
+    <div class="error-card">
+      <div class="country">🎶</div>
+      <h2>Hitster · Eurovisión</h2>
+      <p style="margin:0.8rem 0 1.2rem">
+        Edición Eurovisión 2024 · Gran Final de Malmö.<br><br>
+        Escanea el QR de una carta con la cámara del móvil para empezar a jugar:
+        escucha ~20&nbsp;segundos de la canción y adivina el año del Festival.
+      </p>
+      <a class="btn-spotify" href="cards.html">🖨️ Imprimir las cartas</a>
+      <div class="logo" style="margin-top:1.5rem">${SONGS.length} CANCIONES · MALMÖ 2024</div>
+    </div>`;
+} else if (!song) {
   document.getElementById('card').innerHTML = `
     <div class="error-card">
       <h2>Canción no encontrada</h2>
@@ -336,7 +349,7 @@ if (!song) {
   document.getElementById('countryFlag').textContent = song.flag;
   document.getElementById('countryName').textContent = song.country.toUpperCase();
   document.title = `${song.title} — Hitster Eurovisión`;
-  document.getElementById('spotifyBtn').href = `spotify:track:${song.id}`;
+  document.getElementById('spotifyBtn').href = `https://open.spotify.com/track/${song.id}`;
 
   document.getElementById('spotifyBtn').addEventListener('click', () => {
     setTimeout(() => {
@@ -346,7 +359,7 @@ if (!song) {
   });
 }
 
-// --- Timer ---
+// --- Timer (solo cuando hay una canción cargada) ---
 const DURATION = 20;
 let remaining = DURATION, interval = null;
 const ring     = document.getElementById('timerRing');
@@ -355,6 +368,8 @@ const btnTimer = document.getElementById('timerBtn');
 const btnReset = document.getElementById('resetBtn');
 const statusEl = document.getElementById('statusMsg');
 const circ     = 2 * Math.PI * 55;
+
+if (song) {
 
 function setRing(secs) {
   ring.style.strokeDashoffset = circ * (1 - secs / DURATION);
@@ -399,6 +414,7 @@ btnTimer.addEventListener('click', () => {
 
 btnReset.addEventListener('click', resetTimer);
 setRing(DURATION);
+} // fin if (song)
 
 // --- PWA: Service Worker ---
 if ('serviceWorker' in navigator) {

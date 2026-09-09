@@ -1,4 +1,4 @@
-const CACHE = 'hitster-v1';
+const CACHE = 'hitster-v2';
 const ASSETS = [
   './',
   './play.html',
