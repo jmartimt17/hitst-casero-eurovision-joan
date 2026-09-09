@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hitster Eurovisión</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a14;
+      --card: #13132a;
+      --border: #2a2a4a;
+      --star: #f0c040;
+      --text: #f0eeff;
+      --muted: #8880aa;
+      --green: #00e676;
+      --pulse: #5040ff;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: twinkle 3s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      from { opacity: 0.1; }
+      to   { opacity: 0.7; }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(80, 64, 255, 0.15);
+    }
+
+    .label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .country {
+      font-size: 2rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .country-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      color: var(--star);
+      margin-bottom: 1.5rem;
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--border);
+      margin: 0 auto 1.5rem;
+    }
+
+    /* Timer ring */
+    .timer-wrap {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 1.8rem;
+    }
+
+    .timer-svg {
+      transform: rotate(-90deg);
+      width: 140px;
+      height: 140px;
+    }
+
+    .timer-track {
+      fill: none;
+      stroke: var(--border);
+      stroke-width: 6;
+    }
+
+    .timer-progress {
+      fill: none;
+      stroke: var(--pulse);
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 345.4;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1s linear, stroke 0.5s;
+    }
+
+    .timer-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .timer-seconds {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .timer-unit {
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* Buttons */
+    .btn-spotify {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      background: #1DB954;
+      color: #000;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-bottom: 0.75rem;
+      transition: transform 0.1s, opacity 0.1s;
+    }
+    .btn-spotify:hover { opacity: 0.9; transform: scale(1.02); }
+    .btn-spotify:active { transform: scale(0.98); }
+
+    .btn-timer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      background: transparent;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-timer:hover { border-color: var(--pulse); background: rgba(80,64,255,0.08); }
+    .btn-timer:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-reset {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      display: none;
+    }
+    .btn-reset:hover { color: var(--text); }
+
+    .status-msg {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 1rem;
+      min-height: 1.2em;
+      transition: color 0.3s;
+    }
+    .status-msg.done { color: var(--green); font-weight: 600; }
+
+    .logo {
+      margin-top: 2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      color: var(--border);
+    }
+
+    /* Error state */
+    .error-card {
+      text-align: center;
+    }
+    .error-card h2 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .error-card p  { color: var(--muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="card" id="card">
+  <div class="label">Eurovisión 2024</div>
+  <div class="country" id="countryFlag">🎵</div>
+  <div class="country-name" id="countryName">Cargando...</div>
+  <div class="divider"></div>
+
+  <div class="timer-wrap">
+    <svg class="timer-svg" viewBox="0 0 120 120">
+      <circle class="timer-track"    cx="60" cy="60" r="55"/>
+      <circle class="timer-progress" cx="60" cy="60" r="55" id="timerRing"/>
+    </svg>
+    <div class="timer-center">
+      <span class="timer-seconds" id="timerNum">20</span>
+      <span class="timer-unit">seg</span>
+    </div>
+  </div>
+
+  <a class="btn-spotify" id="spotifyBtn" href="#" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 11-.277-1.215c3.809-.87 7.076-.496 9.712 1.115.293.18.387.563.207.857zm1.223-2.722a.779.779 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.778.778 0 01-.973-.516.779.779 0 01.516-.973c3.632-1.102 8.147-.568 11.237 1.328a.779.779 0 01.257 1.07zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.935.935 0 11-.543-1.79c3.532-1.072 9.404-.865 13.115 1.338a.935.935 0 01-.955 1.609z"/>
+    </svg>
+    Abrir en Spotify
+  </a>
+
+  <button class="btn-timer" id="timerBtn" disabled>
+    ▶ Iniciar temporizador (20 s)
+  </button>
+  <button class="btn-reset" id="resetBtn" onclick="resetTimer()">Reiniciar</button>
+
+  <p class="status-msg" id="statusMsg">Abre la canción en Spotify y pulsa Iniciar</p>
+
+  <div class="logo">HITSTER · EUROVISIÓN</div>
+</div>
+
+<script>
+// --- Stars background ---
+(function() {
+  const container = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top  = Math.random() * 100 + '%';
+    s.style.animationDelay = (Math.random() * 3) + 's';
+    s.style.animationDuration = (2 + Math.random() * 3) + 's';
+    container.appendChild(s);
+  }
+})();
+
+// --- Song data (inlined, no external file needed) ---
+const SONGS = [
+  { id: "7oYMGSXtuRBJbdqT1cHJRf", country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",              title: "Liar" },
+  { id: "2zuEKEHfEFsJDsWyAhEGsH", country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                 title: "Ramonda" },
+  { id: "2BHgGbXOaHaXrVHBQW3ZBt", country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                title: "Hurricane" },
+  { id: "1kHFKnFqBYIfx7fDnbTiRX", country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",              title: "No Rules!" },
+  { id: "4qoUTOMLqJWiSnOQfEkAVM", country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",             title: "In The Middle" },
+  { id: "3MsHBhHKxXnfbq4Wf2Zhp8", country: "Azerbaiyán",   flag: "🇦🇿", artist: "Fahree feat. Ilkin Dovlatov", title: "Özünlə Apar" },
+  { id: "2tpYCBuqFVhCiXZR3QmFPK", country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",            title: "One Milkali (One Blood)" },
+  { id: "7h1R0iMRgBKPepRDY7fE96", country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                   title: "Grito" },
+  { id: "0smabpMkLHuDHpgJY3tTpW", country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                      title: "Fighter" },
+  { id: "5Hk1iykXXCACKnOUEBRrPd", country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",         title: "Unforgettable" },
+  { id: "5kFpJ0LBKPK6mzxiGrRPt0", country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",            title: "Dizzy" },
+  { id: "1rAnT1j9EKXWBT0FQGqaXO", country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",              title: "ZARI" },
+  { id: "4YaFTU7NJXFV8WUHR6Pf0u", country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                      title: "Ulveham" },
+  { id: "66gIYUJm8vNO0TQBGP3WFr", country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",            title: "La Noia" },
+  { id: "4QdeCjHZA7HN4n3MVfvWkv", country: "España",        flag: "🇪🇸", artist: "Nebulossa",                 title: "ZORRA" },
+  { id: "1vrd6UOGamcKNGnSHJQlSt", country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",            title: "Luktelk" },
+  { id: "1y3fJHMYPVMqhwvVInIZoN", country: "Ucrania",       flag: "🇺🇦", artist: "alyona alyona & Jerry Heil", title: "Teresa & Maria" },
+  { id: "3V4CdWZmFOiRLSe7TYCPEE", country: "Francia",       flag: "🇫🇷", artist: "Slimane",                   title: "Mon Amour" },
+  { id: "5xbMPNpXBx5JnGrFnWoCXj", country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                    title: "We Will Rave" },
+  { id: "1oVBFfFDNPqFsZFQvLfBRK", country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                     title: "Always On The Run" },
+  { id: "2vKHlJ5JYMFL1eTcNwDvHn", country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                      title: "The Code" },
+  { id: "5eEDMkRGkABvAFOScjrNlj", country: "Polonia",       flag: "🇵🇱", artist: "Luna",                      title: "The Tower" },
+  { id: "6KuHXWMnVNqKMqDYY3e8J8", country: "San Marino",   flag: "🇸🇲", artist: "Megara",                    title: "11:11" },
+  { id: "3jMZexLLDuN2gGFdFhiOLT", country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                  title: "Jako" },
+  { id: "4XiWDmgQvh9gXYHDRJisCf", country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",               title: "Doomsday Blue" },
+  { id: "0iJBRBjFJtZkwb5Gu3ETXN", country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",               title: "Europapa" },
+];
+
+// --- Parse song from URL ---
+const params  = new URL(location.href).searchParams;
+const trackId = params.get('id');
+const song    = SONGS.find(s => s.id === trackId);
+
+if (!song) {
+  document.getElementById('card').innerHTML = `
+    <div class="error-card">
+      <h2>Canción no encontrada</h2>
+      <p>El código QR no corresponde a ninguna canción de la lista.</p>
+    </div>`;
+} else {
+  // Populate card
+  document.getElementById('countryFlag').textContent = song.flag;
+  document.getElementById('countryName').textContent = song.country.toUpperCase();
+  document.title = `${song.title} — Hitster Eurovisión`;
+
+  // Spotify deep link
+  const spotifyUri = `spotify:track:${song.id}`;
+  document.getElementById('spotifyBtn').href = spotifyUri;
+
+  // Enable timer after clicking Spotify button
+  document.getElementById('spotifyBtn').addEventListener('click', () => {
+    setTimeout(() => {
+      document.getElementById('timerBtn').disabled = false;
+      document.getElementById('statusMsg').textContent = 'Pulsa Iniciar cuando empiece a sonar';
+    }, 800);
+  });
+}
+
+// --- Timer logic ---
+const DURATION = 20;
+let remaining = DURATION;
+let interval  = null;
+const ring     = document.getElementById('timerRing');
+const numEl    = document.getElementById('timerNum');
+const btnTimer = document.getElementById('timerBtn');
+const btnReset = document.getElementById('btnReset');
+const statusEl = document.getElementById('statusMsg');
+const circumference = 2 * Math.PI * 55; // r=55 → ~345.4
+
+function setRing(secs) {
+  const frac = secs / DURATION;
+  ring.style.strokeDashoffset = circumference * (1 - frac);
+  ring.style.stroke = frac > 0.4 ? 'var(--pulse)' : frac > 0.15 ? '#f0a030' : '#e03030';
+}
+
+function resetTimer() {
+  clearInterval(interval);
+  interval  = null;
+  remaining = DURATION;
+  numEl.textContent = DURATION;
+  setRing(DURATION);
+  btnTimer.textContent = '▶ Iniciar temporizador (20 s)';
+  btnTimer.disabled    = false;
+  document.getElementById('resetBtn').style.display = 'none';
+  statusEl.textContent = 'Pulsa Iniciar cuando empiece a sonar';
+  statusEl.classList.remove('done');
+}
+
+document.getElementById('timerBtn').addEventListener('click', () => {
+  if (interval) return;
+  btnTimer.disabled = true;
+  btnTimer.textContent = '⏱ Contando...';
+  document.getElementById('resetBtn').style.display = 'block';
+  statusEl.textContent = '¡Adivina el año!';
+  statusEl.classList.remove('done');
+
+  interval = setInterval(() => {
+    remaining--;
+    numEl.textContent = remaining;
+    setRing(remaining);
+    if (remaining <= 0) {
+      clearInterval(interval);
+      interval = null;
+      numEl.textContent = '✓';
+      ring.style.stroke = 'var(--green)';
+      ring.style.strokeDashoffset = 0;
+      statusEl.textContent = '¡Tiempo! ¿Acertaste el año?';
+      statusEl.classList.add('done');
+      btnTimer.textContent = '✓ Tiempo agotado';
+    }
+  }, 1000);
+});
+
+setRing(DURATION);
+</script>
+</body>
+</html>

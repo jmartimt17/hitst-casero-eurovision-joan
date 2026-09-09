@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Hitster Eurovisión 2024 — Cartas para imprimir</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1a1a2e;
+      font-family: 'Inter', sans-serif;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      color: #f0eeff;
+      font-size: 2rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.3rem;
+    }
+
+    .subtitle {
+      color: #8880aa;
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .instructions {
+      background: #13132a;
+      border: 1px solid #2a2a4a;
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      color: #c0b8ee;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 700px;
+    }
+
+    .instructions strong { color: #f0c040; }
+
+    /* BASE URL input */
+    .url-config {
+      background: #13132a;
+      border: 1px solid #2a2a4a;
+      border-radius: 12px;
+      padding: 1rem 1.4rem;
+      margin-bottom: 2rem;
+      max-width: 700px;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .url-config label { color: #8880aa; font-size: 0.82rem; white-space: nowrap; }
+    .url-config input {
+      flex: 1;
+      min-width: 220px;
+      background: #0a0a14;
+      border: 1px solid #2a2a4a;
+      border-radius: 8px;
+      color: #f0eeff;
+      padding: 0.5rem 0.8rem;
+      font-size: 0.82rem;
+      font-family: monospace;
+    }
+    .url-config button {
+      background: #5040ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .url-config button:hover { opacity: 0.85; }
+
+    /* Grid of cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 200px);
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: #0a0a14;
+      border: 2px solid #2a2a4a;
+      border-radius: 16px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: #f0eeff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #5040ff, #f0c040);
+    }
+
+    .card-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: #8880aa;
+    }
+
+    .card-flag { font-size: 2rem; }
+
+    .card-country {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      color: #f0c040;
+      text-align: center;
+    }
+
+    .card-title {
+      font-size: 0.7rem;
+      color: #c0b8ee;
+      text-align: center;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .card-artist {
+      font-size: 0.65rem;
+      color: #8880aa;
+      text-align: center;
+    }
+
+    .qr-container {
+      background: white;
+      border-radius: 8px;
+      padding: 6px;
+      margin-top: 0.3rem;
+    }
+
+    .qr-container img,
+    .qr-container canvas {
+      display: block;
+      width: 110px;
+      height: 110px;
+    }
+
+    .card-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: #2a2a4a;
+      margin-top: 0.2rem;
+    }
+
+    /* Print styles */
+    @media print {
+      body { background: white; padding: 0.5cm; }
+      h1, .subtitle, .instructions, .url-config { display: none; }
+      .grid { grid-template-columns: repeat(4, 1fr); gap: 0.4cm; }
+      .card {
+        background: white;
+        border: 1.5px solid #ccc;
+        border-radius: 10px;
+        break-inside: avoid;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .card::before { background: linear-gradient(90deg, #5040ff, #f0c040); }
+      .card-country { color: #c09010; }
+      .card-title { color: #333; }
+      .card-artist { color: #666; }
+      .card-logo { color: #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+<h1>🎵 HITSTER EUROVISIÓN 2024</h1>
+<p class="subtitle">26 cartas — Gran Final · Malmö, Suecia</p>
+
+<div class="instructions">
+  <strong>Antes de imprimir:</strong> introduce la URL base de tu GitHub Pages en el campo de abajo y pulsa "Actualizar QR". Los QR se regenerarán apuntando a tu web.<br><br>
+  <strong>Para jugar:</strong> escanea el QR → se abre la web → pulsa "Abrir en Spotify" → pulsa "Iniciar" → ¡adivina el año del Festival!
+</div>
+
+<div class="url-config">
+  <label>URL base de tu web:</label>
+  <input type="text" id="baseUrl" value="https://TU-USUARIO.github.io/hitster-eurovision/play.html" placeholder="https://tu-usuario.github.io/hitster-eurovision/play.html"/>
+  <button onclick="regenerateQRs()">Actualizar QR</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<!-- QRCode.js library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const SONGS = [
+  { id: "7oYMGSXtuRBJbdqT1cHJRf", country: "Chipre",        flag: "🇨🇾", artist: "Silia Kapsis",              title: "Liar" },
+  { id: "2zuEKEHfEFsJDsWyAhEGsH", country: "Serbia",        flag: "🇷🇸", artist: "TEYA DORA",                 title: "Ramonda" },
+  { id: "2BHgGbXOaHaXrVHBQW3ZBt", country: "Israel",        flag: "🇮🇱", artist: "Eden Golan",                title: "Hurricane" },
+  { id: "1kHFKnFqBYIfx7fDnbTiRX", country: "Finlandia",     flag: "🇫🇮", artist: "Windows95man",              title: "No Rules!" },
+  { id: "4qoUTOMLqJWiSnOQfEkAVM", country: "Moldavia",      flag: "🇲🇩", artist: "Natalia Barbu",             title: "In The Middle" },
+  { id: "3MsHBhHKxXnfbq4Wf2Zhp8", country: "Azerbaiyán",   flag: "🇦🇿", artist: "Fahree feat. Ilkin Dovlatov", title: "Özünlə Apar" },
+  { id: "2tpYCBuqFVhCiXZR3QmFPK", country: "Australia",    flag: "🇦🇺", artist: "Electric Fields",            title: "One Milkali (One Blood)" },
+  { id: "7h1R0iMRgBKPepRDY7fE96", country: "Portugal",      flag: "🇵🇹", artist: "Iolanda",                   title: "Grito" },
+  { id: "0smabpMkLHuDHpgJY3tTpW", country: "Luxemburgo",   flag: "🇱🇺", artist: "TALI",                      title: "Fighter" },
+  { id: "5Hk1iykXXCACKnOUEBRrPd", country: "Suecia",        flag: "🇸🇪", artist: "Marcus & Martinus",         title: "Unforgettable" },
+  { id: "5kFpJ0LBKPK6mzxiGrRPt0", country: "Reino Unido",  flag: "🇬🇧", artist: "Olly Alexander",            title: "Dizzy" },
+  { id: "1rAnT1j9EKXWBT0FQGqaXO", country: "Grecia",        flag: "🇬🇷", artist: "Marina Satti",              title: "ZARI" },
+  { id: "4YaFTU7NJXFV8WUHR6Pf0u", country: "Noruega",       flag: "🇳🇴", artist: "Gåte",                      title: "Ulveham" },
+  { id: "66gIYUJm8vNO0TQBGP3WFr", country: "Italia",        flag: "🇮🇹", artist: "Angelina Mango",            title: "La Noia" },
+  { id: "4QdeCjHZA7HN4n3MVfvWkv", country: "España",        flag: "🇪🇸", artist: "Nebulossa",                 title: "ZORRA" },
+  { id: "1vrd6UOGamcKNGnSHJQlSt", country: "Lituania",      flag: "🇱🇹", artist: "Silvester Belt",            title: "Luktelk" },
+  { id: "1y3fJHMYPVMqhwvVInIZoN", country: "Ucrania",       flag: "🇺🇦", artist: "alyona alyona & Jerry Heil", title: "Teresa & Maria" },
+  { id: "3V4CdWZmFOiRLSe7TYCPEE", country: "Francia",       flag: "🇫🇷", artist: "Slimane",                   title: "Mon Amour" },
+  { id: "5xbMPNpXBx5JnGrFnWoCXj", country: "Austria",       flag: "🇦🇹", artist: "Kaleen",                    title: "We Will Rave" },
+  { id: "1oVBFfFDNPqFsZFQvLfBRK", country: "Alemania",      flag: "🇩🇪", artist: "ISAAK",                     title: "Always On The Run" },
+  { id: "2vKHlJ5JYMFL1eTcNwDvHn", country: "Suiza",         flag: "🇨🇭", artist: "Nemo",                      title: "The Code" },
+  { id: "5eEDMkRGkABvAFOScjrNlj", country: "Polonia",       flag: "🇵🇱", artist: "Luna",                      title: "The Tower" },
+  { id: "6KuHXWMnVNqKMqDYY3e8J8", country: "San Marino",   flag: "🇸🇲", artist: "Megara",                    title: "11:11" },
+  { id: "3jMZexLLDuN2gGFdFhiOLT", country: "Armenia",       flag: "🇦🇲", artist: "LADANIVA",                  title: "Jako" },
+  { id: "4XiWDmgQvh9gXYHDRJisCf", country: "Irlanda",       flag: "🇮🇪", artist: "Bambie Thug",               title: "Doomsday Blue" },
+  { id: "0iJBRBjFJtZkwb5Gu3ETXN", country: "Países Bajos", flag: "🇳🇱", artist: "Joost Klein",               title: "Europapa" },
+];
+
+function regenerateQRs() {
+  const baseUrl = document.getElementById('baseUrl').value.trim();
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+
+  SONGS.forEach(song => {
+    const url = `${baseUrl}?id=${song.id}`;
+
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-year">EUROVISIÓN 2024</div>
+      <div class="card-flag">${song.flag}</div>
+      <div class="card-country">${song.country.toUpperCase()}</div>
+      <div class="card-title">${song.title}</div>
+      <div class="card-artist">${song.artist}</div>
+      <div class="qr-container" id="qr-${song.id}"></div>
+      <div class="card-logo">HITSTER · EUROVISIÓN</div>
+    `;
+    grid.appendChild(card);
+
+    new QRCode(document.getElementById(`qr-${song.id}`), {
+      text: url,
+      width: 110,
+      height: 110,
+      colorDark: '#000000',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  });
+}
+
+// Generate on load with placeholder URL
+regenerateQRs();
+</script>
+</body>
+</html>
